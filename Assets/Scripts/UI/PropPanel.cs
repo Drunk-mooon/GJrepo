@@ -12,7 +12,6 @@ public class PropPanel : MonoBehaviour
     void Awake()
     {
         // Get references to the UI components
-        propImageContainer = GetComponentInChildren<Image>();
         propNameContainer = GetComponentInChildren<TextMeshProUGUI>();
     }
 
@@ -20,7 +19,6 @@ public class PropPanel : MonoBehaviour
     {
         if (prop != null)  // Make sure prop is assigned
         {
-            Debug.Log(prop.propIcon == null);
             propImageContainer.sprite = prop.propIcon;
             propNameContainer.text = prop.propName;
         }

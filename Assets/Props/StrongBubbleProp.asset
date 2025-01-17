@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1006834652e859438d6b1f4fa2b03d3, type: 3}
   m_Name: StrongBubbleProp
   m_EditorClassIdentifier: 
-  propName: 
-  propIcon: {fileID: 0}
+  propName: StrongBubbleProp
+  propIcon: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
   duration: 5

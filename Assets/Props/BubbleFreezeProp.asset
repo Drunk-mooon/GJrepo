@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c6e6fecd5e35738468407c6d107bb898, type: 3}
   m_Name: BubbleFreezeProp
   m_EditorClassIdentifier: 
-  propName: 
-  propIcon: {fileID: 0}
+  propName: BubbleFreezeProp
+  propIcon: {fileID: 10901, guid: 0000000000000000f000000000000000, type: 0}
   duration: 5
