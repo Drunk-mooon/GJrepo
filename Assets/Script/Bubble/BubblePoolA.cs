@@ -33,6 +33,7 @@ public class BubblePoolA : ObjPool<BubblePoolA, Bubble>
 
     protected override Bubble CreateObj()
     {
+<<<<<<< Updated upstream
         GameObject obj = new GameObject();
         obj.transform.SetParent(this.transform);
         obj.AddComponent<Bubble>();
@@ -40,6 +41,14 @@ public class BubblePoolA : ObjPool<BubblePoolA, Bubble>
         bubble.isA = true;
         bubble.Set(true);
         bubble.bubble.SetActive(false);
+=======
+        GameObject obj = new GameObject(); //建立泡泡的对象
+        obj.transform.SetParent(this.transform); //父亲是这个对象池
+        obj.AddComponent<Bubble>(); //添加脚本 
+        Bubble bubble = obj.GetComponent<Bubble>(); //指明
+        bubble.Set(true); 
+        bubble.bubble.SetActive(false); //初始出来先隐藏
+>>>>>>> Stashed changes
         return bubble;
     }
     
