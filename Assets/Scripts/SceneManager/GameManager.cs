@@ -124,6 +124,8 @@ public class GameManager : MonoBehaviour
         tutorialPanel.SetActive(true);
         endGamePanel.SetActive(false);
         Time.timeScale = 0f;
+        player1Score = 0.1f;
+        player2Score = 0.1f;
 
         if (uiManager != null)
         {
