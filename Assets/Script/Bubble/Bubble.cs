@@ -7,23 +7,23 @@ using UnityEngine;
 
 public class Bubble : MonoBehaviour
 {
-    private float _speed;
-    public float score;
-    public bool isA;
-    public GameObject bubble;
-    public TextMeshPro label;
-    public Animator ani;
-    public string code;
-    public int index=2;
-    
-    public void Set( bool isA)
+    public float speed; //速度
+    public float score; //得分
+    public bool isA; //来源 
+    public GameObject bubble; //模型
+    public TextMeshPro label; //文本对应的obj是模型子对象
+    public Animator ani; //动画
+    public string code; //当前组合键
+    public int index = 2; //泡泡生命
+
+    public void Set(bool isa)
     {
-        this.isA = isA;
+        this.isA = isa;
         GetBubble(isA);
         this.code = "";
         this.index = 2;
-        label=bubble.GetComponentInChildren<TextMeshPro>(); 
-    }
+        label = bubble.GetComponentInChildren<TextMeshPro>();
+    } //初始化 主要是绑定和确认哪个玩家
 
     public void Init(float blowTime)
     {
@@ -33,7 +33,7 @@ public class Bubble : MonoBehaviour
 
     private void GetSpeed(float blowTime)
     {
-        _speed = blowTime / 3;
+        speed = blowTime / 3;
     }
 
     private void GetScore(float blowTime)
@@ -41,10 +41,11 @@ public class Bubble : MonoBehaviour
         score = math.pow(blowTime, 2);
     }
 
-    private void GetBubble(bool isA)
+    //获取两个值
+    private void GetBubble(bool isa)
     {
-        if (isA)
-        {  
+        if (isa)
+        {
             bubble = Instantiate(AssetManager.LoadRes<GameObject>("BubbleA"), transform);
             ani = bubble.GetComponent<Animator>();
         }
@@ -55,10 +56,9 @@ public class Bubble : MonoBehaviour
         }
     }
 
+    //判断角色
     public void fly()
     {
-        bubble.transform.position += new Vector3(0, _speed*Time.deltaTime, 0);
-    }
-    
-
+        bubble.transform.position += new Vector3(0, speed * Time.deltaTime, 0);
+    } //移动
 }

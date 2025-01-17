@@ -20,7 +20,7 @@ public class BubblePoolA : ObjPool<BubblePoolA, Bubble>
 
     protected override Bubble IniObj(Bubble obj)
     {
-        obj.Init(blowTime);
+        obj.Init(blowTime); 
         obj.bubble.SetActive(true);
         obj.bubble.transform.position = new Vector3(0, 0, 0);
         obj.code = GetCode(obj);
