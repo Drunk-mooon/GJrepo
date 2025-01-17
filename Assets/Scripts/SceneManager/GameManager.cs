@@ -8,7 +8,7 @@ public class GameManager : MonoBehaviour
     public GameObject tutorialPanel;          // Tutorial panel to display at the start
     public GameObject endGamePanel;           // End panel to display when time runs out
 
-    private UIManager uiManager;               // Reference to UIManager
+    private MainSceneUIManager uiManager;               // Reference to UIManager
     private float elapsedTime = 0f;           // Time since the game started
     private bool isGameActive = false;
     private bool isTuitionActive = false;
@@ -20,7 +20,7 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         // Find UIManager in the scene and assign it to uiManager
-        uiManager = FindObjectOfType<UIManager>();
+        uiManager = FindObjectOfType<MainSceneUIManager>();
 
         ShowTutorial();
     }

@@ -4,7 +4,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class UIManager : MonoBehaviour
+public class MainSceneUIManager : MonoBehaviour
 {
     public Image redBar;  // Image representing Player 2's score (left part, red)
     public Image blueBar; // Image representing Player 1's score (right part, blue)

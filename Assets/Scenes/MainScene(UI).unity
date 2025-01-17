@@ -413,7 +413,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prop: {fileID: 0}
-  propImageContainer: {fileID: 0}
+  propImageContainer: {fileID: 1446989719}
   propNameContainer: {fileID: 0}
 --- !u!114 &594525537
 MonoBehaviour:
@@ -1764,7 +1764,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prop: {fileID: 0}
-  propImageContainer: {fileID: 0}
+  propImageContainer: {fileID: 302847343}
   propNameContainer: {fileID: 0}
 --- !u!114 &1922835873
 MonoBehaviour:
