@@ -48,8 +48,9 @@ public class PlayerA : MonoBehaviour
                 if (keyQueue.Count >= 3)
                 {
                     string tempinput = InputKey();
-                  //  if (BubblePoolA.Instance.Bubbles.ContainsKey(tempinput))
+                  
                         KillBubble(tempinput);
+
                 }
                
             }
@@ -114,6 +115,7 @@ public class PlayerA : MonoBehaviour
         // Kill ת string
         string killString = new string(tempKill);
         BubblePoolA.Instance.attackCode = killString;
+        BubblePoolB.Instance.attackCode = killString;
         return killString;
     }
 
@@ -201,14 +203,26 @@ public class PlayerA : MonoBehaviour
 
     public void KillBubble(string killString)
     {
-        BubblePoolA.Instance.PutObj(BubblePoolA.Instance.Bubbles[killString]);
+        if (BubblePoolA.Instance.Bubbles.ContainsKey(killString) || BubblePoolB.Instance.Bubbles.ContainsKey(killString)) 
+        {
+            keyQueue.Dequeue();
+            keyQueue.Dequeue();
+        }
+        if (BubblePoolA.Instance.Bubbles.ContainsKey(killString))
+            BubblePoolA.Instance.PutObj(BubblePoolA.Instance.Bubbles[killString]);
+        else
+            BubblePoolB.Instance.PutObj(BubblePoolB.Instance.Bubbles[killString]);
         /*foreach (var item in BubblePoolA.Instance.Bubbles)
         {
             Debug.Log(item.Key);
             Debug.Log(item.Value);
+        }
+        foreach (var item in BubblePoolB.Instance.Bubbles)
+        {
+            Debug.Log(item.Key);
+            Debug.Log(item.Value);
         }*/
-        keyQueue.Dequeue();
-        keyQueue.Dequeue();
+
     }
 
 
