@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using System;
 using System.Reflection;
-using UnityEditor.Experimental.GraphView;
 
 public class Player : MonoBehaviour
 {
@@ -53,9 +52,10 @@ public class Player : MonoBehaviour
             InputKey();
             if (pressedKeys.Count == maxKeysToPress)
             {
-                if (BubblePoolA.Instance.Bubbles.ContainsKey(Kill.ToString())) { 
-                KillBubble(BubblePoolA.Instance.Bubbles[Kill.ToString()], ref Kill);
-            }
+                if (BubblePoolA.Instance.Bubbles.ContainsKey(Kill.ToString())) 
+                { 
+                KillBubble(BubblePoolA.Instance.Bubbles[Kill.ToString()]);
+                }
             }
         }
     }
@@ -134,7 +134,7 @@ public class Player : MonoBehaviour
 
 
     //WER操作组合键
-    public void KillBubble(Bubble bubble,ref char[] Kill)
+    public void KillBubble(Bubble bubble)
     {/* 
         string number;
         bool match = true;
@@ -199,7 +199,7 @@ public class Player : MonoBehaviour
     currentScale = new Vector3(newRadius, newRadius, newRadius);
     // 应用新的缩放
     transform.localScale = currentScale;
-}
+    }
 
     [System.Serializable]
     // 嵌套类 Playerinput
