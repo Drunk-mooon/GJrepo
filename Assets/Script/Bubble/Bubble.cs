@@ -5,8 +5,18 @@ using TMPro;
 using Unity.Mathematics;
 using UnityEngine;
 
+
+ public enum E_bType
+ {
+    blue,
+    green,
+    white,
+    pink
+ }
+
+
 public class Bubble : MonoBehaviour
-{
+{   
     public float speed; //速度
     public float score; //得分
     public bool isA; //来源 
@@ -15,7 +25,8 @@ public class Bubble : MonoBehaviour
     public Animator ani; //动画
     public string code; //当前组合键
     public int index = 2; //泡泡生命
-
+    public E_bType bType;
+    
     public void Set(bool isa)
     {
         this.isA = isa; 

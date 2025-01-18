@@ -334,6 +334,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   blowTime: 0
+  attackCode: 
+  speedChange: 1
 --- !u!4 &969269846
 Transform:
   m_ObjectHideFlags: 0
