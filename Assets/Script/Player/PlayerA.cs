@@ -25,7 +25,7 @@ public class PlayerA : MonoBehaviour
     //输入队列
     private Queue<KeyCode> keyQueue = new Queue<KeyCode>();
     //为了道具系统加入的变量
-    public Prop playerProp; //道具种类
+    //public Prop playerProp; //道具种类
     public bool isPlayerA = true; //player是否为玩家A
 
     private List<KeyCode> pressedKeys = new List<KeyCode>();
@@ -184,7 +184,32 @@ public class PlayerA : MonoBehaviour
         {
             // 检查是否按下了 key6 键
             if (Input.GetKey(playerinput[5].key6))
-            {}
+            {
+                Bubble bubbleScript = GetComponent<Bubble>();
+                if (bubbleScript != null)
+                {
+                    Bubble.E_bType bubbleType = bubbleScript.bubbleType;
+                    // 对获取到的枚举值进行处理
+                    switch (bubbleType)
+                    {
+                        case Bubble.E_bType.blue:
+                            Debug.Log("The bubble type is blue.");
+                            break;
+                        case Bubble.E_bType.green:
+                            Debug.Log("The bubble type is green.");
+                            break;
+                        case Bubble.E_bType.white:
+                            Debug.Log("The bubble type is white.");
+                            break;
+                        case Bubble.E_bType.pink:
+                            Debug.Log("The bubble type is pink.");
+                            break;
+                        default:
+                            Debug.Log("Unknown bubble type.");
+                            break;
+                    }
+                }
+            }
         }
     }
     public void creatBubble()
