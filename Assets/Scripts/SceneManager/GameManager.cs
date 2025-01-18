@@ -17,8 +17,8 @@ public class GameManager : MonoBehaviour
     private float playerAScore = 0.1f;       //variables for debug. 
     private float playerBScore = 0.1f;
 
-    public Player playerA;
-    public Player playerB;
+    public PlayerA playerA;
+    public PlayerA playerB;
 
     void Start()
     {

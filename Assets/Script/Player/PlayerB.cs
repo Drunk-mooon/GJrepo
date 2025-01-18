@@ -5,7 +5,7 @@ using System;
 using System.Reflection;
 
 
-public class Playerelse : MonoBehaviour
+public class PlayerB : MonoBehaviour
 {
     public Playerinput[] playerinput2;
     //泡泡水总量100
@@ -105,7 +105,7 @@ public class Playerelse : MonoBehaviour
                 if (!isBlowingBubbles2)
                 {
                     // 开始吹泡泡（Q）
-                    creatBubble();
+                    CreateBubble();
                     isBlowingBubbles2 = true;
                     timer2 = 0f;
                 }
@@ -191,7 +191,7 @@ public class Playerelse : MonoBehaviour
             }
         }
     }
-    public void creatBubble()
+    public void CreateBubble()
     {
         float growthRate = 0.1f;
         Vector3 currentScale = transform.localScale;
