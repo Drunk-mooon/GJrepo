@@ -12,9 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99917bdabc4a2004f9b91f0d71f20485, type: 3}
   m_Name: BubbleStealProp
   m_EditorClassIdentifier: 
-  propName: BubbleStealProp
+  propName: StealBubble!
   propIcon: {fileID: 21300000, guid: 6ed19a004a6c5d84b9ccedb9fba38c1d, type: 3}
   duration: 5
+  playerA: {fileID: 0}
+  playerB: {fileID: 0}
   bubbleStealNum: 3
   playerABubblePool: {fileID: 0}
   playerBBubblePool: {fileID: 0}
