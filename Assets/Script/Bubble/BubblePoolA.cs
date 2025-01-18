@@ -100,7 +100,7 @@ public class BubblePoolA : ObjPool<BubblePoolA, Bubble>
             {
                 result += _random.Next(1, 4).ToString();
             }
-        } while (Bubbles.ContainsKey(result)/*||BubblePoolB.Instance.Bubbles.ContainsKey(result)*/);
+        } while (Bubbles.ContainsKey(result)||BubblePoolB.Instance.Bubbles.ContainsKey(result));
 
         obj.index--; //  命数-1
         return result;

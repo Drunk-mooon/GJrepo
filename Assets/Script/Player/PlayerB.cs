@@ -184,8 +184,12 @@ public class PlayerB: MonoBehaviour
 
     public void KillBubble(string killString)
     {
-
-        if (BubblePoolA.Instance.Bubbles.ContainsKey(killString))
+        if (BubblePoolA.Instance.Bubbles.ContainsKey(killString) || BubblePoolB.Instance.Bubbles.ContainsKey(killString))
+        {
+            keyQueue.Dequeue();
+            keyQueue.Dequeue();
+        }
+            if (BubblePoolA.Instance.Bubbles.ContainsKey(killString))
             BubblePoolA.Instance.PutObj(BubblePoolA.Instance.Bubbles[killString]); 
         else
         BubblePoolB.Instance.PutObj(BubblePoolB.Instance.Bubbles[killString]);
@@ -195,8 +199,7 @@ public class PlayerB: MonoBehaviour
             Debug.Log(item.Key);
             Debug.Log(item.Value);
         }*/
-        keyQueue.Dequeue();
-        keyQueue.Dequeue();
+
     }
 
 
