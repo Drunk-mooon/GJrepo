@@ -121,5 +121,23 @@ public class BubblePoolA : ObjPool<BubblePoolA, Bubble>
 
         
     }
-    
+    private void TypeEffect(Bubble obj)
+    {
+        switch (obj.bType)
+        {
+            case E_bType.blue:
+                obj.index = 3;
+                break;
+            case E_bType.green:
+                break;
+            case E_bType.pink:
+                obj.speed *= 2;
+                break;
+            case E_bType.white:
+                break;
+            default:
+                break;
+
+        }
+    }
 }
