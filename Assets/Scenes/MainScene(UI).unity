@@ -1992,6 +1992,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f572c9b7a4151844f93b6aea67cf2f67, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerA: {fileID: 0}
+  playerB: {fileID: 0}
+  greenBubbleEffect: 0.1
 --- !u!1 &1975703506
 GameObject:
   m_ObjectHideFlags: 0
@@ -2025,8 +2028,8 @@ MonoBehaviour:
   blueBar: {fileID: 1533116625}
   totalBarWidth: 1000
   playerAProp: {fileID: 11400000, guid: 8a85f93829379094b9ae7695ec474cd6, type: 2}
-  playerBProp: {fileID: 11400000, guid: 48a0b8dd2db0bfa459389adc9ead6b7a, type: 2}
-  playerA: {fileID: 0}
+  playerBProp: {fileID: 11400000, guid: 787dc92cc88712e4e8c306aa3c42e8ee, type: 2}
+  playerA: {fileID: 1550999048}
   playerB: {fileID: 0}
   playerAPropPanel: {fileID: 1922835871}
   playerBPropPanel: {fileID: 594525535}

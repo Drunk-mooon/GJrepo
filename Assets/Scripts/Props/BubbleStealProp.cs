@@ -1,6 +1,6 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "DoubleStealProp", menuName = "Props/DoubleStealProp")]
+[CreateAssetMenu(fileName = "BubbleStealProp", menuName = "Props/BubbleStealProp")]
 public class BubbleStealProp : Prop
 {
     public int bubbleStealNum = 3;
