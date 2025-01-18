@@ -10,6 +10,7 @@ public class BubblePoolA : ObjPool<BubblePoolA, Bubble>
     private Random _random;
     public Dictionary<string, Bubble> Bubbles = new Dictionary<string, Bubble>(); //组合键与泡泡的对应关系
     public string attackCode; //玩家输入的组合键
+    public float speedChange=1;
 
     public override void Init()
     {
@@ -71,7 +72,7 @@ public class BubblePoolA : ObjPool<BubblePoolA, Bubble>
     {
         foreach (Bubble a in Bubbles.Values)
         {
-            a.fly();
+            a.transform.position += new Vector3(0, a.speed * Time.deltaTime*speedChange, 0);
         }
     }
 
