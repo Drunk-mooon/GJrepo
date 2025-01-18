@@ -85,20 +85,26 @@ public class BubblePoolB : ObjPool<BubblePoolB, Bubble>
         {
             _distance=math.sin(Time.time*6 )/200;
             
-           if(a.isA)  a.bubble.transform.position += new Vector3(_distance*a.dis, a.speed * Time.deltaTime*speedChange, 0);
-           else a.bubble.transform.transform.position += new Vector3(_distance*a.dis, a.speed * Time.deltaTime*BubblePoolA.Instance.speedChange, 0); //其实是 BubblePoolB.instance.speedChange
-
-           
+            if(Time.timeScale!=0)
+            {
+                if (a.isA) a.bubble.transform.position += new Vector3(_distance * a.dis, a.speed * Time.deltaTime * speedChange, 0);
+                else a.bubble.transform.transform.position += new Vector3(_distance * a.dis, a.speed * Time.deltaTime * BubblePoolA.Instance.speedChange, 0); //其实是 Bu
+            }
+         
+       
         } 
     }
 
     private IEnumerator move(Bubble obj)
     {
         float dist = 0;
-        while (dist < obj.dis / 6 + 0.1f)
+        while (dist < Math.Abs( obj.dis / 6) +0.17f)
         {
-            dist += 0.3f * Time.deltaTime;
-            obj.transform.position -= new Vector3(0.03f, 0, 0);
+            if(Time.timeScale!=0)
+            {
+                dist += 0.3f * Time.deltaTime;
+                obj.transform.position -= new Vector3(0.03f, 0, 0);
+            }
 
             yield return null;
         }
