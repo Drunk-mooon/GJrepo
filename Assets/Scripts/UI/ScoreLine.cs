@@ -37,12 +37,14 @@ public class ScoreLine : MonoBehaviour
                 */
                     playerB.playerScore2 += bubble.score;
             }
-
             // Optionally, destroy the bubble after scoring
+            bubble.index = 0;
             if (bubble.isA)
+            {
                 BubblePoolA.Instance.PutObj(bubble);
+            }
             else
-                ; //NeedToChange!
+                BubblePoolB.Instance.PutObj(bubble); //NeedToChange!
         }
     }
 }
