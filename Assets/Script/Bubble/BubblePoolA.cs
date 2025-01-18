@@ -30,7 +30,7 @@ public class BubblePoolA : ObjPool<BubblePoolA, Bubble>
         obj.bubble.transform.localScale = trans.localScale;
         obj.code = GetCode(obj); //获得code 
         obj.label.text = obj.code; //code可见 
-        Bubbles.Add(obj.label.text, obj); //字典添加 code，泡泡 
+        Bubbles.Add(obj.code, obj); //字典添加 code，泡泡 
         obj.bType = bType;
         obj.dis = _random.Next(-10, 11) / 10f;
         TypeEffect(obj);
@@ -82,7 +82,7 @@ public class BubblePoolA : ObjPool<BubblePoolA, Bubble>
     {
         foreach (Bubble a in Bubbles.Values)
         {
-            _distance=2*math.sin(Time.time );
+            _distance=math.sin(Time.time*6 )/200;
             
            if(a.isA)  a.bubble.transform.position += new Vector3( _distance*a.dis, a.speed * Time.deltaTime*speedChange, 0);
            else a.bubble.transform.position += new Vector3( _distance*a.dis, a.speed * Time.deltaTime*BubblePoolB.Instance.speedChange, 0); 
@@ -100,7 +100,7 @@ public class BubblePoolA : ObjPool<BubblePoolA, Bubble>
             {
                 result += _random.Next(1, 4).ToString();
             }
-        } while (Bubbles.ContainsKey(result)/*||BubblePoolB.Instance.Bubbles.ContainsKey(result)*/);
+        } while (Bubbles.ContainsKey(result)||BubblePoolB.Instance.Bubbles.ContainsKey(result));
 
         obj.index--; //  命数-1
         return result;
@@ -109,10 +109,11 @@ public class BubblePoolA : ObjPool<BubblePoolA, Bubble>
     private IEnumerator move(Bubble obj)
     {
         float dist=0;
-        while (dist<obj.dis*15)
+        while (dist<obj.dis/6+0.1f)
         {
             dist += 0.3f * Time.deltaTime;
-            obj.transform.position += new Vector3(dist,0,0);
+            obj.transform.position += new Vector3(0.03f,0,0);
+
             yield return null;
         }
     }

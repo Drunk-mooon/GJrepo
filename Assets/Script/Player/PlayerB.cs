@@ -4,7 +4,7 @@ using System.Collections.Generic;
 public class PlayerB: MonoBehaviour
 {
     private Coroutine blowBubbleCoroutine; // Store reference to the coroutine
-
+    public GameObject gameObject;
     public Playerinput[] playerinput;
     //泡泡棒总量 100,初始值0
     public float BBWAmount = 0;
@@ -34,10 +34,8 @@ public class PlayerB: MonoBehaviour
     char[] Kill = new char[3];
 
     private Coroutine waterCoroutine;
-    private void Start()
-    {
-
-    }
+    //双倍状态
+    public bool DoubleStatus = false;
     void Update()
     {
         //检查是否输入操作键
@@ -111,6 +109,7 @@ public class PlayerB: MonoBehaviour
         keyQueue.Dequeue();
         // Kill 转 string
         string killString = new string(tempKill);
+        BubblePoolA.Instance.attackCode = killString;
         BubblePoolB.Instance.attackCode = killString;
         return killString;
     }
@@ -128,10 +127,6 @@ public class PlayerB: MonoBehaviour
     private IEnumerator GrowBubble()
     {
         float growthRate = 0.1f; // Rate of bubble growth
-        if (BubblePoolB.Instance.bType == E_bType.white)
-        {
-            growthRate = 3f;
-        }
         timer = 0f;
         while (timer < 1f)
         {
@@ -144,13 +139,10 @@ public class PlayerB: MonoBehaviour
             if (transform.localScale.x < maxBubbleSize.x)
             {
                 // Grow the bubble
-                Vector3 currentScale = transform.localScale;
-                float newRadius = Mathf.Max(0, currentScale.x + growthRate * Time.deltaTime);
-                transform.localScale = new Vector2(newRadius, newRadius);
-
                 // Deduct BBWAmount while the bubble grows
                 BBWAmount -= Mathf.FloorToInt(BBWSpeed * Time.deltaTime);
                 BBWAmount = Mathf.Max(0, BBWAmount); // Ensure BBWAmount doesn't go below 0
+
 
                 // If BBWAmount is 0, stop growing the bubble and exit the loop
                 if (BBWAmount <= 0)
@@ -174,9 +166,14 @@ public class PlayerB: MonoBehaviour
         {
             BubblePoolB.Instance.blowTime = timer;
             BubblePoolB.Instance.bType = BBWType;
+            BubblePoolB.Instance.trans = gameObject.transform;
             BubblePoolB.Instance.GetObj();
         }
-
+        //双倍开启，双倍泡泡
+        if (DoubleStatus == true)
+        {
+            BubblePoolB.Instance.GetObj();
+        }
         // Reset the timer after the bubble is instantiated
         timer = 0f;
 
@@ -187,14 +184,22 @@ public class PlayerB: MonoBehaviour
 
     public void KillBubble(string killString)
     {
+        if (BubblePoolA.Instance.Bubbles.ContainsKey(killString) || BubblePoolB.Instance.Bubbles.ContainsKey(killString))
+        {
+            keyQueue.Dequeue();
+            keyQueue.Dequeue();
+        }
+            if (BubblePoolA.Instance.Bubbles.ContainsKey(killString))
+            BubblePoolA.Instance.PutObj(BubblePoolA.Instance.Bubbles[killString]); 
+        else
         BubblePoolB.Instance.PutObj(BubblePoolB.Instance.Bubbles[killString]);
+
         /*foreach (var item in BubblePoolB.Instance.Bubbles)
         {
             Debug.Log(item.Key);
             Debug.Log(item.Value);
         }*/
-        keyQueue.Dequeue();
-        keyQueue.Dequeue();
+
     }
 
 
@@ -203,20 +208,15 @@ public class PlayerB: MonoBehaviour
 
     //释放特殊道具
     public void SpecialItem()
-    {/*
-        if (playerinput != null && playerinput.Length > 0)
+    {
+        // 检查是否按下了 J 键
+        if (Input.GetKeyDown(KeyCode.J))
         {
-            // 检查是否按下了 key5 键
-            if (Input.GetKey(playerinput[4].key5))
+            if (playerProp != null)
             {
-                //调用特殊道具脚本
-                if (this.playerProp != null)
-                {
-                    playerProp.ApplyEffect();
-                    playerProp = null;
-                }
+                playerProp.ApplyEffect(!isPlayerA);
             }
-        }*/
+        }
     }
 
 
