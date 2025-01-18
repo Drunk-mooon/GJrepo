@@ -25,8 +25,8 @@ public class PlayerB : MonoBehaviour
     private Queue<KeyCode> keyQueue2 = new Queue<KeyCode>();
     //为了道具系统加入的变量
     public Prop playerProp; //道具种类
-    public bool isPlayerA = true; //player是否为玩家A
-
+    public bool isPlayerA = false; //player是否为玩家A
+    private Queue<KeyCode> keyQueue = new Queue<KeyCode>();
     private List<KeyCode> pressedKeys2 = new List<KeyCode>();
     private int maxKeysToPress2 = 3;
     char[] Kill2 = new char[3];
@@ -48,9 +48,16 @@ public class PlayerB : MonoBehaviour
         {
             BubbleWater();
         }
-        if (playerinput2 != null && playerinput2.Length > 0 && Input.GetKey(playerinput2[1].key2) || Input.GetKey(playerinput2[2].key3) || Input.GetKey(playerinput2[3].key4))
+        KeyCode[] allowedKeys = new KeyCode[] { KeyCode.I, KeyCode.O, KeyCode.P };
+        foreach (KeyCode key in allowedKeys)
         {
-            InputKey();
+            if (Input.GetKeyDown(key))
+            {
+                keyQueue.Enqueue(key);
+                if (keyQueue.Count >= 3)
+                    InputKey();
+            }
+
             if (pressedKeys2.Count == maxKeysToPress2)
             {
                 if (BubblePoolA.Instance.Bubbles.ContainsKey(Kill2.ToString()))
@@ -65,25 +72,6 @@ public class PlayerB : MonoBehaviour
     {
         keyQueue2.Clear();
         int index = 0;
-        // 遍历所有的 KeyCode 来处理组合键
-        foreach (KeyCode key in System.Enum.GetValues(typeof(KeyCode)))
-        {
-            if (playerinput2 != null && playerinput2.Length > 0)
-            {
-                if (Input.GetKey(playerinput2[1].key2))
-                {
-                    keyQueue2.Enqueue(playerinput2[1].key2);
-                }
-                else if (Input.GetKey(playerinput2[2].key3))
-                {
-                    keyQueue2.Enqueue(playerinput2[2].key3);
-                }
-                else if (Input.GetKey(playerinput2[3].key4))
-                {
-                    keyQueue2.Enqueue(playerinput2[3].key4);
-                }
-            }
-        }
         char[] kill = new char[3];
         while (keyQueue2.Count > 0 && index < 3)
         {

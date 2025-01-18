@@ -48,14 +48,22 @@ public class PlayerA : MonoBehaviour
         {
             BubbleWater();
         }
-        if (playerinput != null && playerinput.Length > 0 && Input.GetKey(playerinput[1].key2) || Input.GetKey(playerinput[2].key3) || Input.GetKey(playerinput[3].key4))
+        //检查是否输入操作键
+        KeyCode[] allowedKeys = new KeyCode[] { KeyCode.W, KeyCode.E, KeyCode.R };
+        foreach (KeyCode key in allowedKeys)
+        {
+            if (Input.GetKeyDown(key))
             {
-            InputKey();
+                keyQueue.Enqueue(key);
+                if (keyQueue.Count >= 3)
+                    InputKey();
+            }
+
             if (pressedKeys.Count == maxKeysToPress)
             {
-                if (BubblePoolA.Instance.Bubbles.ContainsKey(Kill.ToString())) 
-                { 
-                KillBubble(BubblePoolA.Instance.Bubbles[Kill.ToString()]);
+                if (BubblePoolA.Instance.Bubbles.ContainsKey(Kill.ToString()))
+                {
+                    KillBubble(BubblePoolA.Instance.Bubbles[Kill.ToString()]);
                 }
             }
         }
@@ -63,36 +71,19 @@ public class PlayerA : MonoBehaviour
 
     public string InputKey()
     {
-        keyQueue.Clear();
-        int index = 0;
-        // 遍历所有的 KeyCode 来处理组合键
-        foreach (KeyCode key in System.Enum.GetValues(typeof(KeyCode)))
+        char[] tempKill = new char[3];
+        int indexInKill = 0;
+        while (indexInKill < 3)
         {
-            if (playerinput != null && playerinput.Length > 0)
-            {
-                if (Input.GetKey(playerinput[1].key2))
-                {
-                    keyQueue.Enqueue(playerinput[1].key2);
-                }
-                else if (Input.GetKey(playerinput[2].key3))
-                {
-                    keyQueue.Enqueue(playerinput[2].key3);
-                }
-                else if (Input.GetKey(playerinput[3].key4))
-                {
-                    keyQueue.Enqueue(playerinput[3].key4);
-                }
-            }
+            tempKill[indexInKill++] = (char)keyQueue.Dequeue();
         }
-        char[] kill=new char[3];
-        while (keyQueue.Count > 0 && index < 3)
-        {
-            Kill[index++] = (char)keyQueue.Dequeue();
-        }
-        //Kill转string
-        string killString = new string(Kill);
+
+        // Kill 转 string
+        string killString = new string(tempKill);
+        Debug.Log(killString);
         return killString;
-    }
+    
+}
     //吹泡泡
     public void BlowBubble()
     {   
@@ -105,7 +96,7 @@ public class PlayerA : MonoBehaviour
                 if (!isBlowingBubbles)
                 {
                     // 开始吹泡泡（Q）
-                    CreateBubble();
+                    creatBubble();
                     isBlowingBubbles = true;
                     timer = 0f;
                 }
@@ -191,7 +182,7 @@ public class PlayerA : MonoBehaviour
             }
         }
     }
-    public void CreateBubble()
+    public void creatBubble()
     {
     float growthRate = 0.1f;
     Vector3 currentScale = transform.localScale;
