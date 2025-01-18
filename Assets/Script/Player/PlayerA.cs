@@ -1,13 +1,15 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Mathematics;
+using System;
 public class PlayerA : MonoBehaviour
 {
     private Coroutine blowBubbleCoroutine; // Store reference to the coroutine
     public GameObject gameObject;
     public Playerinput[] playerinput;
     //泡泡棒总量 100,初始值0
-    public float BBWAmount = 0;
+    public float BBWAmount = 100;
     // 用于计时的变量
     private float timer = 0f;
     // 吹泡泡的速度，单位为每秒消耗的泡泡水数量
@@ -26,8 +28,6 @@ public class PlayerA : MonoBehaviour
     public bool isPlayerA = true; //player是否为玩家 A
     //泡泡最大体积
     public Vector2 maxBubbleSize = new Vector2(100f,100f);
-    //是否为绿色泡泡双倍效果
-    public bool isDoubleBlow=false; 
     // 存储当前的 BBW 类型索引
     private int currentBBWTypeIndex = 0;
     E_bType BBWType = E_bType.white;
@@ -83,7 +83,7 @@ public class PlayerA : MonoBehaviour
 
     private void Start()
     {
-        gameObject.transform.position = Vector3.zero;
+       // gameObject.transform.position = new Vector3(1,1,1);
     }
 
     public string InputKey()
@@ -143,9 +143,6 @@ public class PlayerA : MonoBehaviour
             if (transform.localScale.x < maxBubbleSize.x)
             {
                 // Grow the bubble
-               
-                
-  
 
                 // Deduct BBWAmount while the bubble grows
                 BBWAmount -= Mathf.FloorToInt(BBWSpeed * Time.deltaTime);
@@ -159,8 +156,12 @@ public class PlayerA : MonoBehaviour
                 // Increment the timer as the bubble grows
                 timer += Time.deltaTime;
 
-                gameObject.transform.localScale*=timer;
-
+               /*Vector3 a= gameObject.transform.localScale*(float) Math.Round(timer*0.5f,2);
+                a.y = (float)Math.Round(a.y, 2);
+                a.x = (float)Math.Round(a.x, 2);
+                a.z = (float)Math.Round(a.z, 2);
+                gameObject.transform.localScale = a;
+               */
 
 
             }
@@ -179,8 +180,9 @@ public class PlayerA : MonoBehaviour
         {
             BubblePoolA.Instance.blowTime = timer;
             BubblePoolA.Instance.bType = BBWType;
+          
+            BubblePoolA.Instance.trans = gameObject.transform;
             BubblePoolA.Instance.GetObj();
-            BubblePoolA.Instance.transform = gameObject.transform;
 
             //双倍开启，双倍泡泡
             if (DoubleStatus == true)

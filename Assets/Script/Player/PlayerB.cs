@@ -4,7 +4,7 @@ using System.Collections.Generic;
 public class PlayerB: MonoBehaviour
 {
     private Coroutine blowBubbleCoroutine; // Store reference to the coroutine
-
+    public GameObject gameObject;
     public Playerinput[] playerinput;
     //ÅÝÅÝ°ô×ÜÁ¿ 100,³õÊ¼Öµ0
     public float BBWAmount = 0;
@@ -126,10 +126,6 @@ public class PlayerB: MonoBehaviour
     private IEnumerator GrowBubble()
     {
         float growthRate = 0.1f; // Rate of bubble growth
-        if (BubblePoolB.Instance.bType == E_bType.white)
-        {
-            growthRate = 3f;
-        }
         timer = 0f;
         while (timer < 1f)
         {
@@ -142,13 +138,10 @@ public class PlayerB: MonoBehaviour
             if (transform.localScale.x < maxBubbleSize.x)
             {
                 // Grow the bubble
-                Vector3 currentScale = transform.localScale;
-                float newRadius = Mathf.Max(0, currentScale.x + growthRate * Time.deltaTime);
-                transform.localScale = new Vector2(newRadius, newRadius);
-
                 // Deduct BBWAmount while the bubble grows
                 BBWAmount -= Mathf.FloorToInt(BBWSpeed * Time.deltaTime);
                 BBWAmount = Mathf.Max(0, BBWAmount); // Ensure BBWAmount doesn't go below 0
+
 
                 // If BBWAmount is 0, stop growing the bubble and exit the loop
                 if (BBWAmount <= 0)
@@ -172,9 +165,14 @@ public class PlayerB: MonoBehaviour
         {
             BubblePoolB.Instance.blowTime = timer;
             BubblePoolB.Instance.bType = BBWType;
+            BubblePoolB.Instance.trans = gameObject.transform;
             BubblePoolB.Instance.GetObj();
         }
-
+        //Ë«±¶¿ªÆô£¬Ë«±¶ÅÝÅÝ
+        if (DoubleStatus == true)
+        {
+            BubblePoolB.Instance.GetObj();
+        }
         // Reset the timer after the bubble is instantiated
         timer = 0f;
 
