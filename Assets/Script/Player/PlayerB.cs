@@ -109,6 +109,7 @@ public class PlayerB: MonoBehaviour
         keyQueue.Dequeue();
         // Kill ת string
         string killString = new string(tempKill);
+        BubblePoolA.Instance.attackCode = killString;
         BubblePoolB.Instance.attackCode = killString;
         return killString;
     }
@@ -183,7 +184,12 @@ public class PlayerB: MonoBehaviour
 
     public void KillBubble(string killString)
     {
+
+        if (BubblePoolA.Instance.Bubbles.ContainsKey(killString))
+            BubblePoolA.Instance.PutObj(BubblePoolA.Instance.Bubbles[killString]); 
+        else
         BubblePoolB.Instance.PutObj(BubblePoolB.Instance.Bubbles[killString]);
+
         /*foreach (var item in BubblePoolB.Instance.Bubbles)
         {
             Debug.Log(item.Key);
