@@ -31,31 +31,34 @@ public class PlayerA : MonoBehaviour
     private List<KeyCode> pressedKeys = new List<KeyCode>();
     private int maxKeysToPress = 3;
     char[] Kill = new char[3];
+    //创建新bubble
     Bubble bubble = new Bubble();
+    //创建枚举值
+   public int bubbleWaterTypeIndex = 0;
     void Update()
     {
 
-            //检查是否输入操作键
-            KeyCode[] allowedKeys = new KeyCode[] { KeyCode.W, KeyCode.E, KeyCode.R };
-            foreach (KeyCode key in allowedKeys)
+        //检查是否输入操作键
+        KeyCode[] allowedKeys = new KeyCode[] { KeyCode.W, KeyCode.E, KeyCode.R };
+        foreach (KeyCode key in allowedKeys)
+        {
+            if (Input.GetKeyDown(key))
             {
-                if (Input.GetKeyDown(key))
+                keyQueue.Enqueue(key);
+                if (keyQueue.Count >= 3)
                 {
-                    keyQueue.Enqueue(key);
-                    if (keyQueue.Count >= 3)
-                    {
-                        InputKey();
-                    }
-                }
-
-                if (pressedKeys.Count == maxKeysToPress)
-                {
-                    if (BubblePoolA.Instance.Bubbles.ContainsKey(Kill.ToString()))
-                    {
-                        KillBubble(BubblePoolA.Instance.Bubbles[Kill.ToString()]);
-                    }
+                    InputKey();
                 }
             }
+
+            if (pressedKeys.Count == maxKeysToPress)
+            {
+                if (BubblePoolA.Instance.Bubbles.ContainsKey(Kill.ToString()))
+                {
+                    KillBubble(BubblePoolA.Instance.Bubbles[Kill.ToString()]);
+                }
+            }
+        }
         if (playerinput != null && playerinput.Length >= 6)
         {
             // 检查是否按下吹泡泡的键
@@ -75,7 +78,7 @@ public class PlayerA : MonoBehaviour
             }
         }
 
-        }
+    }
 
     public string InputKey()
     {
@@ -90,11 +93,11 @@ public class PlayerA : MonoBehaviour
         string killString = new string(tempKill);
         Debug.Log(killString);
         return killString;
-    
-}
+
+    }
     //吹泡泡
     public void BlowBubble()
-    {   
+    {
         // 首先确保 playerinput 数组不为空，并且至少有一个元素
         if (playerinput != null && playerinput.Length > 0)
         {
@@ -112,9 +115,9 @@ public class PlayerA : MonoBehaviour
                 timer += Time.deltaTime;
                 BBWAmount -= Mathf.FloorToInt(BBWSpeed * Time.deltaTime);
                 //等于零时泡泡生成失败
-                if(BBWAmount<=0)
+                if (BBWAmount <= 0)
                 {
-                    isBlowingBubbles=false;
+                    isBlowingBubbles = false;
                     timer = 0f;
                 }
             }
@@ -180,37 +183,35 @@ public class PlayerA : MonoBehaviour
     //蘸泡泡水
     public void BubbleWater()
     {
-        if (playerinput != null && playerinput.Length > 0)
+        // 获取 Bubble 脚本中的枚举值
+        Bubble bubbleScript = GetComponent<Bubble>();
+        if (bubbleScript != null)
         {
-            // 检查是否按下了 key6 键
-            if (Input.GetKey(playerinput[5].key6))
+            // 随机选择一种泡泡水类型
+            E_bType bubbleTypes = (E_bType[])System.Enum.GetValues(typeof(E_bType));
+            selectedBubbleWaterType = bubbleTypes[bubbleWaterTypeIndex];
+
+            switch (selectedBubbleWaterType)
             {
-                Bubble bubbleScript = GetComponent<Bubble>();
-                if (bubbleScript != null)
-                {
-                    Bubble.E_bType bubbleType = bubbleScript.bubbleType;
-                    // 对获取到的枚举值进行处理
-                    switch (bubbleType)
-                    {
-                        case Bubble.E_bType.blue:
-                            Debug.Log("The bubble type is blue.");
-                            break;
-                        case Bubble.E_bType.green:
-                            Debug.Log("The bubble type is green.");
-                            break;
-                        case Bubble.E_bType.white:
-                            Debug.Log("The bubble type is white.");
-                            break;
-                        case Bubble.E_bType.pink:
-                            Debug.Log("The bubble type is pink.");
-                            break;
-                        default:
-                            Debug.Log("Unknown bubble type.");
-                            break;
-                    }
-                }
+                case Bubble.E_bType.blue:
+                    Debug.Log("The bubble water type is blue.");
+                    break;
+                case Bubble.E_bType.green:
+                    Debug.Log("The bubble water type is green.");
+                    break;
+                case Bubble.E_bType.white:
+                    Debug.Log("The bubble water type is white.");
+                    break;
+                case Bubble.E_bType.pink:
+                    Debug.Log("The bubble water type is pink.");
+                    break;
+                default:
+                    Debug.Log("Unknown bubble water type.");
+                    break;
             }
         }
+
+        return selectedBubbleWaterType;
     }
     public void creatBubble()
     {
