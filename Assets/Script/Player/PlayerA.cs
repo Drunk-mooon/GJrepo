@@ -210,14 +210,10 @@ public class PlayerA : MonoBehaviour
             // 对新创建的 Bubble 对象进行初始化
             newBubble.Set(isa);
             newBubble.Init(blowTime);
-
-
             // 输出一些属性信息
             Debug.Log("Bubble speed: " + newBubble.speed);
             Debug.Log("Bubble score: " + newBubble.score);
             Debug.Log("Bubble type: " + newBubble.bType);
-
-
             // 调用 fly 方法
             newBubble.fly();
         }
