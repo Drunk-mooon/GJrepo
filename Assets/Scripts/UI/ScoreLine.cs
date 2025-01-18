@@ -6,6 +6,8 @@ public class ScoreLine : MonoBehaviour
     public PlayerA playerA;
     public PlayerB playerB;
 
+    public float greenBubbleEffect = 0.1f;
+
     // Trigger event for scoring
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -17,12 +19,23 @@ public class ScoreLine : MonoBehaviour
             if (bubble.isA)
             {
                 // Bubble belongs to Player A
-                playerA.playerScore += bubble.score;
+                /*
+                if(bubble.btype = E_type.green)
+                    playerA.playerScore*=(1+greenBubbleEffect); 
+                else
+                */
+                    playerA.playerScore += bubble.score;
+                
             }
             else
             {
                 // Bubble belongs to Player B
-                playerB.playerScore2 += bubble.score;
+                /*
+                if(bubble.btype = E_type.green)
+                    playerB.playerScore*=(1+greenBubbleEffect); 
+                else
+                */
+                    playerB.playerScore2 += bubble.score;
             }
 
             // Optionally, destroy the bubble after scoring
