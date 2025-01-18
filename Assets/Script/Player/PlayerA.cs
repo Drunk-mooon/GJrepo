@@ -1,15 +1,12 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
-using System;
-using System.Reflection;
-using UnityEngine.UIElements;
 
 
 public class PlayerA : MonoBehaviour
 {
     public Playerinput[] playerinput;
-    //泡泡水总量100
+    //泡泡水总量 100
     public float BBWAmount = 100;
     // 用于计时的变量
     private float timer = 0f;
@@ -25,19 +22,31 @@ public class PlayerA : MonoBehaviour
     //输入队列
     private Queue<KeyCode> keyQueue = new Queue<KeyCode>();
     //为了道具系统加入的变量
-    //public Prop playerProp; //道具种类
-    public bool isPlayerA = true; //player是否为玩家A
+    public Prop playerProp; //道具种类
+    public bool isPlayerA = true; //player是否为玩家 A
 
-    private List<KeyCode> pressedKeys = new List<KeyCode>();
-    private int maxKeysToPress = 3;
-    char[] Kill = new char[3];
-    //创建新bubble
-    Bubble bubble = new Bubble();
-    //创建枚举值
-   public int bubbleWaterTypeIndex = 0;
+
+    // 存储当前的 BBW 类型索引
+    private int currentBBWTypeIndex = 0;
+
+
     void Update()
     {
-
+        // 检查是否按下吹泡泡的键
+        if (playerinput != null && playerinput.Length > 0 && Input.GetKey(playerinput[0].key1))
+        {
+            BlowBubble();
+        }
+        // 检查是否按下特殊道具键
+        if (playerinput != null && playerinput.Length > 4 && Input.GetKey(playerinput[4].key5))
+        {
+            SpecialItem();
+        }
+        // 检查是否按下蘸泡泡水的键
+        if (playerinput != null && playerinput.Length > 5 && Input.GetKey(playerinput[5].key6))
+        {
+            BubbleWater();
+        }
         //检查是否输入操作键
         KeyCode[] allowedKeys = new KeyCode[] { KeyCode.W, KeyCode.E, KeyCode.R };
         foreach (KeyCode key in allowedKeys)
@@ -46,55 +55,19 @@ public class PlayerA : MonoBehaviour
             {
                 keyQueue.Enqueue(key);
                 if (keyQueue.Count >= 3)
-                {
                     InputKey();
-                }
-            }
-
-            if (pressedKeys.Count == maxKeysToPress)
-            {
-                if (BubblePoolA.Instance.Bubbles.ContainsKey(Kill.ToString()))
-                {
-                    KillBubble(BubblePoolA.Instance.Bubbles[Kill.ToString()]);
-                }
             }
         }
-        if (playerinput != null && playerinput.Length >= 6)
-        {
-            // 检查是否按下吹泡泡的键
-            if (playerinput != null && playerinput.Length > 0 && Input.GetKey(playerinput[0].key1))
-            {
-                BlowBubble();
-            }
-            // 检查是否按下特殊道具键
-            if (playerinput != null && playerinput.Length > 4 && Input.GetKey(playerinput[4].key5))
-            {
-                SpecialItem();
-            }
-            // 检查是否按下蘸泡泡水的键
-            if (playerinput != null && playerinput.Length > 5 && Input.GetKey(playerinput[5].key6))
-            {
-                BubbleWater();
-            }
-        }
-
     }
+
 
     public string InputKey()
     {
-        char[] tempKill = new char[3];
-        int indexInKill = 0;
-        while (indexInKill < 3)
-        {
-            tempKill[indexInKill++] = (char)keyQueue.Dequeue();
-        }
-
-        // Kill 转 string
-        string killString = new string(tempKill);
-        Debug.Log(killString);
-        return killString;
-
+        // 此处实现输入键的处理逻辑，可根据需求补充完整
+        return "";
     }
+
+
     //吹泡泡
     public void BlowBubble()
     {
@@ -126,105 +99,87 @@ public class PlayerA : MonoBehaviour
                 //一秒最小值
                 // 当不再按压 Code1 键时，停止吹泡泡（Q）
                 isBlowingBubbles = false;
-                BubblePoolA.Instance.blowTime = timer;
-                //销毁泡泡模型
-                BubblePoolA.Instance.GetObj();
+                // 此处可添加更多停止吹泡泡的逻辑
             }
         }
-
     }
 
 
-
-
-    //WER操作组合键
-    public void KillBubble(Bubble bubble)
-    {/* 
-        string number;
-        bool match = true;
-        for(int k = 0;k < Mathf.Min(3,index); k++)
-         {
-             if (k >= bubble.code.Length || Kill[k] != bubble.code[k])
-             {
-                 match = false;
-                 break;
-             }
-         }
-         if(match)
-         { string nm="";
-             foreach (char num in Kill){
-                 if (num == 'W') nm += 1;
-                    if(num=='E') nm += 2;
-                    if(num=='R')nm += 3;
-             }
-             Kill = nm.ToCharArray();  
-         }*/
-        BubblePoolA.Instance.PutObj(bubble);
-    }
     //释放特殊道具
     public void SpecialItem()
     {/*
         if (playerinput != null && playerinput.Length > 0)
         {
-            SpeciailItem Item = new SpeciailItem();
-            // 检查是否按下了 key5键
+            // 检查是否按下了 key5 键
             if (Input.GetKey(playerinput[4].key5))
-            {   //调用特殊道具脚本
-                if (this.playerProp!=null)
+            {
+                //调用特殊道具脚本
+                if (this.playerProp != null)
                 {
                     playerProp.ApplyEffect();
-                    playerProp=null;
+                    playerProp = null;
                 }
-
             }
-        }
-        */
+        }*/
     }
+
+
     //蘸泡泡水
     public void BubbleWater()
     {
-        // 获取 Bubble 脚本中的枚举值
-        Bubble bubbleScript = GetComponent<Bubble>();
-        if (bubbleScript != null)
+        if (playerinput != null && playerinput.Length > 0)
         {
-            // 随机选择一种泡泡水类型
-            E_bType bubbleTypes = (E_bType[])System.Enum.GetValues(typeof(E_bType));
-            selectedBubbleWaterType = bubbleTypes[bubbleWaterTypeIndex];
-
-            switch (selectedBubbleWaterType)
+            // 检查是否按下了 key6 键
+            if (Input.GetKeyDown(playerinput[5].key6))
             {
-                case Bubble.E_bType.blue:
-                    Debug.Log("The bubble water type is blue.");
-                    break;
-                case Bubble.E_bType.green:
-                    Debug.Log("The bubble water type is green.");
-                    break;
-                case Bubble.E_bType.white:
-                    Debug.Log("The bubble water type is white.");
-                    break;
-                case Bubble.E_bType.pink:
-                    Debug.Log("The bubble water type is pink.");
-                    break;
-                default:
-                    Debug.Log("Unknown bubble water type.");
-                    break;
+                // 切换 BBW 类型
+                SwitchBBWType();
+                //泡泡水每秒 +10
+                BBWAmount += 10f * Time.deltaTime;
             }
         }
-
-        return selectedBubbleWaterType;
     }
+
+
+    // 切换 BBW 类型的方法
+    private void SwitchBBWType()
+    {
+        E_bType[] BBWTypes = (E_bType[])System.Enum.GetValues(typeof(E_bType));
+        currentBBWTypeIndex = (currentBBWTypeIndex + 1) % BBWTypes.Length;
+        E_bType currentBBWType = BBWTypes[currentBBWTypeIndex];
+
+
+        switch (currentBBWType)
+        {
+            case E_bType.blue:
+                Debug.Log("The bubble water type is blue.");
+                break;
+            case E_bType.green:
+                Debug.Log("The bubble water type is green.");
+                break;
+            case E_bType.white:
+                Debug.Log("The bubble water type is white.");
+                break;
+            case E_bType.pink:
+                Debug.Log("The bubble water type is pink.");
+                break;
+        }
+    }
+
+
     public void creatBubble()
     {
-    float growthRate = 0.1f;
-    Vector3 currentScale = transform.localScale;
-    // 计算新的半径
-    float newRadius = Mathf.Max(0, currentScale.x + growthRate * Time.deltaTime);
-    // 确保半径不为负数
-    currentScale = new Vector3(newRadius, newRadius, newRadius);
-    // 应用新的缩放
-    transform.localScale = currentScale;
+        float growthRate = 0.1f;
+        Vector3 currentScale = transform.localScale;
+        // 计算新的半径
+        float newRadius = Mathf.Max(0, currentScale.x + growthRate * Time.deltaTime);
+        // 确保半径不为负数
+        currentScale = new Vector3(newRadius, newRadius, newRadius);
+        // 应用新的缩放
+        transform.localScale = currentScale;
         //停
     }
+
 
     [System.Serializable]
     // 嵌套类 Playerinput
@@ -237,7 +192,5 @@ public class PlayerA : MonoBehaviour
         public KeyCode key5;
         public KeyCode key6;
         public int point;
-
     }
-
 }
