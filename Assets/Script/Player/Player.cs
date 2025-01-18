@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System;
 using System.Reflection;
 
+
 public class Player : MonoBehaviour
 {
     public Playerinput[] playerinput;
@@ -23,7 +24,7 @@ public class Player : MonoBehaviour
     //输入队列
     private Queue<KeyCode> keyQueue = new Queue<KeyCode>();
     //为了道具系统加入的变量
-    Prop playerProp; //道具种类
+    public Prop playerProp; //道具种类
     public bool isPlayerA = true; //player是否为玩家A
 
     private List<KeyCode> pressedKeys = new List<KeyCode>();
@@ -120,6 +121,7 @@ public class Player : MonoBehaviour
             }
             else
             {
+                //一秒最小值
                 // 当不再按压 Code1 键时，停止吹泡泡（Q）
                 isBlowingBubbles = false;
                 BubblePoolA.Instance.blowTime = timer;
@@ -199,6 +201,7 @@ public class Player : MonoBehaviour
     currentScale = new Vector3(newRadius, newRadius, newRadius);
     // 应用新的缩放
     transform.localScale = currentScale;
+        //停
     }
 
     [System.Serializable]
