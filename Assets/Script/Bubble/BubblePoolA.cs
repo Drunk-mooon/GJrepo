@@ -102,22 +102,16 @@ public class BubblePoolA : ObjPool<BubblePoolA, Bubble>
         Bubbles.Remove(code); //移除字典中之前那个code与bubble的键值对
     }
 
-    public void changeBubble(int num)
+    public void changeBubble()
     {
-        int[] index =new int[num];
+        int[] index =new int[2];
         int count = Bubbles.Count;
-        index[0]=_random.Next(0, count);
-        for (int i = 1; i < num; i++)
-        {
-            index[i] = (index[0] + i)%count;
-        }
-
-        for (int i = 0; i < num; i++)
-        {
-           Bubbles.ElementAt(index[i]).Value.isA = false;
-        }
-
-        
+        index[0] = _random.Next(count);
+        index[1] = _random.Next((count+1)%count);
+        var a = Bubbles.ElementAt(index[0]);
+        var b = Bubbles.ElementAt(index[1]);
+        a.Value.isA = false;
+        b.Value.isA = false;
     }
     
     
