@@ -18,7 +18,7 @@ public class Bubble : MonoBehaviour
 
     public void Set(bool isa)
     {
-        this.isA = isa;
+        this.isA = isa; 
         GetBubble(isA);
         this.code = "";
         this.index = 2;

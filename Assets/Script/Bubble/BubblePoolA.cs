@@ -54,7 +54,7 @@ public class BubblePoolA : ObjPool<BubblePoolA, Bubble>
             Pool.Enqueue(obj);
         }
         else
-        {
+        { 
           // attack(attackCode);
           obj.index -= 1;
         }
