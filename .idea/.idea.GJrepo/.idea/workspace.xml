@@ -4,12 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="01f5344a-2482-466c-825e-61f18f7eed00" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.GJrepo/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.GJrepo/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Bubble/Bubble.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Bubble/Bubble.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Bubble/BubblePoolA.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Bubble/BubblePoolA.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Bubble/BubblePoolB.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Bubble/BubblePoolB.cs" afterDir="false" />
-    </list>
+    <list default="true" id="01f5344a-2482-466c-825e-61f18f7eed00" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -133,7 +128,7 @@
       <workItem from="1737195560669" duration="2335000" />
       <workItem from="1737198229419" duration="351000" />
       <workItem from="1737201741152" duration="98000" />
-      <workItem from="1737201843652" duration="4135000" />
+      <workItem from="1737201843652" duration="4776000" />
     </task>
     <servers />
   </component>
