@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System;
 using System.Reflection;
+using UnityEngine.UIElements;
 
 
 public class PlayerA : MonoBehaviour
@@ -183,10 +184,7 @@ public class PlayerA : MonoBehaviour
         {
             // 检查是否按下了 key6 键
             if (Input.GetKey(playerinput[5].key6))
-            {
-                //泡泡水每秒+10
-                BBWAmount += 10f*Time.deltaTime;
-            }
+            {}
         }
     }
     public void creatBubble()
