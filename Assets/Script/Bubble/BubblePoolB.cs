@@ -5,7 +5,7 @@ using System.Linq;
 using UnityEngine;
 using Random = System.Random;
 
-public class BubblePoolA : ObjPool<BubblePoolA, Bubble>
+public class BubblePoolB : ObjPool<BubblePoolB, Bubble>
 {
     public float blowTime; //吹的时间
     private Random _random;
@@ -39,7 +39,7 @@ public class BubblePoolA : ObjPool<BubblePoolA, Bubble>
         obj.transform.SetParent(this.transform); //父亲是这个对象池 
         obj.AddComponent<Bubble>(); //添加脚本 
         Bubble bubble = obj.GetComponent<Bubble>(); //指明 
-        bubble.Set(true); 
+        bubble.Set(false); 
         bubble.bubble.SetActive(false); //初始出来先隐藏 
         return bubble; 
     }
@@ -56,7 +56,7 @@ public class BubblePoolA : ObjPool<BubblePoolA, Bubble>
         else
         { 
              attack(attackCode); //用code 攻击
-            
+       
         } 
     }
 
@@ -77,7 +77,7 @@ public class BubblePoolA : ObjPool<BubblePoolA, Bubble>
         foreach (Bubble a in Bubbles.Values)
         {
            if(a.isA)  a.transform.position += new Vector3(0, a.speed * Time.deltaTime*speedChange, 0);
-           else a.transform.position += new Vector3(0, a.speed * Time.deltaTime*BubblePoolB.Instance.speedChange, 0); 
+           else a.transform.position += new Vector3(0, a.speed * Time.deltaTime*BubblePoolA.Instance.speedChange, 0); //其实是 BubblePoolB.instance.speedChange
         } 
     }
 
@@ -91,7 +91,7 @@ public class BubblePoolA : ObjPool<BubblePoolA, Bubble>
             {
                 result += _random.Next(1, 4).ToString();
             }
-        } while (Bubbles.ContainsKey(result)/*||BubblePoolB.Instance.Bubbles.ContainsKey(result)*/);
+        } while (Bubbles.ContainsKey(result)|| BubblePoolA.Instance.Bubbles.ContainsKey(result));
 
         obj.index--; //  命数-1
         return result;

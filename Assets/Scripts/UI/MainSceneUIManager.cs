@@ -20,6 +20,15 @@ public class MainSceneUIManager : MonoBehaviour
     public PropPanel playerBPropPanel;
     public TextMeshProUGUI timerText;
 
+    public GameObject miniGamePanel;
+
+    private void Start()
+    {
+        if (miniGamePanel != null)
+        {
+            miniGamePanel.SetActive(false);
+        }
+    }
     private void Update()
     {
         if (playerAProp != null)
@@ -60,5 +69,15 @@ public class MainSceneUIManager : MonoBehaviour
 
         blueBar.rectTransform.anchoredPosition = new Vector2(-totalBarWidth/2, blueBar.rectTransform.anchoredPosition.y);
         redBar.rectTransform.anchoredPosition = new Vector2(-totalBarWidth / 2 + blueBarWidth, redBar.rectTransform.anchoredPosition.y);
+    }
+
+    public void EnableMiniGamePanel()
+    {
+        miniGamePanel.SetActive(true);
+    }
+
+    public void DisableMiniGamePanel()
+    {
+        miniGamePanel.SetActive(false);
     }
 }
