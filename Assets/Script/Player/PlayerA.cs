@@ -220,7 +220,10 @@ public class PlayerA : MonoBehaviour
     {   // 检查是否按下了 A 键
         if (Input.GetKeyDown(KeyCode.A))
        {
-
+            if (playerProp != null)
+            {
+                playerProp.ApplyEffect(isPlayerA);
+            }
        }     
     }
 

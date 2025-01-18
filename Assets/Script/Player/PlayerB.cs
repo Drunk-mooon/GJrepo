@@ -203,7 +203,10 @@ public class PlayerB: MonoBehaviour
         // 检查是否按下了 J 键
         if (Input.GetKeyDown(KeyCode.J))
         {
-
+            if (playerProp != null)
+            {
+                playerProp.ApplyEffect(!isPlayerA);
+            }
         }
     }
 
