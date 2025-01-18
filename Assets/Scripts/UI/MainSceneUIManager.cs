@@ -14,7 +14,7 @@ public class MainSceneUIManager : MonoBehaviour
     public Prop playerBProp;
 
     public PlayerA playerA;
-    public PlayerA playerB;
+    public PlayerB playerB;
 
     public PropPanel playerAPropPanel; //!need to change to player!
     public PropPanel playerBPropPanel;
@@ -39,6 +39,8 @@ public class MainSceneUIManager : MonoBehaviour
     // Method to update the score bar
     public void UpdateScoreBar(float player1Score, float player2Score)
     {
+        player1Score = playerA.playerScore;
+        player2Score = playerB.playerScore2;
         // Calculate the total score to find the ratio
         float totalScore = player1Score + player2Score;
 

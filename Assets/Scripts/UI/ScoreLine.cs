@@ -2,15 +2,34 @@ using UnityEngine;
 
 public class ScoreLine : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    // Reference to the players
+    public PlayerA playerA;
+    public PlayerB playerB;
 
-    // Update is called once per frame
-    void Update()
+    // Trigger event for scoring
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        
+        // Check if the colliding object has a Bubble component
+        Bubble bubble = collision.GetComponent<Bubble>();
+        if (bubble != null)
+        {
+            // Determine which player gets the score
+            if (bubble.isA)
+            {
+                // Bubble belongs to Player A
+                playerA.playerScore += bubble.score;
+            }
+            else
+            {
+                // Bubble belongs to Player B
+                playerB.playerScore2 += bubble.score;
+            }
+
+            // Optionally, destroy the bubble after scoring
+            if (bubble.isA)
+                BubblePoolA.Instance.PutObj(bubble);
+            else
+                ; //NeedToChange!
+        }
     }
 }

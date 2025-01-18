@@ -5,7 +5,7 @@ using System.Collections;
 public class BubbleFreezeProp : Prop
 {
     public BubblePoolA playerABubblePool; // Reference to Player A's BubblePool
-    public BubblePoolA playerBBubblePool; // Reference to Player B's BubblePool
+    public BubblePoolA playerBBubblePool; // Reference to Player B's BubblePool   NeedToChange! to certain pool class
 
     public float freezeSpeed = 0.7f; // The reduced speed during freeze
     public float freezeDuration = 5f; // Duration of the freeze effect
@@ -14,13 +14,14 @@ public class BubbleFreezeProp : Prop
     {
         base.ApplyEffect(isApplyByPlayerA);
 
-        // Choose the correct bubble pool based on the boolean
-        BubblePoolA targetBubblePool = isApplyByPlayerA ? playerABubblePool : playerBBubblePool;
-
         // Start the freeze effect
-        if (targetBubblePool != null)
+        if (isApplyByPlayerA)
         {
-            targetBubblePool.StartCoroutine(FreezeEffect(targetBubblePool));
+            playerBBubblePool.StartCoroutine(FreezeEffectB(playerBBubblePool));
+        }
+        else if(!isApplyByPlayerA)
+        {
+            playerBBubblePool.StartCoroutine(FreezeEffectA(playerABubblePool));
         }
     }
 
@@ -30,7 +31,22 @@ public class BubbleFreezeProp : Prop
         
     }
 
-    private IEnumerator FreezeEffect(BubblePoolA bubblePool)
+    private IEnumerator FreezeEffectA(BubblePoolA bubblePool)
+    {
+        // Store the original speed
+        float originalSpeed = bubblePool.speedChange;
+
+        // Apply the freeze speed
+        bubblePool.speedChange = freezeSpeed;
+
+        // Wait for the freeze duration
+        yield return new WaitForSeconds(freezeDuration);
+
+        // Reset the speed to its original value
+        bubblePool.speedChange = originalSpeed;
+    }
+
+    private IEnumerator FreezeEffectB(BubblePoolA bubblePool)
     {
         // Store the original speed
         float originalSpeed = bubblePool.speedChange;

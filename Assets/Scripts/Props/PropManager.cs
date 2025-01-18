@@ -8,11 +8,16 @@ public class PropManager : MonoBehaviour
     public BubbleFreezeProp bubbleFreezeProp;
     public BubbleStealProp bubbleStealProp;
 
-    public Player playerA; //need to change the class to PlayerA/B
-    public Player playerB;
+    public PlayerA playerA; //need to change the class to PlayerA/B
+    public PlayerB playerB;
     
     public void PlayerAGetProp(Prop certainProp)
     {
-        //playerA.playerProp = certainProp  NeedToChange!
+        playerA.playerProp = certainProp;
+    }
+
+    public void PlayerBGetProp(Prop certainProp)
+    {
+        playerB.playerProp = certainProp;
     }
 }
