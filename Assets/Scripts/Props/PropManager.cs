@@ -5,13 +5,19 @@ public class PropManager : MonoBehaviour
     public BubbleFreezeProp bubbleFreezeProp;
     public BubbleStealProp bubbleStealProp;
 
-    public PlayerA playerA; //need to change the class to PlayerA/B
+    public PlayerA playerA; 
     public PlayerB playerB;
     
     public void PlayerAGetProp()
     {
         Random.InitState(System.DateTime.Now.Millisecond);
-        int randomValue = Random.Range(0, 3);
+        int randomValue;
+        if (playerB.playerProp = bubbleStealProp)
+        {
+            randomValue = Random.Range(0, 2);
+        }
+        else
+            randomValue = Random.Range(0, 3);
         if (randomValue == 0)
         {
             playerA.playerProp = bubbleDoubleProp;
@@ -32,7 +38,13 @@ public class PropManager : MonoBehaviour
     public void PlayerBGetProp()
     {
         Random.InitState(System.DateTime.Now.Millisecond);
-        int randomValue = Random.Range(0, 3);
+        int randomValue;
+        if (playerA.playerProp = bubbleStealProp)
+        {
+            randomValue = Random.Range(0, 2);
+        }
+        else
+            randomValue = Random.Range(0, 3);
         if (randomValue == 0)
         {
             playerB.playerProp = bubbleDoubleProp;
