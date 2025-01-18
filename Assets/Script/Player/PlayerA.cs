@@ -142,7 +142,7 @@ public class PlayerA : MonoBehaviour
 
 
     // 切换 BBW 类型的方法
-    private void SwitchBBWType()
+    private E_bType SwitchBBWType()
     {
         E_bType[] BBWTypes = (E_bType[])System.Enum.GetValues(typeof(E_bType));
         currentBBWTypeIndex = (currentBBWTypeIndex + 1) % BBWTypes.Length;
@@ -153,16 +153,21 @@ public class PlayerA : MonoBehaviour
         {
             case E_bType.blue:
                 Debug.Log("The bubble water type is blue.");
-                break;
+                return E_bType.blue;       
             case E_bType.green:
                 Debug.Log("The bubble water type is green.");
-                break;
+                return E_bType.green;
             case E_bType.white:
                 Debug.Log("The bubble water type is white.");
-                break;
+                return E_bType.white;
             case E_bType.pink:
                 Debug.Log("The bubble water type is pink.");
-                break;
+                return E_bType.pink;
+            default:
+                // 处理未预期的枚举值
+                Debug.Log("Unexpected bubble water type.");
+                return E_bType.white;
+
         }
     }
 
