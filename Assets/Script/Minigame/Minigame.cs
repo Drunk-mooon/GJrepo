@@ -13,6 +13,9 @@ public class Minigame : MonoBehaviour
     [Header("Settings")]
     public float minigameTime = 5f;
 
+    [Header("Reference")]
+    public GameManager gameManager;
+
     private bool minigameOngoing = false; // 是否正在进行游戏
 
     private KeyCode playerAKey;
@@ -115,7 +118,7 @@ public class Minigame : MonoBehaviour
         {
             onMinigameEnd(isAWin);
         }
-
+        gameManager.EndMiniGame();
         // 恢复游戏
         Time.timeScale = 1f;
     }

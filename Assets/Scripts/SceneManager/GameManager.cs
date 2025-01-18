@@ -22,6 +22,7 @@ public class GameManager : MonoBehaviour
 
     private int miniGameTime = 0;
     public float miniGameInterval = 10f;
+    private bool isInMiniGame = false;
     void Start()
     {
         // Find UIManager in the scene and assign it to uiManager
@@ -58,12 +59,9 @@ public class GameManager : MonoBehaviour
         {
             EndGame();
         }
-        else if (elapsedTime - (miniGameTime+1) * miniGameInterval >= 0f)
+        else if ((elapsedTime - (miniGameTime+1) * miniGameInterval >= 0f) && !isInMiniGame)
         {
-            uiManager.EnableMiniGamePanel();
-            ;//StartMiniGame
-            miniGameTime++;
-            uiManager.EnableMiniGamePanel();
+            BeginMiniGame();
         }
     }
 
@@ -144,6 +142,18 @@ public class GameManager : MonoBehaviour
         {
             uiManager.timerText.gameObject.SetActive(false);
         }
+    }
+
+    public void BeginMiniGame()
+    {
+        isInMiniGame = true;
+        uiManager.EnableMiniGamePanel();
+    }
+    public void EndMiniGame()
+    {
+        isInMiniGame = false;
+        miniGameTime++;
+        uiManager.DisableMiniGamePanel();
     }
 
     #endregion
