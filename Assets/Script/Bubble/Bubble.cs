@@ -26,7 +26,6 @@ public class Bubble : MonoBehaviour
     public string code; //当前组合键
     public int index = 2; //泡泡生命
     public E_bType bType;
-    
     public void Set(bool isa)
     {
         this.isA = isa; 

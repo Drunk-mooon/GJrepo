@@ -1547,8 +1547,9 @@ MonoBehaviour:
     key4: 114
     key5: 97
     key6: 115
+    key7: 100
     point: 0
-  BBWAmount: 100
+  BBWAmount: 0
   BBWSpeed: 10
   playerScore: 0.1
   playerinputin: []
@@ -1722,6 +1723,54 @@ Transform:
   - {fileID: 1533116623}
   m_Father: {fileID: 606107553}
   m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1778267644
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1778267646}
+  - component: {fileID: 1778267645}
+  m_Layer: 0
+  m_Name: PoolA
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1778267645
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1778267644}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b52fbb0ae55be894ea535231e245cc22, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  blowTime: 0
+  attackCode: 
+  speedChange: 1
+  bType: 0
+--- !u!4 &1778267646
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1778267644}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.34792373, y: -0.04398437, z: 0.11011723}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1828277924
 GameObject:
