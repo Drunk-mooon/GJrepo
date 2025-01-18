@@ -28,6 +28,7 @@ public class PlayerA : MonoBehaviour
     public bool isDoubleBlow=false; 
     // 存储当前的 BBW 类型索引
     private int currentBBWTypeIndex = 0;
+    E_bType BBWType = E_bType.white;
 
 
     void Update()
@@ -99,7 +100,9 @@ public class PlayerA : MonoBehaviour
                 //一秒最小值
                 // 当不再按压 Code1 键时，停止吹泡泡（Q）
                 isBlowingBubbles = false;
-                CreateBubble(true,timer);
+                BubblePoolA.Instance.blowTime = timer;
+                BubblePoolA.Instance.bType = BBWType;
+                CreateBubble(true,timer,BBWType);
                 timer = 0f;
                 // 此处可添加更多停止吹泡泡的逻辑
             }
@@ -135,9 +138,8 @@ public class PlayerA : MonoBehaviour
             if (Input.GetKeyDown(playerinput[5].key6))
             {
                 // 切换 BBW 类型
-                SwitchBBWType();
-                //泡泡水每秒 +10
-                BBWAmount += 10f * Time.deltaTime;
+                BBWType=SwitchBBWType();
+                BubblePoolA.Instance.bType = BBWType;
             }
         }
     }
@@ -171,6 +173,7 @@ public class PlayerA : MonoBehaviour
                 return E_bType.white;
 
         }
+
     }
 
 
@@ -200,20 +203,15 @@ public class PlayerA : MonoBehaviour
         public KeyCode key6;
         public int point;
     }
-    private void CreateBubble(bool isa,float blowTime)
+    private void CreateBubble(bool isa,float blowTime,E_bType type)
     {
         Bubble newBubble = Instantiate(Resources.Load<Bubble>("BubblePrefab"));
-
 
         if (newBubble != null)
         {
             // 对新创建的 Bubble 对象进行初始化
             newBubble.Set(isa);
             newBubble.Init(blowTime);
-            // 输出一些属性信息
-            Debug.Log("Bubble speed: " + newBubble.speed);
-            Debug.Log("Bubble score: " + newBubble.score);
-            Debug.Log("Bubble type: " + newBubble.bType);
             // 调用 fly 方法
             newBubble.fly();
         }
