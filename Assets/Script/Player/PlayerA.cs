@@ -25,7 +25,7 @@ public class PlayerA : MonoBehaviour
     public Prop playerProp; //道具种类
     public bool isPlayerA = true; //player是否为玩家 A
 
-
+    public bool isDoubleBlow=false; 
     // 存储当前的 BBW 类型索引
     private int currentBBWTypeIndex = 0;
 
@@ -80,7 +80,7 @@ public class PlayerA : MonoBehaviour
                 if (!isBlowingBubbles)
                 {
                     // 开始吹泡泡（Q）
-                    creatBubble();
+                    GrowBubble();
                     isBlowingBubbles = true;
                     timer = 0f;
                 }
@@ -99,6 +99,8 @@ public class PlayerA : MonoBehaviour
                 //一秒最小值
                 // 当不再按压 Code1 键时，停止吹泡泡（Q）
                 isBlowingBubbles = false;
+                CreateBubble(true,timer);
+                timer = 0f;
                 // 此处可添加更多停止吹泡泡的逻辑
             }
         }
@@ -172,7 +174,7 @@ public class PlayerA : MonoBehaviour
     }
 
 
-    public void creatBubble()
+    public void GrowBubble()
     {
         float growthRate = 0.1f;
         Vector3 currentScale = transform.localScale;
@@ -198,4 +200,31 @@ public class PlayerA : MonoBehaviour
         public KeyCode key6;
         public int point;
     }
+    private void CreateBubble(bool isa,float blowTime)
+    {
+        Bubble newBubble = Instantiate(Resources.Load<Bubble>("BubblePrefab"));
+
+
+        if (newBubble != null)
+        {
+            // 对新创建的 Bubble 对象进行初始化
+            newBubble.Set(isa);
+            newBubble.Init(blowTime);
+
+
+            // 输出一些属性信息
+            Debug.Log("Bubble speed: " + newBubble.speed);
+            Debug.Log("Bubble score: " + newBubble.score);
+            Debug.Log("Bubble type: " + newBubble.bType);
+
+
+            // 调用 fly 方法
+            newBubble.fly();
+        }
+        else
+        {
+            Debug.LogError("Failed to instantiate Bubble object.");
+        }
+    }
+
 }
