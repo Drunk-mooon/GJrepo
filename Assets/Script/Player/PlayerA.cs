@@ -34,12 +34,8 @@ public class PlayerA : MonoBehaviour
     char[] Kill = new char[3];
 
     private Coroutine waterCoroutine;
-    //道具持有状态
-    public bool HaveItem = false;
-    private void Start()
-    {
-
-    }
+    //双倍状态
+    public bool DoubleStatus = false;
     void Update()
     {
         //检查是否输入操作键
@@ -128,8 +124,7 @@ public class PlayerA : MonoBehaviour
         }
     }
     private IEnumerator GrowBubble()
-    {    //白色
-
+    {    
         float growthRate = 0.1f; // Rate of bubble growth
         timer = 0f;
         while (timer < 1f)
@@ -140,8 +135,9 @@ public class PlayerA : MonoBehaviour
         // While the key is held down, continue growing the bubble
         while (Input.GetKey(KeyCode.Q)) // Continue while the key is pressed
         {
+
             if (transform.localScale.x < maxBubbleSize.x)
-            {
+            {   
                 // Grow the bubble
                 Vector3 currentScale = transform.localScale;
                 float newRadius = Mathf.Max(0, currentScale.x + growthRate * Time.deltaTime);
@@ -173,6 +169,11 @@ public class PlayerA : MonoBehaviour
             BubblePoolA.Instance.blowTime = timer;
             BubblePoolA.Instance.bType = BBWType;
             BubblePoolA.Instance.GetObj();
+            //双倍开启，双倍泡泡
+            if (DoubleStatus = true)
+            {
+                BubblePoolA.Instance.GetObj();
+            }
         }
 
         // Reset the timer after the bubble is instantiated
@@ -204,11 +205,7 @@ public class PlayerA : MonoBehaviour
     {   // 检查是否按下了 A 键
         if (Input.GetKeyDown(KeyCode.A))
        {
-            if (HaveItem == true)
-                //BubbleFreeze,DoubleBlow,BubbleStealer
-                Debug.Log("使用道具!");
-            else
-                return;
+
        }     
     }
 

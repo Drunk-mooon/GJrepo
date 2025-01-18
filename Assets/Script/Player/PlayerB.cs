@@ -34,12 +34,8 @@ public class PlayerB: MonoBehaviour
     char[] Kill = new char[3];
 
     private Coroutine waterCoroutine;
-    //道具持有状态
-    public bool HaveItem = false;
-    private void Start()
-    {
-
-    }
+    //双倍状态
+    public bool DoubleStatus = false;
     void Update()
     {
         //检查是否输入操作键
@@ -209,11 +205,7 @@ public class PlayerB: MonoBehaviour
         // 检查是否按下了 J 键
         if (Input.GetKeyDown(KeyCode.J))
         {
-            if (HaveItem == true)
-                //BubbleFreeze,DoubleBlow,BubbleStealer
-                Debug.Log("使用道具!");
-            else
-                return;
+
         }
     }
 
