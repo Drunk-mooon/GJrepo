@@ -4,16 +4,16 @@ using UnityEngine.UI;  // 如果要使用 UI 元素，比如 Text, Button
 
 public class Minigame : MonoBehaviour
 {
-    [Header("UI 元素")]
-    public TextMeshProUGUI  countdownText;      // 用于显示倒计时的文本
-    public TextMeshProUGUI  playerAKeyText;     // 用于显示玩家 A 需要按的键
-    public TextMeshProUGUI  playerBKeyText;     // 用于显示玩家 B 需要按的键
-    public TextMeshProUGUI  resultText;         // 用于显示最终结果
+    [Header("UI Elements")]
+    public TextMeshProUGUI  countdownText;      // 显示倒计时的文本
+    public TextMeshProUGUI  playerAKeyText;     // 显示玩家 A 需要按的键
+    public TextMeshProUGUI  playerBKeyText;     // 显示玩家 B 需要按的键
+    public TextMeshProUGUI  resultText;         // 显示最终结果
 
-    [Header("配置")]
+    [Header("Settings")]
     public float minigameTime = 5f;
 
-    private bool minigameOngoing = false; // 是否正在进行比拼
+    private bool minigameOngoing = false; // 是否正在进行游戏
 
     private KeyCode playerAKey;
     private KeyCode playerBKey;
@@ -21,11 +21,10 @@ public class Minigame : MonoBehaviour
     private int playerACount;
     private int playerBCount;
 
-    // 用于把结果返回给调用方(比如外部脚本):
+    // 用于把结果返回给调用方:
     private System.Action<bool> onMinigameEnd; 
     // 这个回调里，bool=true 表示 A 胜利，false 表示 B 胜利
-
-    // 可选：存一个胜利方，方便后面查询
+    
     private bool isAWin;
 
     // 所有可能随机到的 KeyCode，可以按照需求自定义
@@ -36,10 +35,8 @@ public class Minigame : MonoBehaviour
         KeyCode.Z, KeyCode.X, KeyCode.C, KeyCode.V, KeyCode.B, 
         KeyCode.N, KeyCode.M
     };
-
-    /// <summary>
-    /// 对外暴露的方法：开始比拼并暂停游戏
-    /// </summary>
+    
+    //对外暴露的方法：开始比拼并暂停游戏
     public void StartMinigame(System.Action<bool> callback)
     {
         // 暂停游戏
@@ -57,8 +54,8 @@ public class Minigame : MonoBehaviour
         playerBKey = GetRandomKeyCode();
 
         // 更新 UI 显示
-        if (playerAKeyText) playerAKeyText.text = "玩家A按键: " + playerAKey.ToString();
-        if (playerBKeyText) playerBKeyText.text = "玩家B按键: " + playerBKey.ToString();
+        if (playerAKeyText) playerAKeyText.text = "Player A Key: " + playerAKey.ToString();
+        if (playerBKeyText) playerBKeyText.text = "Player B Key: " + playerBKey.ToString();
 
         // 重置结果文本
         if (resultText) resultText.text = "";
@@ -105,20 +102,14 @@ public class Minigame : MonoBehaviour
         if (playerACount > playerBCount)
         {
             isAWin = true;  // A 胜利
-            if (resultText) resultText.text = "A 胜利！";
+            if (resultText) resultText.text = "A Wins!";
         }
         else if (playerACount < playerBCount)
         {
             isAWin = false; // B 胜利
-            if (resultText) resultText.text = "B 胜利！";
+            if (resultText) resultText.text = "B Wins!";
         }
-        else
-        {
-            // 平局处理，这里随便处理一下，或者再加一轮判断
-            isAWin = false; 
-            if (resultText) resultText.text = "平局！";
-        }
-
+        
         // 调用回调，把结果通知外部
         if (onMinigameEnd != null)
         {
