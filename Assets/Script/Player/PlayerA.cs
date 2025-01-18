@@ -2,7 +2,6 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
-
 public class PlayerA : MonoBehaviour
 {
     public Playerinput[] playerinput;
@@ -29,10 +28,23 @@ public class PlayerA : MonoBehaviour
     // 存储当前的 BBW 类型索引
     private int currentBBWTypeIndex = 0;
     E_bType BBWType = E_bType.white;
-
-
+    char[] Kill = new char[3];
+    private Bubble bubble = new Bubble();
     void Update()
     {
+        //检查是否输入操作键
+        KeyCode[] allowedKeys = new KeyCode[] { KeyCode.W, KeyCode.E, KeyCode.R };
+        foreach (KeyCode key in allowedKeys)
+        {
+            if (Input.GetKeyDown(key))
+            {
+                keyQueue.Enqueue(key);
+                if (keyQueue.Count >= 3)
+                    InputKey();
+                KillBubble(InputKey(),bubble);
+            }
+            
+        }
         // 检查是否按下吹泡泡的键
         if (playerinput != null && playerinput.Length > 0 && Input.GetKey(playerinput[0].key1))
         {
@@ -48,24 +60,20 @@ public class PlayerA : MonoBehaviour
         {
             BubbleWater();
         }
-        //检查是否输入操作键
-        KeyCode[] allowedKeys = new KeyCode[] { KeyCode.W, KeyCode.E, KeyCode.R };
-        foreach (KeyCode key in allowedKeys)
-        {
-            if (Input.GetKeyDown(key))
-            {
-                keyQueue.Enqueue(key);
-                if (keyQueue.Count >= 3)
-                    InputKey();
-            }
-        }
     }
 
 
-    public string InputKey()
+    public char[] InputKey()
     {
-        // 此处实现输入键的处理逻辑，可根据需求补充完整
-        return "";
+        char[] tempKill = new char[3];
+        int indexInKill = 0;
+        while (indexInKill < 3)
+        {
+            tempKill[indexInKill++] = (char)keyQueue.Dequeue();
+        }
+
+        // Kill 转 string
+        return tempKill;
     }
 
 
@@ -109,7 +117,23 @@ public class PlayerA : MonoBehaviour
         }
     }
 
-
+    public void KillBubble(char[] killString, Bubble bubble)
+    {
+        for (int i = bubble.code.Length - 1; i >= 0; i--)
+        {
+            char[] c = killString;
+            if (c[i] != bubble.code[i])
+            {
+                return;
+            }
+        }
+        BubblePoolA.Instance.PutObj(bubble);
+    }
+    private bool CompareStrings(string str1, string str2)
+    {
+        // 进行比较
+        return str1.ToLower() == str2.ToLower();
+    }
     //释放特殊道具
     public void SpecialItem()
     {/*

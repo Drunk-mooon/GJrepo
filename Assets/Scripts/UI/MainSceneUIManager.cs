@@ -39,8 +39,8 @@ public class MainSceneUIManager : MonoBehaviour
     // Method to update the score bar
     public void UpdateScoreBar(float player1Score, float player2Score)
     {
-        player1Score = playerA.playerScore;
-        player2Score = playerB.playerScore2;
+        player1Score = 0.1f;// playerA.playerScore;
+        player2Score = 0.1f;// playerB.playerScore2;
         // Calculate the total score to find the ratio
         float totalScore = player1Score + player2Score;
 
