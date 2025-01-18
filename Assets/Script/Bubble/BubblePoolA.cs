@@ -56,6 +56,7 @@ public class BubblePoolA : ObjPool<BubblePoolA, Bubble>
         else
         { 
              attack(attackCode); //用code 攻击
+            Debug.Log("WWW");
         } 
     }
 
@@ -100,6 +101,7 @@ public class BubblePoolA : ObjPool<BubblePoolA, Bubble>
     {
         Bubbles[code].code = GetCode(Bubbles[code]); //这个attackcode对应的bubble获得新的code
         string secCod = Bubbles[code].code; //临时code=上个code
+        Bubbles[code].label.text = secCod;
         Bubbles.Add(secCod, Bubbles[code]); //临时code，以及那个bubble进入字典
         Bubbles.Remove(code); //移除字典中之前那个code与bubble的键值对
     }
