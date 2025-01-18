@@ -14,8 +14,11 @@ public class GameManager : MonoBehaviour
     private bool isTuitionActive = false;
     private bool isEndActive = false;
 
-    private float player1Score = 0.1f;
-    private float player2Score = 0.1f;
+    private float playerAScore = 0.1f;       //variables for debug. 
+    private float playerBScore = 0.1f;
+
+    public Player playerA;
+    public Player playerB;
 
     void Start()
     {
@@ -48,7 +51,7 @@ public class GameManager : MonoBehaviour
     {
         elapsedTime += Time.deltaTime;
         UpdateTimerUI();
-        uiManager.UpdateScoreBar(player1Score, player2Score);
+        uiManager.UpdateScoreBar(playerAScore, playerBScore);
         if (elapsedTime >= gameDuration)
         {
             EndGame();
@@ -124,8 +127,8 @@ public class GameManager : MonoBehaviour
         tutorialPanel.SetActive(true);
         endGamePanel.SetActive(false);
         Time.timeScale = 0f;
-        player1Score = 0.1f;
-        player2Score = 0.1f;
+        playerAScore = 0.1f;
+        playerBScore = 0.1f;
 
         if (uiManager != null)
         {
@@ -167,9 +170,9 @@ public class GameManager : MonoBehaviour
     public void AddScore(int player,float score)
     {
         if (player == 1)
-            player1Score += score;
+            playerAScore += score;
         if (player==2)
-            player2Score += score;
+            playerBScore += score;
     } 
     #endregion
 }

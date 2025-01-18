@@ -6,21 +6,26 @@ using UnityEngine.UI;
 
 public class MainSceneUIManager : MonoBehaviour
 {
-    public Image redBar;  // Image representing Player 2's score (left part, red)
-    public Image blueBar; // Image representing Player 1's score (right part, blue)
+    public Image redBar;  // Image representing Player 2's score (right part, red)
+    public Image blueBar; // Image representing Player 1's score (left part, blue)
     public float totalBarWidth = 1000f;
-    public Prop player1Prop;
-    public Prop player2Prop;
-    public PropPanel player1PropPanel; //!need to change to player!
-    public PropPanel player2PropPanel;
+
+    public Prop playerAProp;  //调试变量，需直接引用player所拥有的道具
+    public Prop playerBProp;
+
+    public Player playerA;
+    public Player playerB;
+
+    public PropPanel playerAPropPanel; //!need to change to player!
+    public PropPanel playerBPropPanel;
     public TextMeshProUGUI timerText;
 
     private void Update()
     {
-        if (player1Prop != null)
-            player1PropPanel.prop = player1Prop;
-        if (player2Prop != null)
-            player2PropPanel.prop = player2Prop;
+        if (playerAProp != null)
+            playerAPropPanel.prop = playerAProp;
+        if (playerBProp != null)
+            playerBPropPanel.prop = playerBProp;
     }
 
     public void UpdateTimerUI(float remainingTime)

@@ -1,7 +1,7 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "New StrongBubbleProp", menuName = "Props/StrongBubbleProp")]
-public class StrongBubbleProp : Prop
+[CreateAssetMenu(fileName = "DoubleBubbleProp", menuName = "Props/DoubleBubbleProp")]
+public class DoubleBubbleProp : Prop
 {
     public override void ApplyEffect(GameObject player)
     {

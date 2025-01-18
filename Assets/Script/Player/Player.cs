@@ -2,7 +2,7 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
-public class Players : MonoBehaviour
+public class Player : MonoBehaviour
 {
     public Playerinput[] playerinput;
     //泡泡水总量100
@@ -14,8 +14,12 @@ public class Players : MonoBehaviour
     // 标记是否正在吹泡泡
     private bool isBlowingBubbles = false;
     //计分
-    public int point;
+    public float playerScore = 0.1f;
     char[] count = new char[3];
+
+    //为了道具系统加入的变量
+    Prop playerProp; //道具种类
+    public bool isPlayerA = true; //player是否为玩家A
 
     private List<KeyCode> pressedKeys = new List<KeyCode>();
     private int maxKeysToPress = 3;
@@ -69,7 +73,7 @@ public class Players : MonoBehaviour
     }
 
     public float GetTimer()
-    {//返回时间
+    {//返回时间     是不是还没改
         return timer;
     }
     //WER操作组合键
@@ -112,10 +116,10 @@ public class Players : MonoBehaviour
             // 检查是否按下了 key5键
             if (Input.GetKey(playerinput[4].key5))
             {   //调用特殊道具脚本
-                if (Item.exist = true)
+                if (this.playerProp!=null)
                 {
-                    Item.use();
-                    Item.exist = false;
+                    playerProp.ApplyEffect();
+                    playerProp=null;
                 }
 
             }
