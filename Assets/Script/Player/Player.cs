@@ -53,6 +53,7 @@ public class Player : MonoBehaviour
                 if (!isBlowingBubbles)
                 {
                     // 开始吹泡泡（Q）
+                    creatBubble();
                     isBlowingBubbles = true;
                     timer = 0f;
                 }
@@ -139,7 +140,10 @@ public class Player : MonoBehaviour
             }
         }
     }
-
+    public void creatBubble()
+    {
+        Debug.Log("制造泡泡");
+    }
 
     [System.Serializable]
     // 嵌套类 Playerinput
