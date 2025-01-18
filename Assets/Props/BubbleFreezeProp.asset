@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: BubbleFreezeProp
   m_EditorClassIdentifier: 
   propName: BubbleFreeze
-  propIcon: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
+  propIcon: {fileID: 21300000, guid: 67cfcb24e3f324447a92bfb7d90c2563, type: 3}
   duration: 5
   playerABubblePool: {fileID: 0}
   playerBBubblePool: {fileID: 0}

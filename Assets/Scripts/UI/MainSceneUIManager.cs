@@ -10,8 +10,8 @@ public class MainSceneUIManager : MonoBehaviour
     public Image blueBar; // Image representing Player 1's score (left part, blue)
     public float totalBarWidth = 1000f;
 
-    public Prop playerAProp;  //调试变量，需直接引用player所拥有的道具
-    public Prop playerBProp;
+    //public Prop playerAProp;  //调试变量，需直接引用player所拥有的道具
+    //public Prop playerBProp;
 
     public PlayerA playerA;
     public PlayerB playerB;
@@ -31,10 +31,10 @@ public class MainSceneUIManager : MonoBehaviour
     }
     private void Update()
     {
-        if (playerAProp != null)
-            playerAPropPanel.prop = playerAProp;
-        if (playerBProp != null)
-            playerBPropPanel.prop = playerBProp;
+        if (playerA.playerProp != null)
+            playerAPropPanel.prop = playerA.playerProp;
+        if (playerB.playerProp != null)
+            playerBPropPanel.prop = playerB.playerProp;
     }
 
     public void UpdateTimerUI(float remainingTime)
@@ -48,8 +48,8 @@ public class MainSceneUIManager : MonoBehaviour
     // Method to update the score bar
     public void UpdateScoreBar(float player1Score, float player2Score)
     {
-        player1Score = 0.1f;// playerA.playerScore;
-        player2Score = 0.1f;// playerB.playerScore2;
+        player1Score = playerA.playerScore;// playerA.playerScore;
+        player2Score = playerB.playerScore2;// playerB.playerScore2;
         // Calculate the total score to find the ratio
         float totalScore = player1Score + player2Score;
 

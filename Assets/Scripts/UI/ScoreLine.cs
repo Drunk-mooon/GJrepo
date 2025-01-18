@@ -44,7 +44,7 @@ public class ScoreLine : MonoBehaviour
                 BubblePoolA.Instance.PutObj(bubble);
             }
             else
-                BubblePoolB.Instance.PutObj(bubble); //NeedToChange!
+                BubblePoolB.Instance.PutObj(bubble);
         }
     }
 }

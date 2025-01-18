@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: DoubleBubbleProp
   m_EditorClassIdentifier: 
   propName: 
-  propIcon: {fileID: 0}
+  propIcon: {fileID: 21300000, guid: 9b0be3d1c2d495647a6ef3e3d1917ac4, type: 3}
   duration: 5
   playerA: {fileID: 0}
   playerB: {fileID: 0}

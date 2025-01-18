@@ -14,11 +14,11 @@ public class GameManager : MonoBehaviour
     private bool isTuitionActive = false;
     private bool isEndActive = false;
 
-    private float playerAScore = 0.1f;       //variables for debug. 
-    private float playerBScore = 0.1f;
+    //private float playerAScore = 0.1f;       //variables for debug. 
+    //private float playerBScore = 0.1f;
 
     public PlayerA playerA;
-    public PlayerA playerB;
+    public PlayerB playerB;
 
     private int miniGameTime = 0;
     public float miniGameInterval = 10f;
@@ -29,6 +29,8 @@ public class GameManager : MonoBehaviour
         // Find UIManager in the scene and assign it to uiManager
         uiManager = FindObjectOfType<MainSceneUIManager>();
         isInMiniGame = false;
+        playerA.playerScore = 0.1f;
+        playerB.playerScore2 = 0.1f;
         ShowTutorial();
     }
 
@@ -55,7 +57,7 @@ public class GameManager : MonoBehaviour
     {
         elapsedTime += Time.deltaTime;
         UpdateTimerUI();
-        uiManager.UpdateScoreBar(playerAScore, playerBScore);
+        uiManager.UpdateScoreBar(playerA.playerScore, playerB.playerScore2);
         //Debug.Log((elapsedTime - (miniGameTime + 1) * miniGameInterval));
         if (elapsedTime >= gameDuration)
         {
@@ -137,8 +139,8 @@ public class GameManager : MonoBehaviour
         tutorialPanel.SetActive(true);
         endGamePanel.SetActive(false);
         Time.timeScale = 0f;
-        playerAScore = 0.1f;
-        playerBScore = 0.1f;
+        playerA.playerScore = 0.1f;
+        playerB.playerScore2 = 0.1f;
         miniGameTime = 0;
 
         if (uiManager != null)
@@ -191,13 +193,6 @@ public class GameManager : MonoBehaviour
     #endregion
 
     #region DataManage
-    public void AddScore(int player,float score)
-    {
-        if (player == 1)
-            playerAScore += score;
-        if (player==2)
-            playerBScore += score;
-    }
 
     void OnMinigameEnd(bool isAWin)
     {
