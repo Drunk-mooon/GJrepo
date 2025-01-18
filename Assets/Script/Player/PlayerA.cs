@@ -1,8 +1,6 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.Mathematics;
-using System;
 public class PlayerA : MonoBehaviour
 {
     private Coroutine blowBubbleCoroutine; // Store reference to the coroutine
@@ -48,9 +46,7 @@ public class PlayerA : MonoBehaviour
                 if (keyQueue.Count >= 3)
                 {
                     string tempinput = InputKey();
-                  
                         KillBubble(tempinput);
-
                 }
                
             }
@@ -81,12 +77,6 @@ public class PlayerA : MonoBehaviour
             }
         
     }
-
-    private void Start()
-    {
-       // gameObject.transform.position = new Vector3(1,1,1);
-    }
-
     public string InputKey()
     {
         char[] tempKill = new char[3];
@@ -126,7 +116,6 @@ public class PlayerA : MonoBehaviour
         // Start the coroutine for growing the bubble when the key is pressed
         if (blowBubbleCoroutine == null)  // Prevent starting multiple coroutines
         {
-            
             blowBubbleCoroutine = StartCoroutine(GrowBubble());
         }
     }
@@ -150,7 +139,6 @@ public class PlayerA : MonoBehaviour
                 // Deduct BBWAmount while the bubble grows
                 BBWAmount -= Mathf.FloorToInt(BBWSpeed * Time.deltaTime);
                 BBWAmount = Mathf.Max(0, BBWAmount); // Ensure BBWAmount doesn't go below 0
-
                 // If BBWAmount is 0, stop growing the bubble and exit the loop
                 if (BBWAmount <= 0)
                 {
@@ -158,15 +146,6 @@ public class PlayerA : MonoBehaviour
                 }
                 // Increment the timer as the bubble grows
                 timer += Time.deltaTime;
-
-               /*Vector3 a= gameObject.transform.localScale*(float) Math.Round(timer*0.5f,2);
-                a.y = (float)Math.Round(a.y, 2);
-                a.x = (float)Math.Round(a.x, 2);
-                a.z = (float)Math.Round(a.z, 2);
-                gameObject.transform.localScale = a;
-               */
-
-
             }
             if (timer < 1f)
             {
@@ -175,15 +154,12 @@ public class PlayerA : MonoBehaviour
             // Wait for the next frame
             yield return null;
         }
-
-
-        //Debug.Log(BBWAmount);
+        Debug.Log(BBWAmount);
         // When the key is released, stop growing and instantiate the bubble
         if (BBWAmount > 0)  // If there's enough BBWAmount, instantiate the bubble
         {
             BubblePoolA.Instance.blowTime = timer;
             BubblePoolA.Instance.bType = BBWType;
-          
             BubblePoolA.Instance.trans = gameObject.transform;
             BubblePoolA.Instance.GetObj();
 
@@ -193,10 +169,8 @@ public class PlayerA : MonoBehaviour
                 BubblePoolA.Instance.GetObj();
             }
         }
-
         // Reset the timer after the bubble is instantiated
         timer = 0f;
-
         // Reset the coroutine reference
         blowBubbleCoroutine = null;
     }

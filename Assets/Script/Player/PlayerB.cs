@@ -26,8 +26,6 @@ public class PlayerB: MonoBehaviour
     public bool isPlayerA = false; //player是否为玩家 A
     //泡泡最大体积
     public Vector2 maxBubbleSize = new Vector2(100f, 100f);
-    //是否为绿色泡泡双倍效果
-    public bool isDoubleBlow = false;
     // 存储当前的 BBW 类型索引
     private int currentBBWTypeIndex = 0;
     E_bType BBWType = E_bType.white;
@@ -48,7 +46,6 @@ public class PlayerB: MonoBehaviour
                 if (keyQueue.Count >= 3)
                 {
                     string tempinput = InputKey();
-                    //  if (BubblePoolB.Instance.Bubbles.ContainsKey(tempinput))
                     KillBubble(tempinput);
                 }
 
@@ -80,8 +77,6 @@ public class PlayerB: MonoBehaviour
         }
 
     }
-
-
     public string InputKey()
     {
         char[] tempKill = new char[3];
@@ -134,23 +129,20 @@ public class PlayerB: MonoBehaviour
             timer += Time.deltaTime;
         }
         // While the key is held down, continue growing the bubble
-        while (Input.GetKey(KeyCode.Q)) // Continue while the key is pressed
+        while (Input.GetKey(KeyCode.U)) // Continue while the key is pressed
         {
-            BBWAmount -= BBWSpeed * Time.deltaTime * 2;
+            BBWAmount -= BBWSpeed * Time.deltaTime*2;
             if (transform.localScale.x < maxBubbleSize.x)
             {
                 // Grow the bubble
                 // Deduct BBWAmount while the bubble grows
                 BBWAmount -= Mathf.FloorToInt(BBWSpeed * Time.deltaTime);
                 BBWAmount = Mathf.Max(0, BBWAmount); // Ensure BBWAmount doesn't go below 0
-
-
                 // If BBWAmount is 0, stop growing the bubble and exit the loop
                 if (BBWAmount <= 0)
                 {
                     break; // Exit the coroutine and stop bubble growth
                 }
-
                 // Increment the timer as the bubble grows
                 timer += Time.deltaTime;
             }
@@ -177,7 +169,6 @@ public class PlayerB: MonoBehaviour
         }
         // Reset the timer after the bubble is instantiated
         timer = 0f;
-
         // Reset the coroutine reference
         blowBubbleCoroutine = null;
     }
