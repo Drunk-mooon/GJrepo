@@ -33,41 +33,48 @@ public class PlayerA : MonoBehaviour
     Bubble bubble = new Bubble();
     void Update()
     {
-        // 检查是否按下吹泡泡的键
-        if (playerinput != null && playerinput.Length > 0 && Input.GetKey(playerinput[0].key1))
-        {
-            BlowBubble();
-        }
-        // 检查是否按下特殊道具键
-        if (playerinput != null && playerinput.Length > 0 && Input.GetKey(playerinput[4].key5))
-        {
-            SpecialItem();
-        }
-        // 检查是否按下蘸泡泡水的键
-        if (playerinput != null && playerinput.Length > 0 && Input.GetKey(playerinput[5].key6))
-        {
-            BubbleWater();
-        }
-        //检查是否输入操作键
-        KeyCode[] allowedKeys = new KeyCode[] { KeyCode.W, KeyCode.E, KeyCode.R };
-        foreach (KeyCode key in allowedKeys)
-        {
-            if (Input.GetKeyDown(key))
-            {
-                keyQueue.Enqueue(key);
-                if (keyQueue.Count >= 3)
-                    InputKey();
-            }
 
-            if (pressedKeys.Count == maxKeysToPress)
+            //检查是否输入操作键
+            KeyCode[] allowedKeys = new KeyCode[] { KeyCode.W, KeyCode.E, KeyCode.R };
+            foreach (KeyCode key in allowedKeys)
             {
-                if (BubblePoolA.Instance.Bubbles.ContainsKey(Kill.ToString()))
+                if (Input.GetKeyDown(key))
                 {
-                    KillBubble(BubblePoolA.Instance.Bubbles[Kill.ToString()]);
+                    keyQueue.Enqueue(key);
+                    if (keyQueue.Count >= 3)
+                    {
+                        InputKey();
+                    }
+                }
+
+                if (pressedKeys.Count == maxKeysToPress)
+                {
+                    if (BubblePoolA.Instance.Bubbles.ContainsKey(Kill.ToString()))
+                    {
+                        KillBubble(BubblePoolA.Instance.Bubbles[Kill.ToString()]);
+                    }
                 }
             }
+        if (playerinput != null && playerinput.Length >= 6)
+        {
+            // 检查是否按下吹泡泡的键
+            if (playerinput != null && playerinput.Length > 0 && Input.GetKey(playerinput[0].key1))
+            {
+                BlowBubble();
+            }
+            // 检查是否按下特殊道具键
+            if (playerinput != null && playerinput.Length > 4 && Input.GetKey(playerinput[4].key5))
+            {
+                SpecialItem();
+            }
+            // 检查是否按下蘸泡泡水的键
+            if (playerinput != null && playerinput.Length > 5 && Input.GetKey(playerinput[5].key6))
+            {
+                BubbleWater();
+            }
         }
-    }
+
+        }
 
     public string InputKey()
     {

@@ -33,36 +33,40 @@ public class PlayerB : MonoBehaviour
     Bubble bubble2 = new Bubble();
     void Update()
     {
-        // 检查是否按下吹泡泡的键
-        if (playerinput2 != null && playerinput2.Length > 0 && Input.GetKey(playerinput2[0].key1))
+        if (playerinput2 != null && playerinput2.Length >= 6)
         {
-            BlowBubble();
-        }
-        // 检查是否按下特殊道具键
-        if (playerinput2 != null && playerinput2.Length > 0 && Input.GetKey(playerinput2[4].key5))
-        {
-            SpecialItem();
-        }
-        // 检查是否按下蘸泡泡水的键
-        if (playerinput2 != null && playerinput2.Length > 0 && Input.GetKey(playerinput2[5].key6))
-        {
-            BubbleWater();
-        }
-        KeyCode[] allowedKeys = new KeyCode[] { KeyCode.I, KeyCode.O, KeyCode.P };
-        foreach (KeyCode key in allowedKeys)
-        {
-            if (Input.GetKeyDown(key))
-            {
-                keyQueue.Enqueue(key);
-                if (keyQueue.Count >= 3)
-                    InputKey();
-            }
 
-            if (pressedKeys2.Count == maxKeysToPress2)
+            // 检查是否按下吹泡泡的键
+            if (playerinput2 != null && playerinput2.Length > 0 && Input.GetKey(playerinput2[0].key1))
             {
-                if (BubblePoolA.Instance.Bubbles.ContainsKey(Kill2.ToString()))
+                BlowBubble();
+            }
+            // 检查是否按下特殊道具键
+            if (playerinput2 != null && playerinput2.Length > 4 && Input.GetKey(playerinput2[4].key5))
+            {
+                SpecialItem();
+            }
+            // 检查是否按下蘸泡泡水的键
+            if (playerinput2 != null && playerinput2.Length > 5 && Input.GetKey(playerinput2[5].key6))
+            {
+                BubbleWater();
+            }
+            KeyCode[] allowedKeys = new KeyCode[] { KeyCode.I, KeyCode.O, KeyCode.P };
+            foreach (KeyCode key in allowedKeys)
+            {
+                if (Input.GetKeyDown(key))
                 {
-                    KillBubble(BubblePoolA.Instance.Bubbles[Kill2.ToString()]);
+                    keyQueue.Enqueue(key);
+                    if (keyQueue.Count >= 3)
+                        InputKey();
+                }
+
+                if (pressedKeys2.Count == maxKeysToPress2)
+                {
+                    if (BubblePoolA.Instance.Bubbles.ContainsKey(Kill2.ToString()))
+                    {
+                        KillBubble(BubblePoolA.Instance.Bubbles[Kill2.ToString()]);
+                    }
                 }
             }
         }

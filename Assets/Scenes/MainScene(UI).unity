@@ -821,7 +821,7 @@ GameObject:
   m_Component:
   - component: {fileID: 940466625}
   m_Layer: 0
-  m_Name: PlayerTwo
+  m_Name: PlayerB
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1507,8 +1507,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1550999047}
+  - component: {fileID: 1550999048}
   m_Layer: 0
-  m_Name: PlayerOne
+  m_Name: PlayerA
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1529,6 +1530,32 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1550999048
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1550999044}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1de3c47a882b3d841a2c8292482a9170, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerinput:
+  - key1: 113
+    key2: 119
+    key3: 101
+    key4: 114
+    key5: 97
+    key6: 115
+    point: 0
+  BBWAmount: 100
+  BBWSpeed: 10
+  playerScore: 0.1
+  playerinputin: []
+  playerProp: {fileID: 0}
+  isPlayerA: 1
 --- !u!1 &1607525686
 GameObject:
   m_ObjectHideFlags: 0
@@ -2112,10 +2139,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e889948daabc2554ab7ae6aebaf5ff58, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerinput:
-  - key2: 97
-    key3: 98
-    key4: 99
 --- !u!4 &2110419226
 Transform:
   m_ObjectHideFlags: 0
