@@ -12,6 +12,7 @@ public class BubblePoolA : ObjPool<BubblePoolA, Bubble>
     public Dictionary<string, Bubble> Bubbles = new Dictionary<string, Bubble>(); //组合键与泡泡的对应关系
     public string attackCode; //玩家输入的组合键
     public float speedChange=1; 
+    public E_bType bType;
 
     public override void Init()
     {
@@ -26,8 +27,9 @@ public class BubblePoolA : ObjPool<BubblePoolA, Bubble>
         obj.bubble.transform.position = new Vector3(0, 0, 0); //初始位置 
         obj.code = GetCode(obj); //获得code 
         obj.label.text = obj.code; //code可见 
-
         Bubbles.Add(obj.label.text, obj); //字典添加 code，泡泡 
+        obj.bType = bType;
+        TypeEffect(obj);
         return obj;
     }
 
@@ -119,7 +121,25 @@ public class BubblePoolA : ObjPool<BubblePoolA, Bubble>
 
         
     }
-    
-    
+
+    private void TypeEffect(Bubble obj)
+    {
+        switch (obj.bType)
+        {
+            case E_bType.blue:
+                obj.index = 3;
+                break;
+            case E_bType.green:
+                break;
+            case E_bType.pink:
+                obj.speed *= 2;
+                break;
+            case E_bType.white:
+                break;
+            default:
+                break;
+            
+        }
+    }
     
 }
