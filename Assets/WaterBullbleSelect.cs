@@ -12,15 +12,15 @@ public struct TransformData
 
 public class WaterBullbleSelect : MonoBehaviour
 {
-    [Header("物体数组")]
+    [Header("Object Array")]
     public Transform[] bullbleWater;
     private int length;
 
-    [Header("目标属性")]
+    [Header("Fixed Slot Data")]
     private TransformData[] targetDatas;
 
-    [Header("控制参数")]
-    public float moveDuration = 1f;   // 移动时长
+    [Header("Movement Control")]
+    public float moveDuration = 1f;  
     private bool isMoving = false;    
     private float moveTimer = 0f;
 
@@ -29,7 +29,7 @@ public class WaterBullbleSelect : MonoBehaviour
         length = bullbleWater.Length;
         targetDatas = new TransformData[length];
 
-        // 把最初每个物体位置/旋转/缩放记录下来作为槽位信息
+        // Record each object's initial position/rotation/scale as the "fixed slots"
         for (int i = 0; i < length; i++)
         {
             Transform trans = bullbleWater[i];
@@ -44,7 +44,7 @@ public class WaterBullbleSelect : MonoBehaviour
 
     void Update()
     {
-        // 按下 Q 并且当前不在移动时，开始轮换
+        // Press Q to start the rotation (if not currently moving)
         if (Input.GetKeyDown(KeyCode.Q) && !isMoving)
         {
             StartRotationCycle();
@@ -56,25 +56,27 @@ public class WaterBullbleSelect : MonoBehaviour
         }
     }
     
-    // 让物体轮换占用固定的槽位
+    /// <summary>
+    /// Rotate references: move each object in bullbleWater left by one,
+    /// then start the interpolation to the fixed slots (targetDatas).
+    /// </summary>
     void StartRotationCycle()
     {
         Transform firstObj = bullbleWater[0];
 
-        // 左移
         for (int i = 0; i < length - 1; i++)
         {
             bullbleWater[i] = bullbleWater[i + 1];
         }
-
-        // 把最末位替换为原先的第一个
         bullbleWater[length - 1] = firstObj;
 
         moveTimer = 0f;
         isMoving = true;
     }
     
-    /// 逐帧对各个属性进行插值，并且设置渲染顺序
+    /// <summary>
+    /// Smoothly move each object to the corresponding slot (targetDatas[i]).
+    /// </summary>
     void PerformSmoothMove()
     {
         moveTimer += Time.deltaTime;
@@ -85,27 +87,28 @@ public class WaterBullbleSelect : MonoBehaviour
             Transform trans = bullbleWater[i];
             if (trans == null) continue;
 
-            // 位置插值
+            // Lerp position
             trans.position = Vector3.Lerp(
                 trans.position,
                 targetDatas[i].position,
                 t
             );
 
-            // 旋转插值
+            // Slerp rotation
             trans.rotation = Quaternion.Slerp(
                 trans.rotation,
                 targetDatas[i].rotation,
                 t
             );
 
-            // 缩放插值
+            // Lerp scale
             trans.localScale = Vector3.Lerp(
                 trans.localScale,
                 targetDatas[i].scale,
                 t
             );
             
+            // Example: adjust sortingOrder if needed
             Renderer rd = trans.GetComponent<Renderer>();
             if (rd != null)
             {
@@ -123,12 +126,17 @@ public class WaterBullbleSelect : MonoBehaviour
                 }
             }
         }
+
+        // End when interpolation is done
         if (t >= 1f)
         {
             isMoving = false;
         }
     }
     
+    /// <summary>
+    /// Example getter: return one of the objects as "selected"
+    /// </summary>
     public Transform GetSelectedElement()
     {
         if (bullbleWater != null && bullbleWater.Length > 1)
