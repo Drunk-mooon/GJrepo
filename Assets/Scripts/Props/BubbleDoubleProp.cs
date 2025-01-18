@@ -15,35 +15,37 @@ public class BubbleDoubleProp : Prop
         {
             // Start the coroutine to change isDoubleBlow for 5 seconds
             playerA.StartCoroutine(ActivateDoubleBlowForTimeA(duration));
+            playerA.playerProp = null;
         }
         else
         {
             playerB.StartCoroutine(ActivateDoubleBlowForTimeB(duration));
+            playerB.playerProp = null;
         }
     }
 
     private IEnumerator ActivateDoubleBlowForTimeA(float t_duration)
     {
         // Activate double blow
-        //playerA.isDoubleBlow = true;
+        playerA.DoubleStatus = true;
 
         // Wait for the specified duration
         yield return new WaitForSeconds(t_duration);
 
         // Deactivate double blow after the duration
-        //playerA.isDoubleBlow = false;
+        playerA.DoubleStatus = false;
     }
 
     private IEnumerator ActivateDoubleBlowForTimeB(float t_duration)
     {
         // Activate double blow
-        //playerB.isDoubleBlow = true;
+        playerB.DoubleStatus = true;
 
         // Wait for the specified duration
         yield return new WaitForSeconds(t_duration);
 
         // Deactivate double blow after the duration
-        //playerB.isDoubleBlow = false;
+        playerB.DoubleStatus = false;
     }
 
     public override void RemoveEffect()
