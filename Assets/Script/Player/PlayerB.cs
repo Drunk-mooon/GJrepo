@@ -123,11 +123,7 @@ public class PlayerB: MonoBehaviour
     {
         float growthRate = 0.1f; // Rate of bubble growth
         timer = 0f;
-        while (timer < 1f)
-        {
-            yield return null;
-            timer += Time.deltaTime;
-        }
+        bool keyHeldDown = false;
         // While the key is held down, continue growing the bubble
         while (Input.GetKey(KeyCode.U)) // Continue while the key is pressed
         {
@@ -145,15 +141,20 @@ public class PlayerB: MonoBehaviour
                 }
                 // Increment the timer as the bubble grows
                 timer += Time.deltaTime;
+                yield return null;
             }
-            if (timer < 1f)
-            {
-                break;
-            }
+            timer += Time.deltaTime;
             // Wait for the next frame
-            yield return null;
         }
-        Debug.Log(BBWAmount);
+        if (keyHeldDown && timer < 1f)
+        {
+            // Reset the timer
+            timer = 0f;
+        }
+        else
+        {
+            Debug.Log(BBWAmount);
+        }
         // When the key is released, stop growing and instantiate the bubble
         if (BBWAmount > 0)  // If there's enough BBWAmount, instantiate the bubble
         {
