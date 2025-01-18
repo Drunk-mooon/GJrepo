@@ -30,7 +30,7 @@ public class BubblePoolA : ObjPool<BubblePoolA, Bubble>
         obj.bubble.transform.localScale = trans.localScale;
         obj.code = GetCode(obj); //获得code 
         obj.label.text = obj.code; //code可见 
-        Bubbles.Add(obj.label.text, obj); //字典添加 code，泡泡 
+        Bubbles.Add(obj.code, obj); //字典添加 code，泡泡 
         obj.bType = bType;
         obj.dis = _random.Next(-10, 11) / 10f;
         TypeEffect(obj);
@@ -82,7 +82,7 @@ public class BubblePoolA : ObjPool<BubblePoolA, Bubble>
     {
         foreach (Bubble a in Bubbles.Values)
         {
-            _distance=math.sin(Time.time*6 )/100;
+            _distance=math.sin(Time.time*6 )/200;
             
            if(a.isA)  a.bubble.transform.position += new Vector3( _distance*a.dis, a.speed * Time.deltaTime*speedChange, 0);
            else a.bubble.transform.position += new Vector3( _distance*a.dis, a.speed * Time.deltaTime*BubblePoolB.Instance.speedChange, 0); 
