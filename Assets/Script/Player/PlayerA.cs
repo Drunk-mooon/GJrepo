@@ -129,10 +129,6 @@ public class PlayerA : MonoBehaviour
     {    //白色
 
         float growthRate = 0.1f; // Rate of bubble growth
-        if (BubblePoolA.Instance.bType == E_bType.white)
-        {
-            growthRate = 3f;
-        }
         timer = 0f;
         while (timer < 1f)
         {
@@ -224,7 +220,7 @@ public class PlayerA : MonoBehaviour
     {
         if (playerinput != null && playerinput.Length > 0)
         {
-            // 检查是否按下了 key6 键
+            // 检查是否按下了S 键
             if (Input.GetKeyDown(KeyCode.S))
             {
                 // 切换 BBW 类型
@@ -251,7 +247,14 @@ public class PlayerA : MonoBehaviour
                 // Increase BBWAmount while the key is held down
                 if (BBWAmount < 100)
                 {
-                    BBWAmount += BBWSpeed * Time.deltaTime;
+                    if (BubblePoolA.Instance.bType == E_bType.white)
+                    {
+                        BBWAmount += BBWSpeed * Time.deltaTime * 5;
+                    }
+                    else
+                    {
+                        BBWAmount += BBWSpeed * Time.deltaTime;
+                    }
                     BBWAmount = Mathf.Min(BBWAmount, 100); // Clamp to max value
                 }
             }

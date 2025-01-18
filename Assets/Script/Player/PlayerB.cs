@@ -223,16 +223,15 @@ public class PlayerB: MonoBehaviour
     //选泡泡水
     public void BubbleWater()
     {
-        if (playerinput != null && playerinput.Length > 0)
-        {
-            // 检查是否按下了 key6 键
+
+            // 检查是否按下了K 键
             if (Input.GetKeyDown(KeyCode.K))
             {
                 // 切换 BBW 类型
                 BBWType = SwitchBBWType();
                 BubblePoolB.Instance.bType = BBWType;
-            }
-        }
+           }
+        
     }
     public void UseWater()
     {
@@ -252,7 +251,14 @@ public class PlayerB: MonoBehaviour
                 // Increase BBWAmount while the key is held down
                 if (BBWAmount < 100)
                 {
-                    BBWAmount += BBWSpeed * Time.deltaTime;
+                    if (BubblePoolB.Instance.bType == E_bType.white)
+                    {
+                        BBWAmount += BBWSpeed * Time.deltaTime * 5;
+                    }
+                    else
+                    {
+                        BBWAmount += BBWSpeed * Time.deltaTime;
+                    }
                     BBWAmount = Mathf.Min(BBWAmount, 100); // Clamp to max value
                 }
             }
