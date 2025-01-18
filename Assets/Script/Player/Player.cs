@@ -1,6 +1,9 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using System;
+using System.Reflection;
+using UnityEditor.Experimental.GraphView;
 
 public class Player : MonoBehaviour
 {
@@ -16,31 +19,79 @@ public class Player : MonoBehaviour
     //计分
     public float playerScore = 0.1f;
     char[] count = new char[3];
-
+    //玩家输入
+    public Playerinput[] playerinputin;
+    //输入队列
+    private Queue<KeyCode> keyQueue = new Queue<KeyCode>();
     //为了道具系统加入的变量
     Prop playerProp; //道具种类
     public bool isPlayerA = true; //player是否为玩家A
 
     private List<KeyCode> pressedKeys = new List<KeyCode>();
     private int maxKeysToPress = 3;
+    char[] Kill = new char[3];
+    Bubble bubble = new Bubble();
     void Update()
     {
-        // 遍历所有的 KeyCode
-        foreach (KeyCode key in System.Enum.GetValues(typeof(KeyCode)))
+        // 检查是否按下吹泡泡的键
+        if (playerinput != null && playerinput.Length > 0 && Input.GetKey(playerinput[0].key1))
         {
-            if (Input.GetKeyDown(key))
+            BlowBubble();
+        }
+        // 检查是否按下特殊道具键
+        if (playerinput != null && playerinput.Length > 0 && Input.GetKey(playerinput[4].key5))
+        {
+            SpecialItem();
+        }
+        // 检查是否按下蘸泡泡水的键
+        if (playerinput != null && playerinput.Length > 0 && Input.GetKey(playerinput[5].key6))
+        {
+            BubbleWater();
+        }
+        if (playerinput != null && playerinput.Length > 0 && Input.GetKey(playerinput[1].key2) || Input.GetKey(playerinput[2].key3) || Input.GetKey(playerinput[3].key4))
             {
-                BlowBubble();
-                SpecialItem();
-                BubbleWater();
-            }
+            InputKey();
             if (pressedKeys.Count == maxKeysToPress)
             {
-                KillBubble(BubblePoolA.Instance.Bubbles[count.ToString()]);
+                if (BubblePoolA.Instance.Bubbles.ContainsKey(Kill.ToString())) { 
+                KillBubble(BubblePoolA.Instance.Bubbles[Kill.ToString()], ref Kill);
+            }
             }
         }
     }
 
+    public string InputKey()
+    {
+        keyQueue.Clear();
+        int index = 0;
+        // 遍历所有的 KeyCode 来处理组合键
+        foreach (KeyCode key in System.Enum.GetValues(typeof(KeyCode)))
+        {
+            if (playerinput != null && playerinput.Length > 0)
+            {
+                if (Input.GetKey(playerinput[1].key2))
+                {
+                    keyQueue.Enqueue(playerinput[1].key2);
+                }
+                else if (Input.GetKey(playerinput[2].key3))
+                {
+                    keyQueue.Enqueue(playerinput[2].key3);
+                }
+                else if (Input.GetKey(playerinput[3].key4))
+                {
+                    keyQueue.Enqueue(playerinput[3].key4);
+                }
+            }
+        }
+        char[] kill=new char[3];
+        while (keyQueue.Count > 0 && index < 3)
+        {
+            Kill[index++] = (char)keyQueue.Dequeue();
+        }
+        //Kill转string
+        string killString = new string(Kill);
+        return killString;
+    }
     //吹泡泡
     public void BlowBubble()
     {   
@@ -60,53 +111,51 @@ public class Player : MonoBehaviour
                 // 开始计时并减少泡泡水的数量（Q）
                 timer += Time.deltaTime;
                 BBWAmount -= Mathf.FloorToInt(BBWSpeed * Time.deltaTime);
-                // 确保泡泡水数量不会为负数（Q）
-                BBWAmount = Mathf.Max(0, BBWAmount);
+                //等于零时泡泡生成失败
+                if(BBWAmount<=0)
+                {
+                    isBlowingBubbles=false;
+                    timer = 0f;
+                }
             }
             else
             {
                 // 当不再按压 Code1 键时，停止吹泡泡（Q）
                 isBlowingBubbles = false;
-                GetTimer();
+                BubblePoolA.Instance.blowTime = timer;
+                //销毁泡泡模型
+                BubblePoolA.Instance.GetObj();
             }
         }
 
     }
 
-    public float GetTimer()
-    {//返回时间     是不是还没改
-        return timer;
-    }
+
+
+
     //WER操作组合键
-    public void KillBubble(Bubble bubble)
-    {   KeyCode[] Kill=new KeyCode[] { };
-
-        if (playerinput != null && playerinput.Length > 0)
-        {for (int n = 0; n<3;n++)
-            if (Input.GetKey(playerinput[1].key2))
-            {
-                Kill[n] = playerinput[1].key2;
-            }
-            else if(Input.GetKey(playerinput[2].key3))
-            {
-                Kill[n] = playerinput[1].key3;
-            }
-            else if(Input.GetKey(playerinput[3].key4))
-            {
-                Kill[n] = playerinput[1].key4;
-            }
-            for (int i = 0; i < Kill.Length; i++)
-            {
-                count[i] = (char)Kill[i];
-            }
-        }
-        for(int k = 0;k < 3; k++)
-        {
-            if (count[k] == bubble.code[k]) { }
-            else return;
-        }
-        Destroy(bubble);
-        return;
+    public void KillBubble(Bubble bubble,ref char[] Kill)
+    {/* 
+        string number;
+        bool match = true;
+        for(int k = 0;k < Mathf.Min(3,index); k++)
+         {
+             if (k >= bubble.code.Length || Kill[k] != bubble.code[k])
+             {
+                 match = false;
+                 break;
+             }
+         }
+         if(match)
+         { string nm="";
+             foreach (char num in Kill){
+                 if (num == 'W') nm += 1;
+                    if(num=='E') nm += 2;
+                    if(num=='R')nm += 3;
+             }
+             Kill = nm.ToCharArray();  
+         }*/
+        BubblePoolA.Instance.PutObj(bubble);
     }
     //释放特殊道具
     public void SpecialItem()
@@ -142,8 +191,15 @@ public class Player : MonoBehaviour
     }
     public void creatBubble()
     {
-        Debug.Log("制造泡泡");
-    }
+    float growthRate = 0.1f;
+    Vector3 currentScale = transform.localScale;
+    // 计算新的半径
+    float newRadius = Mathf.Max(0, currentScale.x + growthRate * Time.deltaTime);
+    // 确保半径不为负数
+    currentScale = new Vector3(newRadius, newRadius, newRadius);
+    // 应用新的缩放
+    transform.localScale = currentScale;
+}
 
     [System.Serializable]
     // 嵌套类 Playerinput
