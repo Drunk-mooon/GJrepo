@@ -1922,12 +1922,12 @@ MonoBehaviour:
   redBar: {fileID: 202465515}
   blueBar: {fileID: 1533116625}
   totalBarWidth: 1000
-  playerAProp: {fileID: 0}
-  playerBProp: {fileID: 0}
+  playerAProp: {fileID: 11400000, guid: 8a85f93829379094b9ae7695ec474cd6, type: 2}
+  playerBProp: {fileID: 11400000, guid: 48a0b8dd2db0bfa459389adc9ead6b7a, type: 2}
   playerA: {fileID: 0}
   playerB: {fileID: 0}
-  playerAPropPanel: {fileID: 0}
-  playerBPropPanel: {fileID: 0}
+  playerAPropPanel: {fileID: 1922835871}
+  playerBPropPanel: {fileID: 594525535}
   timerText: {fileID: 1456257732}
 --- !u!4 &1975703508
 Transform:
