@@ -9,7 +9,7 @@ public class Bubble : MonoBehaviour
 {
     public float speed; //速度
     public float score; //得分
-    public bool isA; //来源
+    public bool isA; //来源 
     public GameObject bubble; //模型
     public TextMeshPro label; //文本对应的obj是模型子对象
     public Animator ani; //动画
@@ -18,7 +18,7 @@ public class Bubble : MonoBehaviour
 
     public void Set(bool isa)
     {
-        this.isA = isa;
+        this.isA = isa; 
         GetBubble(isA);
         this.code = "";
         this.index = 2;
