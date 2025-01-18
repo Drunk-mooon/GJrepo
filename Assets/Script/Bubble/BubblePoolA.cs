@@ -86,6 +86,7 @@ public class BubblePoolA : ObjPool<BubblePoolA, Bubble>
         string result;
         do
         {
+
             result = "";
             for (int i = 0; i < 3; i++)
             {
