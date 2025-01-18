@@ -4,7 +4,7 @@ using System.Collections.Generic;
 public class PlayerA : MonoBehaviour
 {
     private Coroutine blowBubbleCoroutine; // Store reference to the coroutine
-
+    public GameObject gameObject;
     public Playerinput[] playerinput;
     //ÅÝÅÝ°ô×ÜÁ¿ 100,³õÊ¼Öµ0
     public float BBWAmount = 0;
@@ -81,6 +81,10 @@ public class PlayerA : MonoBehaviour
         
     }
 
+    private void Start()
+    {
+        gameObject.transform.position = Vector3.zero;
+    }
 
     public string InputKey()
     {
@@ -137,11 +141,11 @@ public class PlayerA : MonoBehaviour
         {
 
             if (transform.localScale.x < maxBubbleSize.x)
-            {   
+            {
                 // Grow the bubble
-                Vector3 currentScale = transform.localScale;
-                float newRadius = Mathf.Max(0, currentScale.x + growthRate * Time.deltaTime);
-                transform.localScale = new Vector2(newRadius, newRadius);
+               
+                
+  
 
                 // Deduct BBWAmount while the bubble grows
                 BBWAmount -= Mathf.FloorToInt(BBWSpeed * Time.deltaTime);
@@ -154,6 +158,11 @@ public class PlayerA : MonoBehaviour
                 }
                 // Increment the timer as the bubble grows
                 timer += Time.deltaTime;
+
+                gameObject.transform.localScale*=timer;
+
+
+
             }
             if (timer < 1f)
             {
@@ -162,15 +171,19 @@ public class PlayerA : MonoBehaviour
             // Wait for the next frame
             yield return null;
         }
-        Debug.Log(BBWAmount);
+
+
+        //Debug.Log(BBWAmount);
         // When the key is released, stop growing and instantiate the bubble
         if (BBWAmount > 0)  // If there's enough BBWAmount, instantiate the bubble
         {
             BubblePoolA.Instance.blowTime = timer;
             BubblePoolA.Instance.bType = BBWType;
             BubblePoolA.Instance.GetObj();
+            BubblePoolA.Instance.transform = gameObject.transform;
+
             //Ë«±¶¿ªÆô£¬Ë«±¶ÅÝÅÝ
-            if (DoubleStatus = true)
+            if (DoubleStatus == true)
             {
                 BubblePoolA.Instance.GetObj();
             }
