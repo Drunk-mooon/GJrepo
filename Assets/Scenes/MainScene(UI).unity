@@ -821,7 +821,7 @@ GameObject:
   m_Component:
   - component: {fileID: 940466625}
   m_Layer: 0
-  m_Name: PlayerTwo
+  m_Name: PlayerB
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1507,56 +1507,14 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1550999047}
-  - component: {fileID: 1550999046}
-  - component: {fileID: 1550999045}
+  - component: {fileID: 1550999048}
   m_Layer: 0
-  m_Name: PlayerOne
+  m_Name: PlayerA
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1550999045
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1550999044}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8601f7227c0894f408ced85ea3ee7e53, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerinput: []
-  BBWAmount: 100
-  BBWSpeed: 10
-  playerScore: 0.1
-  isPlayerA: 1
---- !u!114 &1550999046
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1550999044}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8601f7227c0894f408ced85ea3ee7e53, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerinput:
-  - key1: 113
-    key2: 119
-    key3: 101
-    key4: 114
-    key5: 97
-    key6: 115
-    point: 0
-  BBWAmount: 100
-  BBWSpeed: 10
-  playerScore: 0.1
-  isPlayerA: 1
 --- !u!4 &1550999047
 Transform:
   m_ObjectHideFlags: 0
@@ -1572,6 +1530,32 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1550999048
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1550999044}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1de3c47a882b3d841a2c8292482a9170, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerinput:
+  - key1: 113
+    key2: 119
+    key3: 101
+    key4: 114
+    key5: 97
+    key6: 115
+    point: 0
+  BBWAmount: 100
+  BBWSpeed: 10
+  playerScore: 0.1
+  playerinputin: []
+  playerProp: {fileID: 0}
+  isPlayerA: 1
 --- !u!1 &1607525686
 GameObject:
   m_ObjectHideFlags: 0
@@ -2139,3 +2123,47 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2020342073}
   m_CullTransparentMesh: 1
+--- !u!1 &2110419224
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2110419226}
+  - component: {fileID: 2110419225}
+  m_Layer: 0
+  m_Name: Ceshi
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &2110419225
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2110419224}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e889948daabc2554ab7ae6aebaf5ff58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &2110419226
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2110419224}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1011.948, y: 510.0465, z: 2.658764}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 9
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
