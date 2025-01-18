@@ -26,6 +26,8 @@ public class Bubble : MonoBehaviour
     public string code; //当前组合键
     public int index = 2; //泡泡生命
     public E_bType bType;
+    public float dis; 
+    
     public void Set(bool isa)
     {
         this.isA = isa; 
@@ -67,8 +69,5 @@ public class Bubble : MonoBehaviour
     }
 
     //判断角色
-    public void fly()
-    {
-        bubble.transform.position += new Vector3(0, speed * Time.deltaTime, 0);
-    } //移动
+
 }

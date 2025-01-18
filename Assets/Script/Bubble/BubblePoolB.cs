@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.Mathematics;
 using UnityEngine;
 using Random = System.Random;
 
@@ -13,7 +14,9 @@ public class BubblePoolB : ObjPool<BubblePoolB, Bubble>
     public string attackCode; //玩家输入的组合键
     public float speedChange=1; 
     public E_bType bType;
-
+    private float _distance;
+    public Transform trans=null;
+    
     public override void Init()
     {
         _random = new Random();
@@ -24,12 +27,15 @@ public class BubblePoolB : ObjPool<BubblePoolB, Bubble>
     {
         obj.Init(blowTime); //获取本次吹得到的速度和分数 
         obj.bubble.SetActive(true); //模型激活 
-        obj.bubble.transform.position = new Vector3(0, 0, 0); //初始位置 
+        obj.bubble.transform.position = trans.position; //初始位置 
+        obj.bubble.transform.localScale = trans.localScale;
         obj.code = GetCode(obj); //获得code 
         obj.label.text = obj.code; //code可见 
-        Bubbles.Add(obj.label.text, obj); //字典添加 code，泡泡 
+        Bubbles.Add(obj.code, obj); //字典添加 code，泡泡 
+        obj.dis=_random.Next(-10,11)/10f;
         obj.bType = bType;
         TypeEffect(obj);
+        StartCoroutine(move(obj));
         return obj;
     }
 
@@ -41,6 +47,7 @@ public class BubblePoolB : ObjPool<BubblePoolB, Bubble>
         Bubble bubble = obj.GetComponent<Bubble>(); //指明 
         bubble.Set(false); 
         bubble.bubble.SetActive(false); //初始出来先隐藏 
+       
         return bubble; 
     }
 
@@ -76,10 +83,26 @@ public class BubblePoolB : ObjPool<BubblePoolB, Bubble>
     {
         foreach (Bubble a in Bubbles.Values)
         {
-           if(a.isA)  a.transform.position += new Vector3(0, a.speed * Time.deltaTime*speedChange, 0);
-           else a.transform.position += new Vector3(0, a.speed * Time.deltaTime*BubblePoolA.Instance.speedChange, 0); //其实是 BubblePoolB.instance.speedChange
+            _distance=2*math.sin(Time.time );
+            
+           if(a.isA)  a.bubble.transform.position += new Vector3(_distance*a.dis, a.speed * Time.deltaTime*speedChange, 0);
+           else a.bubble.transform.transform.position += new Vector3(_distance*a.dis, a.speed * Time.deltaTime*BubblePoolA.Instance.speedChange, 0); //其实是 BubblePoolB.instance.speedChange
+
+           
         } 
     }
+
+    private IEnumerator move(Bubble obj)
+    {
+        float dist=0;
+        while (dist<obj.dis*15)
+        {
+            dist += 0.3f * Time.deltaTime;
+            obj.transform.position -= new Vector3(dist,0,0);
+            yield return null;
+        }
+    }
+    
 
     private string GetCode(Bubble obj) //随机获得code  
     {
