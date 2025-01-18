@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using Random = System.Random;
 
@@ -72,7 +73,8 @@ public class BubblePoolA : ObjPool<BubblePoolA, Bubble>
     {
         foreach (Bubble a in Bubbles.Values)
         {
-             a.transform.position += new Vector3(0, a.speed * Time.deltaTime*speedChange, 0);
+           if(a.isA)  a.transform.position += new Vector3(0, a.speed * Time.deltaTime*speedChange, 0);
+           else a.transform.position += new Vector3(0, a.speed * Time.deltaTime*speedChange, 0); //其实是 BubblePoolB.instance.speedChange
         } 
     }
 
@@ -99,4 +101,19 @@ public class BubblePoolA : ObjPool<BubblePoolA, Bubble>
         Bubbles.Add(secCod, Bubbles[code]); //临时code，以及那个bubble进入字典
         Bubbles.Remove(code); //移除字典中之前那个code与bubble的键值对
     }
+
+    public void changeBubble()
+    {
+        int[] index =new int[2];
+        int count = Bubbles.Count;
+        index[0] = _random.Next(count);
+        index[1] = _random.Next((count+1)%count);
+        var a = Bubbles.ElementAt(index[0]);
+        var b = Bubbles.ElementAt(index[1]);
+        a.Value.isA = false;
+        b.Value.isA = false;
+    }
+    
+    
+    
 }
