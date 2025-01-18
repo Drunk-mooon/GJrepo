@@ -1,201 +1,298 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
-using System;
-using System.Reflection;
-
-
-public class PlayerB : MonoBehaviour
+public class PlayerB: MonoBehaviour
 {
-    public Playerinput[] playerinput2;
-    //泡泡水总量100
-    public float BBWAmount2 = 100;
+    private Coroutine blowBubbleCoroutine; // Store reference to the coroutine
+
+    public Playerinput[] playerinput;
+    //泡泡棒总量 100,初始值0
+    public float BBWAmount = 0;
     // 用于计时的变量
-    private float timer2 = 0f;
+    private float timer = 0f;
     // 吹泡泡的速度，单位为每秒消耗的泡泡水数量
-    public float BBWSpeed2 = 10f;
+    public float BBWSpeed = 10f;
     // 标记是否正在吹泡泡
-    private bool isBlowingBubbles2 = false;
+    private bool isBlowingBubbles = false;
     //计分
     public float playerScore2 = 0.1f;
-    char[] count2 = new char[3];
+    char[] count = new char[3];
     //玩家输入
-    public Playerinput[] playerinputin2;
+    public Playerinput[] playerinputin;
     //输入队列
-    private Queue<KeyCode> keyQueue2 = new Queue<KeyCode>();
+    private Queue<KeyCode> keyQueue = new Queue<KeyCode>();
     //为了道具系统加入的变量
     public Prop playerProp; //道具种类
-    public bool isPlayerA = false; //player是否为玩家A
-    private Queue<KeyCode> keyQueue = new Queue<KeyCode>();
-    private List<KeyCode> pressedKeys2 = new List<KeyCode>();
-    private int maxKeysToPress2 = 3;
-    char[] Kill2 = new char[3];
-    Bubble bubble2 = new Bubble();
+    public bool isPlayerA = false; //player是否为玩家 A
+    //泡泡最大体积
+    public Vector2 maxBubbleSize = new Vector2(100f, 100f);
+    //是否为绿色泡泡双倍效果
+    public bool isDoubleBlow = false;
+    // 存储当前的 BBW 类型索引
+    private int currentBBWTypeIndex = 0;
+    E_bType BBWType = E_bType.white;
+    char[] Kill = new char[3];
+
+    private Coroutine waterCoroutine;
+    private void Start()
+    {
+
+    }
     void Update()
     {
-        if (playerinput2 != null && playerinput2.Length >= 6)
+        //检查是否输入操作键
+        KeyCode[] allowedKeys = new KeyCode[] { KeyCode.I, KeyCode.O, KeyCode.P };
+        foreach (KeyCode key in allowedKeys)
+        {
+            if (Input.GetKeyDown(key))
+            {
+                keyQueue.Enqueue(key);
+                if (keyQueue.Count >= 3)
+                {
+                    string tempinput = InputKey();
+                    //  if (BubblePoolB.Instance.Bubbles.ContainsKey(tempinput))
+                    KillBubble(tempinput);
+                }
+
+            }
+
+        }
+        // 检查是否按下吹泡泡的键
+        if (Input.GetKeyDown(KeyCode.U))
         {
 
-            // 检查是否按下吹泡泡的键
-            if (playerinput2 != null && playerinput2.Length > 0 && Input.GetKey(playerinput2[0].key1))
-            {
-                BlowBubble();
-            }
-            // 检查是否按下特殊道具键
-            if (playerinput2 != null && playerinput2.Length > 4 && Input.GetKey(playerinput2[4].key5))
-            {
-                SpecialItem();
-            }
-            // 检查是否按下蘸泡泡水的键
-            if (playerinput2 != null && playerinput2.Length > 5 && Input.GetKey(playerinput2[5].key6))
-            {
-                BubbleWater();
-            }
-            KeyCode[] allowedKeys = new KeyCode[] { KeyCode.I, KeyCode.O, KeyCode.P };
-            foreach (KeyCode key in allowedKeys)
-            {
-                if (Input.GetKeyDown(key))
-                {
-                    keyQueue.Enqueue(key);
-                    if (keyQueue.Count >= 3)
-                        InputKey();
-                }
-
-                if (pressedKeys2.Count == maxKeysToPress2)
-                {
-                    if (BubblePoolA.Instance.Bubbles.ContainsKey(Kill2.ToString()))
-                    {
-                        KillBubble(BubblePoolA.Instance.Bubbles[Kill2.ToString()]);
-                    }
-                }
-            }
+            BlowBubble();
         }
+        // 检查是否按下特殊道具键
+        if (Input.GetKey(KeyCode.J))
+        {
+            SpecialItem();
+        }
+        // 检查是否按下选泡泡水的键
+        if (Input.GetKey(KeyCode.K))
+        {
+            BubbleWater();
+        }
+        // 检查是否按下蘸泡泡水的键
+        if (Input.GetKeyDown(KeyCode.L))
+        {
+            Debug.Log(BBWAmount);
+            UseWater();
+            Debug.Log(BBWAmount);
+        }
+
     }
+
 
     public string InputKey()
     {
-        keyQueue2.Clear();
-        int index = 0;
-        char[] kill = new char[3];
-        while (keyQueue2.Count > 0 && index < 3)
+        char[] tempKill = new char[3];
+        int indexInKill = 0;
+        foreach (var item in keyQueue)
         {
-            Kill2[index++] = (char)keyQueue2.Dequeue();
+            switch ((char)item)
+            {
+                case 'i':
+                    tempKill[indexInKill] = '1';
+                    break;
+                case 'o':
+                    tempKill[indexInKill] = '2';
+                    break;
+                case 'p':
+                    tempKill[indexInKill] = '3';
+                    break;
+                default:
+                    tempKill[indexInKill] = (char)item;
+                    break;
+            }
+            indexInKill++;
+
         }
-        //Kill转string
-        string killString = new string(Kill2);
+        keyQueue.Dequeue();
+        // Kill 转 string
+        string killString = new string(tempKill);
+        BubblePoolB.Instance.attackCode = killString;
         return killString;
     }
+
+
     //吹泡泡
     public void BlowBubble()
     {
-        // 首先确保 playerinput 数组不为空，并且至少有一个元素
-        if (playerinput2 != null && playerinput2.Length > 0)
+        // Start the coroutine for growing the bubble when the key is pressed
+        if (blowBubbleCoroutine == null)  // Prevent starting multiple coroutines
         {
-            // 检查是否按下了 key1 键
-            if (Input.GetKey(playerinput2[0].key1))
+            blowBubbleCoroutine = StartCoroutine(GrowBubble());
+        }
+    }
+    private IEnumerator GrowBubble()
+    {
+        float growthRate = 0.1f; // Rate of bubble growth
+        timer = 0f;
+        while (timer < 1f)
+        {
+            yield return null;
+            timer += Time.deltaTime;
+        }
+        // While the key is held down, continue growing the bubble
+        while (Input.GetKey(KeyCode.Q)) // Continue while the key is pressed
+        {
+            if (transform.localScale.x < maxBubbleSize.x)
             {
-                if (!isBlowingBubbles2)
+                // Grow the bubble
+                Vector3 currentScale = transform.localScale;
+                float newRadius = Mathf.Max(0, currentScale.x + growthRate * Time.deltaTime);
+                transform.localScale = new Vector2(newRadius, newRadius);
+
+                // Deduct BBWAmount while the bubble grows
+                BBWAmount -= Mathf.FloorToInt(BBWSpeed * Time.deltaTime);
+                BBWAmount = Mathf.Max(0, BBWAmount); // Ensure BBWAmount doesn't go below 0
+
+                // If BBWAmount is 0, stop growing the bubble and exit the loop
+                if (BBWAmount <= 0)
                 {
-                    // 开始吹泡泡（Q）
-                    CreateBubble();
-                    isBlowingBubbles2 = true;
-                    timer2 = 0f;
+                    break; // Exit the coroutine and stop bubble growth
                 }
-                // 开始计时并减少泡泡水的数量（Q）
-                timer2 += Time.deltaTime;
-                BBWAmount2 -= Mathf.FloorToInt(BBWSpeed2 * Time.deltaTime);
-                //等于零时泡泡生成失败
-                if (BBWAmount2 <= 0)
-                {
-                    isBlowingBubbles2 = false;
-                    timer2 = 0f;
-                }
+
+                // Increment the timer as the bubble grows
+                timer += Time.deltaTime;
             }
-            else
+            if (timer < 1f)
             {
-                //一秒最小值
-                // 当不再按压 Code1 键时，停止吹泡泡（Q）
-                isBlowingBubbles2 = false;
-                BubblePoolA.Instance.blowTime = timer2;
-                //销毁泡泡模型
-                BubblePoolA.Instance.GetObj();
+                break;
             }
+            // Wait for the next frame
+            yield return null;
+        }
+        Debug.Log(BBWAmount);
+        // When the key is released, stop growing and instantiate the bubble
+        if (BBWAmount > 0)  // If there's enough BBWAmount, instantiate the bubble
+        {
+            BubblePoolB.Instance.blowTime = timer;
+            BubblePoolB.Instance.bType = BBWType;
+            BubblePoolB.Instance.GetObj();
         }
 
+        // Reset the timer after the bubble is instantiated
+        timer = 0f;
+
+        // Reset the coroutine reference
+        blowBubbleCoroutine = null;
+    }
+
+
+    public void KillBubble(string killString)
+    {
+        BubblePoolB.Instance.PutObj(BubblePoolB.Instance.Bubbles[killString]);
+        /*foreach (var item in BubblePoolB.Instance.Bubbles)
+        {
+            Debug.Log(item.Key);
+            Debug.Log(item.Value);
+        }*/
+        keyQueue.Dequeue();
+        keyQueue.Dequeue();
     }
 
 
 
 
-    //WER操作组合键
-    public void KillBubble(Bubble bubble)
-    {/* 
-        string number;
-        bool match = true;
-        for(int k = 0;k < Mathf.Min(3,index); k++)
-         {
-             if (k >= bubble.code.Length || Kill[k] != bubble.code[k])
-             {
-                 match = false;
-                 break;
-             }
-         }
-         if(match)
-         { string nm="";
-             foreach (char num in Kill){
-                 if (num == 'W') nm += 1;
-                    if(num=='E') nm += 2;
-                    if(num=='R')nm += 3;
-             }
-             Kill = nm.ToCharArray();  
-         }*/
-        BubblePoolA.Instance.PutObj(bubble);
-    }
+
     //释放特殊道具
     public void SpecialItem()
     {/*
         if (playerinput != null && playerinput.Length > 0)
         {
-            SpeciailItem Item = new SpeciailItem();
-            // 检查是否按下了 key5键
+            // 检查是否按下了 key5 键
             if (Input.GetKey(playerinput[4].key5))
-            {   //调用特殊道具脚本
-                if (this.playerProp!=null)
+            {
+                //调用特殊道具脚本
+                if (this.playerProp != null)
                 {
                     playerProp.ApplyEffect();
-                    playerProp=null;
+                    playerProp = null;
                 }
-
             }
-        }
-        */
+        }*/
     }
-    //蘸泡泡水
+
+
+    //选泡泡水
     public void BubbleWater()
     {
-        if (playerinput2!= null && playerinput2.Length > 0)
+        if (playerinput != null && playerinput.Length > 0)
         {
             // 检查是否按下了 key6 键
-            if (Input.GetKey(playerinput2[5].key6))
+            if (Input.GetKeyDown(KeyCode.K))
             {
-                //泡泡水每秒+10
-                BBWAmount2 += 10f * Time.deltaTime;
+                // 切换 BBW 类型
+                BBWType = SwitchBBWType();
+                BubblePoolB.Instance.bType = BBWType;
             }
         }
     }
-    public void CreateBubble()
+    public void UseWater()
     {
-        float growthRate = 0.1f;
-        Vector3 currentScale = transform.localScale;
-        // 计算新的半径
-        float newRadius = Mathf.Max(0, currentScale.x + growthRate * Time.deltaTime);
-        // 确保半径不为负数
-        currentScale = new Vector3(newRadius, newRadius, newRadius);
-        // 应用新的缩放
-        transform.localScale = currentScale;
-        //停
+        // Start the coroutine only if it's not already running
+        if (waterCoroutine == null)
+        {
+            waterCoroutine = StartCoroutine(ManageWaterCoroutine());
+        }
     }
 
+    private IEnumerator ManageWaterCoroutine()
+    {
+        while (true)
+        {
+            if (Input.GetKey(KeyCode.L))
+            {
+                // Increase BBWAmount while the key is held down
+                if (BBWAmount < 100)
+                {
+                    BBWAmount += BBWSpeed * Time.deltaTime;
+                    BBWAmount = Mathf.Min(BBWAmount, 100); // Clamp to max value
+                }
+            }
+            else if (Input.GetKeyUp(KeyCode.L))
+            {
+                // Stop the coroutine when the key is released
+                StopCoroutine(waterCoroutine);
+                waterCoroutine = null;
+                yield break;
+            }
+            yield return null; // Wait for the next frame
+        }
+    }
+
+    // 切换 BBW 类型的方法
+    private E_bType SwitchBBWType()
+    {
+        E_bType[] BBWTypes = (E_bType[])System.Enum.GetValues(typeof(E_bType));
+        currentBBWTypeIndex = (currentBBWTypeIndex + 1) % BBWTypes.Length;
+        E_bType currentBBWType = BBWTypes[currentBBWTypeIndex];
+
+
+        switch (currentBBWType)
+        {
+            case E_bType.blue:
+                Debug.Log("The bubble water type is blue.");
+                return E_bType.blue;
+            case E_bType.green:
+                Debug.Log("The bubble water type is green.");
+                return E_bType.green;
+            case E_bType.white:
+                Debug.Log("The bubble water type is white.");
+                return E_bType.white;
+            case E_bType.pink:
+                Debug.Log("The bubble water type is pink.");
+                return E_bType.pink;
+            default:
+                // 处理未预期的枚举值
+                Debug.Log("Unexpected bubble water type.");
+                return E_bType.white;
+
+        }
+
+    }
     [System.Serializable]
     // 嵌套类 Playerinput
     public class Playerinput
@@ -206,8 +303,8 @@ public class PlayerB : MonoBehaviour
         public KeyCode key4;
         public KeyCode key5;
         public KeyCode key6;
+        public KeyCode key7;
         public int point;
-
     }
 
 }
