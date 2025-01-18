@@ -8,6 +8,9 @@ using Random = System.Random;
 
 public class BubblePoolB : ObjPool<BubblePoolB, Bubble>
 {
+    public Sprite A;
+    
+    
     public float blowTime; //吹的时间
     private Random _random;
     public Dictionary<string, Bubble> Bubbles = new Dictionary<string, Bubble>(); //组合键与泡泡的对应关系
@@ -28,7 +31,7 @@ public class BubblePoolB : ObjPool<BubblePoolB, Bubble>
         obj.Init(blowTime); //获取本次吹得到的速度和分数 
         obj.bubble.SetActive(true); //模型激活 
         obj.bubble.transform.position = trans.position; //初始位置 
-        obj.bubble.transform.localScale = trans.localScale;
+        obj.bubble.transform.localScale = new Vector3(1+blowTime/7,1+blowTime/7 ,1+blowTime/7 );
         obj.code = GetCode(obj); //获得code 
         obj.label.text =ChangeChar( obj.code); //code可见 
         Bubbles.Add(obj.code, obj); //字典添加 code，泡泡 
@@ -140,16 +143,21 @@ public class BubblePoolB : ObjPool<BubblePoolB, Bubble>
     {
         int[] index =new int[num];
         int count = Bubbles.Count;
-        index[0]=_random.Next(0, count);
-        for (int i = 1; i < num; i++)
+        if (count != 0)
         {
-            index[i] = (index[0] + i)%count;
+            index[0]=_random.Next(0, count);
+            for (int i = 1; i < num; i++)
+            {
+                index[i] = (index[0] + i)%count;
+            }
+
+            for (int i = 0; i < num; i++)
+            {
+                Bubbles.ElementAt(index[i]).Value.isA = false;
+                Bubbles.ElementAt(index[i]).Value.bubble.GetComponent<SpriteRenderer>().sprite = A;
+            }
         }
 
-        for (int i = 0; i < num; i++)
-        {
-           Bubbles.ElementAt(index[i]).Value.isA = false;
-        }
 
         
     }
