@@ -34,6 +34,8 @@ public class PlayerA : MonoBehaviour
     char[] Kill = new char[3];
 
     private Coroutine waterCoroutine;
+    //道具持有状态
+    public bool HaveItem = false;
     private void Start()
     {
 
@@ -199,19 +201,15 @@ public class PlayerA : MonoBehaviour
 
     //释放特殊道具
     public void SpecialItem()
-    {
-        while (Input.GetKey(KeyCode.Q))
-        {
-            if (playerinput != null && playerinput.Length > 0)
-            {
-                // 检查是否按下了 key6 键
-                if (Input.GetKeyDown(KeyCode.S))
-                {
-                   
-                }
-            }
-        }
-       
+    {   // 检查是否按下了 A 键
+        if (Input.GetKeyDown(KeyCode.A))
+       {
+            if (HaveItem == true)
+                //BubbleFreeze,DoubleBlow,BubbleStealer
+                Debug.Log("使用道具!");
+            else
+                return;
+       }     
     }
 
 
