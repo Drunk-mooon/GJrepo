@@ -23,11 +23,12 @@ public class GameManager : MonoBehaviour
     private int miniGameTime = 0;
     public float miniGameInterval = 10f;
     private bool isInMiniGame = false;
+    public Minigame minigame;
     void Start()
     {
         // Find UIManager in the scene and assign it to uiManager
         uiManager = FindObjectOfType<MainSceneUIManager>();
-
+        isInMiniGame = false;
         ShowTutorial();
     }
 
@@ -55,12 +56,14 @@ public class GameManager : MonoBehaviour
         elapsedTime += Time.deltaTime;
         UpdateTimerUI();
         uiManager.UpdateScoreBar(playerAScore, playerBScore);
+        //Debug.Log((elapsedTime - (miniGameTime + 1) * miniGameInterval));
         if (elapsedTime >= gameDuration)
         {
             EndGame();
         }
         else if ((elapsedTime - (miniGameTime+1) * miniGameInterval >= 0f) && !isInMiniGame)
         {
+            Debug.Log("minigame!");
             BeginMiniGame();
         }
     }
@@ -148,6 +151,7 @@ public class GameManager : MonoBehaviour
     {
         isInMiniGame = true;
         uiManager.EnableMiniGamePanel();
+        minigame.StartMinigame(OnMinigameEnd);
     }
     public void EndMiniGame()
     {
@@ -193,6 +197,20 @@ public class GameManager : MonoBehaviour
             playerAScore += score;
         if (player==2)
             playerBScore += score;
-    } 
+    }
+
+    void OnMinigameEnd(bool isAWin)
+    {
+        if (isAWin)
+        {
+            Debug.Log("玩家A 获胜！");
+        }
+        else
+        {
+            Debug.Log("玩家B 获胜！");
+        }
+    }
     #endregion
+
+
 }

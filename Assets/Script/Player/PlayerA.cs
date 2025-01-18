@@ -127,7 +127,6 @@ public class PlayerA : MonoBehaviour
     }
     private IEnumerator GrowBubble()
     {    //°×É«
-        if()
         float growthRate = 0.1f; // Rate of bubble growth
 
         timer = 0f;

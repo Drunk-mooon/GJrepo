@@ -1,7 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-
 public class PropManager : MonoBehaviour
 {
     public BubbleDoubleProp bubbleDoubleProp;
@@ -11,13 +8,45 @@ public class PropManager : MonoBehaviour
     public PlayerA playerA; //need to change the class to PlayerA/B
     public PlayerB playerB;
     
-    public void PlayerAGetProp(Prop certainProp)
+    public void PlayerAGetProp()
     {
-        playerA.playerProp = certainProp;
+        Random.InitState(System.DateTime.Now.Millisecond);
+        int randomValue = Random.Range(0, 3);
+        if (randomValue == 0)
+        {
+            playerA.playerProp = bubbleDoubleProp;
+            //Debug.Log(randomValue);
+        }
+        else if (randomValue == 1)
+        {
+            playerA.playerProp = bubbleFreezeProp;
+            //Debug.Log(randomValue);
+        }
+        else if (randomValue == 2)
+        {
+            playerA.playerProp = bubbleStealProp;
+            //Debug.Log(randomValue);
+        }
     }
 
-    public void PlayerBGetProp(Prop certainProp)
+    public void PlayerBGetProp()
     {
-        playerB.playerProp = certainProp;
+        Random.InitState(System.DateTime.Now.Millisecond);
+        int randomValue = Random.Range(0, 3);
+        if (randomValue == 0)
+        {
+            playerB.playerProp = bubbleDoubleProp;
+            //Debug.Log(randomValue);
+        }
+        else if (randomValue == 1)
+        {
+            playerB.playerProp = bubbleFreezeProp;
+            //Debug.Log(randomValue);
+        }
+        else if (randomValue == 2)
+        {
+            playerB.playerProp = bubbleStealProp;
+            //Debug.Log(randomValue);
+        }
     }
 }

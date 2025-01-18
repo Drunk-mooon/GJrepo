@@ -12,9 +12,12 @@ public class Minigame : MonoBehaviour
 
     [Header("Settings")]
     public float minigameTime = 5f;
+    public int fontAmplifyTime = 2;
+    public float showResultTime = 1f;
 
     [Header("Reference")]
     public GameManager gameManager;
+    public PropManager propManager;
 
     private bool minigameOngoing = false; // 是否正在进行游戏
 
@@ -57,8 +60,8 @@ public class Minigame : MonoBehaviour
         playerBKey = GetRandomKeyCode();
 
         // 更新 UI 显示
-        if (playerAKeyText) playerAKeyText.text = "Player A Key: " + playerAKey.ToString();
-        if (playerBKeyText) playerBKeyText.text = "Player B Key: " + playerBKey.ToString();
+        if (playerAKeyText) playerAKeyText.text = "Left Player Key: " + playerAKey.ToString();
+        if (playerBKeyText) playerBKeyText.text = "Right Player Key: " + playerBKey.ToString();
 
         // 重置结果文本
         if (resultText) resultText.text = "";
@@ -67,15 +70,18 @@ public class Minigame : MonoBehaviour
         minigameOngoing = true;
         StartCoroutine(MinigameRoutine());
     }
-    
+
     // 协程：进行 10 秒倒计时，每帧监听键盘按下次数
     private System.Collections.IEnumerator MinigameRoutine()
     {
         float timer = minigameTime;
 
+        // Define the base font size
+        int baseFontSize = 36;
+
         while (timer > 0f)
         {
-            // 监听按键（用 unscaledTime，因为 timeScale=0）
+            // Listen for key presses (use unscaledTime, since timeScale=0)
             if (Input.GetKeyDown(playerAKey))
             {
                 playerACount++;
@@ -85,44 +91,91 @@ public class Minigame : MonoBehaviour
                 playerBCount++;
             }
 
-            // 更新倒计时文本
-            if (countdownText)
+            // Update the font size based on the counts
+            if (playerAKeyText)
             {
-                countdownText.text = "countdown: " + Mathf.CeilToInt(timer).ToString() + "s";
+                playerAKeyText.fontSize = baseFontSize + playerACount * fontAmplifyTime; // Increase by 2 for each key press
             }
 
-            // 减少计时（用 unscaledDeltaTime）
+            if (playerBKeyText)
+            {
+                playerBKeyText.fontSize = baseFontSize + playerBCount * fontAmplifyTime; // Increase by 2 for each key press
+            }
+
+            // Update countdown text
+            if (countdownText)
+            {
+                countdownText.text = "Countdown: " + Mathf.CeilToInt(timer).ToString() + "s";
+            }
+
+            // Decrease timer (use unscaledDeltaTime because timeScale=0)
             timer -= Time.unscaledDeltaTime;
 
-            // 等下一帧
+            // Wait for the next frame
             yield return null;
         }
 
-        // 时间到，结束比拼
+        // Time's up, end the mini-game
         minigameOngoing = false;
+        if (countdownText)
+        {
+            countdownText.text = "Game Will Continue After " + showResultTime.ToString() + " Seconds";
+        }
 
-        // 判断胜负
+        // Handle the result: if there's a tie, randomly pick a winner
         if (playerACount > playerBCount)
         {
-            isAWin = true;  // A 胜利
+            isAWin = true;  // A wins
             if (resultText) resultText.text = "A Wins!";
+            propManager.PlayerAGetProp();
         }
         else if (playerACount < playerBCount)
         {
-            isAWin = false; // B 胜利
+            isAWin = false; // B wins
             if (resultText) resultText.text = "B Wins!";
+            propManager.PlayerBGetProp();
         }
-        
-        // 调用回调，把结果通知外部
+        else
+        {
+            // Tie-breaker logic: Randomly select a winner
+            Random.InitState(System.DateTime.Now.Millisecond);
+            isAWin = Random.Range(0, 2) == 0; // 50% chance for A to win, 50% for B to win
+            if (resultText)
+            {
+                resultText.text = isAWin ? "A Wins!" : "B Wins!";
+            }
+
+            // Assign random props after a tie
+            if (isAWin)
+            {
+                propManager.PlayerAGetProp();
+            }
+            else
+            {
+                propManager.PlayerBGetProp();
+            }
+        }
+
+        // Wait for a few seconds before triggering the end callback and ending the mini-game
+        yield return new WaitForSecondsRealtime(showResultTime); // Use WaitForSecondsRealtime instead of WaitForSeconds
+
+        // Notify the result to the caller after the delay
         if (onMinigameEnd != null)
         {
             onMinigameEnd(isAWin);
         }
+
+        // End the mini-game
         gameManager.EndMiniGame();
-        // 恢复游戏
+
+        // Restore normal game time
         Time.timeScale = 1f;
     }
-    
+
+
+
+
+
     // 工具方法：从 possibleKeys 中随机取一个 KeyCode
     private KeyCode GetRandomKeyCode()
     {

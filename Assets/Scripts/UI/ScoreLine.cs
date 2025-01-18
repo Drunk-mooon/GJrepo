@@ -12,7 +12,7 @@ public class ScoreLine : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         // Check if the colliding object has a Bubble component
-        Bubble bubble = collision.GetComponent<Bubble>();
+        Bubble bubble = collision.GetComponentInParent<Bubble>();
         if (bubble != null)
         {
             // Determine which player gets the score
