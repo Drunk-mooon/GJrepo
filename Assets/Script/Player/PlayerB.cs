@@ -50,7 +50,7 @@ public class PlayerB: MonoBehaviour
                 if (keyQueue.Count >= 3)
                 {
                     string tempinput = InputKey();
-                    //  if (BubblePoolA.Instance.Bubbles.ContainsKey(tempinput))
+                    //  if (BubblePoolB.Instance.Bubbles.ContainsKey(tempinput))
                     KillBubble(tempinput);
                 }
 
@@ -111,7 +111,7 @@ public class PlayerB: MonoBehaviour
         keyQueue.Dequeue();
         // Kill ×ª string
         string killString = new string(tempKill);
-        BubblePoolA.Instance.attackCode = killString;
+        BubblePoolB.Instance.attackCode = killString;
         return killString;
     }
 
@@ -129,7 +129,11 @@ public class PlayerB: MonoBehaviour
     {
         float growthRate = 0.1f; // Rate of bubble growth
         timer = 0f;
-
+        while (timer < 1f)
+        {
+            yield return null;
+            timer += Time.deltaTime;
+        }
         // While the key is held down, continue growing the bubble
         while (Input.GetKey(KeyCode.Q)) // Continue while the key is pressed
         {
@@ -153,6 +157,10 @@ public class PlayerB: MonoBehaviour
                 // Increment the timer as the bubble grows
                 timer += Time.deltaTime;
             }
+            if (timer < 1f)
+            {
+                break;
+            }
             // Wait for the next frame
             yield return null;
         }
@@ -160,9 +168,9 @@ public class PlayerB: MonoBehaviour
         // When the key is released, stop growing and instantiate the bubble
         if (BBWAmount > 0)  // If there's enough BBWAmount, instantiate the bubble
         {
-            BubblePoolA.Instance.blowTime = timer;
-            BubblePoolA.Instance.bType = BBWType;
-            BubblePoolA.Instance.GetObj();
+            BubblePoolB.Instance.blowTime = timer;
+            BubblePoolB.Instance.bType = BBWType;
+            BubblePoolB.Instance.GetObj();
         }
 
         // Reset the timer after the bubble is instantiated
@@ -175,8 +183,8 @@ public class PlayerB: MonoBehaviour
 
     public void KillBubble(string killString)
     {
-        BubblePoolA.Instance.PutObj(BubblePoolA.Instance.Bubbles[killString]);
-        /*foreach (var item in BubblePoolA.Instance.Bubbles)
+        BubblePoolB.Instance.PutObj(BubblePoolB.Instance.Bubbles[killString]);
+        /*foreach (var item in BubblePoolB.Instance.Bubbles)
         {
             Debug.Log(item.Key);
             Debug.Log(item.Value);
@@ -218,7 +226,7 @@ public class PlayerB: MonoBehaviour
             {
                 // ÇÐ»» BBW ÀàÐÍ
                 BBWType = SwitchBBWType();
-                BubblePoolA.Instance.bType = BBWType;
+                BubblePoolB.Instance.bType = BBWType;
             }
         }
     }
@@ -244,7 +252,7 @@ public class PlayerB: MonoBehaviour
                     BBWAmount = Mathf.Min(BBWAmount, 100); // Clamp to max value
                 }
             }
-            else if (Input.GetKeyUp(KeyCode.D))
+            else if (Input.GetKeyUp(KeyCode.L))
             {
                 // Stop the coroutine when the key is released
                 StopCoroutine(waterCoroutine);

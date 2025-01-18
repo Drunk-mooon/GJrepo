@@ -589,7 +589,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd832f721446e9d4f8f54f1cf458d990, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameDuration: 10
+  gameDuration: 100
   tutorialPanel: {fileID: 1828277924}
   endGamePanel: {fileID: 2020342073}
   playerA: {fileID: 0}
@@ -855,6 +855,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 940466625}
+  - component: {fileID: 940466626}
   m_Layer: 0
   m_Name: PlayerB
   m_TagString: Untagged
@@ -877,6 +878,27 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &940466626
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 940466624}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 548d6b1252e13364e9afea75620bb70e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerinput: []
+  BBWAmount: 0
+  BBWSpeed: 10
+  playerScore2: 0.1
+  playerinputin: []
+  playerProp: {fileID: 0}
+  isPlayerA: 0
+  maxBubbleSize: {x: 100, y: 100}
+  isDoubleBlow: 0
 --- !u!1 &958345752
 GameObject:
   m_ObjectHideFlags: 0
@@ -1609,7 +1631,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1571514481
 RectTransform:
   m_ObjectHideFlags: 0

@@ -160,8 +160,6 @@ public class PlayerA : MonoBehaviour
             {
                 break;
             }
-
-
             // Wait for the next frame
             yield return null;
         }
