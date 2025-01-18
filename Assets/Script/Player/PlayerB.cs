@@ -7,7 +7,7 @@ public class PlayerB: MonoBehaviour
     public GameObject gameObject;
     public Playerinput[] playerinput;
     //泡泡棒总量 100,初始值0
-    public float BBWAmount = 0;
+    public float BBWAmount = 100;
     // 用于计时的变量
     private float timer = 0f;
     // 吹泡泡的速度，单位为每秒消耗的泡泡水数量
@@ -136,6 +136,7 @@ public class PlayerB: MonoBehaviour
         // While the key is held down, continue growing the bubble
         while (Input.GetKey(KeyCode.Q)) // Continue while the key is pressed
         {
+            BBWAmount -= BBWSpeed * Time.deltaTime * 2;
             if (transform.localScale.x < maxBubbleSize.x)
             {
                 // Grow the bubble

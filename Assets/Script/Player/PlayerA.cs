@@ -126,6 +126,7 @@ public class PlayerA : MonoBehaviour
         // Start the coroutine for growing the bubble when the key is pressed
         if (blowBubbleCoroutine == null)  // Prevent starting multiple coroutines
         {
+            
             blowBubbleCoroutine = StartCoroutine(GrowBubble());
         }
     }
@@ -141,7 +142,7 @@ public class PlayerA : MonoBehaviour
         // While the key is held down, continue growing the bubble
         while (Input.GetKey(KeyCode.Q)) // Continue while the key is pressed
         {
-
+            BBWAmount -= BBWSpeed * Time.deltaTime*2;
             if (transform.localScale.x < maxBubbleSize.x)
             {
                 // Grow the bubble
@@ -245,8 +246,6 @@ public class PlayerA : MonoBehaviour
     //选泡泡水
     public void BubbleWater()
     {
-        if (playerinput != null && playerinput.Length > 0)
-        {
             // 检查是否按下了S 键
             if (Input.GetKeyDown(KeyCode.S))
             {
@@ -254,7 +253,7 @@ public class PlayerA : MonoBehaviour
                 BBWType=SwitchBBWType();
                 BubblePoolA.Instance.bType = BBWType;
             }
-        }
+        
     }
     public void UseWater()
     {
@@ -302,8 +301,6 @@ public class PlayerA : MonoBehaviour
         E_bType[] BBWTypes = (E_bType[])System.Enum.GetValues(typeof(E_bType));
         currentBBWTypeIndex = (currentBBWTypeIndex + 1) % BBWTypes.Length;
         E_bType currentBBWType = BBWTypes[currentBBWTypeIndex];
-
-
         switch (currentBBWType)
         {
             case E_bType.blue:
