@@ -11,8 +11,8 @@ public class PropManager : MonoBehaviour
     public Player playerA; //need to change the class to PlayerA/B
     public Player playerB;
     
-    public void PlayerAGetProp()
+    public void PlayerAGetProp(Prop certainProp)
     {
-        //playerA.playerProp
+        //playerA.playerProp = certainProp  NeedToChange!
     }
 }
