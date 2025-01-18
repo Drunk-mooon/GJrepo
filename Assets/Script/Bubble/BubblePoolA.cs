@@ -29,7 +29,7 @@ public class BubblePoolA : ObjPool<BubblePoolA, Bubble>
         obj.bubble.transform.position = trans.position; //初始位置 
         obj.bubble.transform.localScale = trans.localScale;
         obj.code = GetCode(obj); //获得code 
-        obj.label.text = obj.code; //code可见 
+        obj.label.text =ChangeChar( obj.code); //code可见 
         Bubbles.Add(obj.code, obj); //字典添加 code，泡泡 
         obj.bType = bType;
         obj.dis = _random.Next(-10, 11) / 10f;
@@ -102,6 +102,9 @@ public class BubblePoolA : ObjPool<BubblePoolA, Bubble>
             }
         } while (Bubbles.ContainsKey(result)||BubblePoolB.Instance.Bubbles.ContainsKey(result));
 
+        
+        
+        
         obj.index--; //  命数-1
         return result;
     }
@@ -121,7 +124,8 @@ public class BubblePoolA : ObjPool<BubblePoolA, Bubble>
     {
         Bubbles[code].code = GetCode(Bubbles[code]); //这个attackcode对应的bubble获得新的code
         string secCod = Bubbles[code].code; //临时code=上个code
-        Bubbles[code].label.text = secCod;
+        Bubbles[code].label.text = ChangeChar(secCod);
+        
         Bubbles.Add(secCod, Bubbles[code]); //临时code，以及那个bubble进入字典
         Bubbles.Remove(code); //移除字典中之前那个code与bubble的键值对
     }
@@ -162,4 +166,27 @@ public class BubblePoolA : ObjPool<BubblePoolA, Bubble>
 
         }
     }
+
+    private string ChangeChar(string code)
+    {
+        string result="";
+        for (int i = 0; i < 3; i++)
+        {
+            if (code[i] == '1')
+            {
+                result += 'X';
+            }
+            else if (code[i] == '2')
+            {
+                result += 'O';
+            }
+            else
+            {
+                result += '\u25a1';
+            }
+            
+        }
+        return result;
+    }
+    
 }
