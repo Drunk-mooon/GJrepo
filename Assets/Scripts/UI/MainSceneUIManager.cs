@@ -13,8 +13,8 @@ public class MainSceneUIManager : MonoBehaviour
     public Prop playerAProp;  //调试变量，需直接引用player所拥有的道具
     public Prop playerBProp;
 
-    public Player playerA;
-    public Player playerB;
+    public PlayerA playerA;
+    public PlayerA playerB;
 
     public PropPanel playerAPropPanel; //!need to change to player!
     public PropPanel playerBPropPanel;
