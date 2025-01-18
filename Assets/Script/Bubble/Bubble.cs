@@ -58,12 +58,12 @@ public class Bubble : MonoBehaviour
     {
         if (isa)
         {
-            bubble = Instantiate(AssetManager.LoadRes<GameObject>("bubble1"), transform);
+            bubble = Instantiate(AssetManager.LoadRes<GameObject>("BubbleA"), transform);
             ani = bubble.GetComponent<Animator>();
         }
         else
         {
-            bubble = Instantiate(AssetManager.LoadRes<GameObject>("bubble2"), transform);
+            bubble = Instantiate(AssetManager.LoadRes<GameObject>("BubbleB"), transform);
             ani = bubble.GetComponent<Animator>();
         }
     }

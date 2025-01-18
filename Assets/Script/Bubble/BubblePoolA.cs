@@ -8,8 +8,6 @@ using Random = System.Random;
 
 public class BubblePoolA : ObjPool<BubblePoolA, Bubble>
 {
-    public Sprite B;
-    
     public float blowTime; //吹的时间
     private Random _random;
     public Dictionary<string, Bubble> Bubbles = new Dictionary<string, Bubble>(); //组合键与泡泡的对应关系
@@ -143,18 +141,15 @@ public class BubblePoolA : ObjPool<BubblePoolA, Bubble>
     {
         int[] index =new int[num];
         int count = Bubbles.Count;
-        if (count!=0)
+        index[0]=_random.Next(0, count);
+        for (int i = 1; i < num; i++)
         {
-            index[0]=_random.Next(0, count);
-            for (int i = 1; i < num; i++)
-            {
-                index[i] = (index[0] + i)%count;
-            }
+            index[i] = (index[0] + i)%count;
+        }
 
-            for (int i = 0; i < num; i++)
-            {
-                Bubbles.ElementAt(index[i]).Value.isA = false;
-            } 
+        for (int i = 0; i < num; i++)
+        {
+           Bubbles.ElementAt(index[i]).Value.isA = false;
         }
 
         
