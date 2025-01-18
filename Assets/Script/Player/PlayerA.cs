@@ -153,6 +153,10 @@ public class PlayerA : MonoBehaviour
                 // Increment the timer as the bubble grows
                 timer += Time.deltaTime;
             }
+            if (timer < 1f)
+            {
+                break ;
+            }
             // Wait for the next frame
             yield return null;
         }
