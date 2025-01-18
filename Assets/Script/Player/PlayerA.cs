@@ -129,7 +129,11 @@ public class PlayerA : MonoBehaviour
     {
         float growthRate = 0.1f; // Rate of bubble growth
         timer = 0f;
-
+        while (timer < 1f)
+        {
+            yield return null;
+            timer += Time.deltaTime;
+        }
         // While the key is held down, continue growing the bubble
         while (Input.GetKey(KeyCode.Q)) // Continue while the key is pressed
         {
@@ -149,14 +153,15 @@ public class PlayerA : MonoBehaviour
                 {
                     break; // Exit the coroutine and stop bubble growth
                 }
-
                 // Increment the timer as the bubble grows
                 timer += Time.deltaTime;
             }
-            if (timer > 1f)
+            if (timer < 1f)
             {
-                break ;
+                break;
             }
+
+
             // Wait for the next frame
             yield return null;
         }
