@@ -6,8 +6,9 @@
   <component name="ChangeListManager">
     <list default="true" id="01f5344a-2482-466c-825e-61f18f7eed00" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.GJrepo/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.GJrepo/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SmoothCurveMover.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SmoothCurveMover.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/BullbleWater.unity" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/BullbleWater.unity.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/WaterBullbleSelect.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/WaterBullbleSelect.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -28,7 +29,7 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "azure",
+    "git-widget-placeholder": "togeter",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
