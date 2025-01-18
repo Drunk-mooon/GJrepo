@@ -127,10 +127,10 @@ public class PlayerB: MonoBehaviour
         // While the key is held down, continue growing the bubble
         while (Input.GetKey(KeyCode.U)) // Continue while the key is pressed
         {
+            keyHeldDown = true;
             BBWAmount -= BBWSpeed * Time.deltaTime*2;
             if (transform.localScale.x < maxBubbleSize.x)
             {
-                // Grow the bubble
                 // Deduct BBWAmount while the bubble grows
                 BBWAmount -= Mathf.FloorToInt(BBWSpeed * Time.deltaTime);
                 BBWAmount = Mathf.Max(0, BBWAmount); // Ensure BBWAmount doesn't go below 0
@@ -146,32 +146,36 @@ public class PlayerB: MonoBehaviour
             timer += Time.deltaTime;
             // Wait for the next frame
         }
-        if (keyHeldDown && timer < 1f)
+        keyHeldDown = false;
+        if (!keyHeldDown && timer < 1f)
         {
             // Reset the timer
             timer = 0f;
+            blowBubbleCoroutine = null;
+            Debug.Log("timer <= 1");
         }
-        else
+        else if(!keyHeldDown)
         {
-            Debug.Log(BBWAmount);
+            Debug.Log("timer > 1");
+            // When the key is released, stop growing and instantiate the bubble
+            if (BBWAmount > 0)  // If there's enough BBWAmount, instantiate the bubble
+            {
+                BubblePoolB.Instance.blowTime = timer;
+                BubblePoolB.Instance.bType = BBWType;
+                BubblePoolB.Instance.trans = gameObject.transform;
+                BubblePoolB.Instance.GetObj();
+            }
+            //Ë«±¶¿ªÆô£¬Ë«±¶ÅÝÅÝ
+            if (DoubleStatus == true)
+            {
+                BubblePoolB.Instance.GetObj();
+            }
+            // Reset the timer after the bubble is instantiated
+            timer = 0f;
+            // Reset the coroutine reference
+            blowBubbleCoroutine = null;
         }
-        // When the key is released, stop growing and instantiate the bubble
-        if (BBWAmount > 0)  // If there's enough BBWAmount, instantiate the bubble
-        {
-            BubblePoolB.Instance.blowTime = timer;
-            BubblePoolB.Instance.bType = BBWType;
-            BubblePoolB.Instance.trans = gameObject.transform;
-            BubblePoolB.Instance.GetObj();
-        }
-        //Ë«±¶¿ªÆô£¬Ë«±¶ÅÝÅÝ
-        if (DoubleStatus == true)
-        {
-            BubblePoolB.Instance.GetObj();
-        }
-        // Reset the timer after the bubble is instantiated
-        timer = 0f;
-        // Reset the coroutine reference
-        blowBubbleCoroutine = null;
+
     }
 
 
