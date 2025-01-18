@@ -235,7 +235,7 @@ public class PlayerB: MonoBehaviour
     {
         while (true)
         {
-            if (Input.GetKey(KeyCode.D))
+            if (Input.GetKey(KeyCode.L))
             {
                 // Increase BBWAmount while the key is held down
                 if (BBWAmount < 100)

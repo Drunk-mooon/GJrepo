@@ -821,6 +821,7 @@ GameObject:
   m_Component:
   - component: {fileID: 940466625}
   - component: {fileID: 940466626}
+  - component: {fileID: 940466627}
   m_Layer: 0
   m_Name: PlayerB
   m_TagString: Untagged
@@ -862,6 +863,27 @@ MonoBehaviour:
   playerinputin: []
   playerProp: {fileID: 0}
   isPlayerA: 1
+  maxBubbleSize: {x: 100, y: 100}
+  isDoubleBlow: 0
+--- !u!114 &940466627
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 940466624}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 548d6b1252e13364e9afea75620bb70e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerinput: []
+  BBWAmount: 0
+  BBWSpeed: 10
+  playerScore2: 0.1
+  playerinputin: []
+  playerProp: {fileID: 0}
+  isPlayerA: 0
   maxBubbleSize: {x: 100, y: 100}
   isDoubleBlow: 0
 --- !u!1 &958345752
