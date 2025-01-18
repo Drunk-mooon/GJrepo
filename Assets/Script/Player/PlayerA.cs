@@ -126,8 +126,10 @@ public class PlayerA : MonoBehaviour
         }
     }
     private IEnumerator GrowBubble()
-    {
+    {    //白色
+        if()
         float growthRate = 0.1f; // Rate of bubble growth
+
         timer = 0f;
         while (timer < 1f)
         {
@@ -198,20 +200,19 @@ public class PlayerA : MonoBehaviour
 
     //释放特殊道具
     public void SpecialItem()
-    {/*
-        if (playerinput != null && playerinput.Length > 0)
+    {
+        while (Input.GetKey(KeyCode.Q))
         {
-            // 检查是否按下了 key5 键
-            if (Input.GetKey(playerinput[4].key5))
+            if (playerinput != null && playerinput.Length > 0)
             {
-                //调用特殊道具脚本
-                if (this.playerProp != null)
+                // 检查是否按下了 key6 键
+                if (Input.GetKeyDown(KeyCode.S))
                 {
-                    playerProp.ApplyEffect();
-                    playerProp = null;
+                   
                 }
             }
-        }*/
+        }
+       
     }
 
 

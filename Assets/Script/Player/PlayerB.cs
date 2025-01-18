@@ -222,7 +222,7 @@ public class PlayerB: MonoBehaviour
         if (playerinput != null && playerinput.Length > 0)
         {
             // 检查是否按下了 key6 键
-            if (Input.GetKeyDown(KeyCode.S))
+            if (Input.GetKeyDown(KeyCode.K))
             {
                 // 切换 BBW 类型
                 BBWType = SwitchBBWType();
