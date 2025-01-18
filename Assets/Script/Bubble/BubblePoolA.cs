@@ -166,13 +166,17 @@ public class BubblePoolA : ObjPool<BubblePoolA, Bubble>
         {
             case E_bType.blue:
                 obj.index = 3;
+                obj.label.color = Color.blue;
                 break;
             case E_bType.green:
+                obj.label.color = Color.green;
                 break;
             case E_bType.pink:
+                obj.label.color = new Color(1f, 0.53f, 0.79f);
                 obj.speed *= 2;
                 break;
             case E_bType.white:
+                obj.label.color = Color.white;
                 break;
             default:
                 break;
