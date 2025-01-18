@@ -128,6 +128,10 @@ public class PlayerB: MonoBehaviour
     private IEnumerator GrowBubble()
     {
         float growthRate = 0.1f; // Rate of bubble growth
+        if (BubblePoolB.Instance.bType == E_bType.white)
+        {
+            growthRate = 3f;
+        }
         timer = 0f;
         while (timer < 1f)
         {
