@@ -15,26 +15,27 @@ public class ScoreLine : MonoBehaviour
         Bubble bubble = collision.GetComponent<Bubble>();
         if (bubble != null)
         {
+            /*
+            if (bubble.btype == E_bType.gold)
+                ; NeedToChange!
+            */
             // Determine which player gets the score
             if (bubble.isA)
             {
                 // Bubble belongs to Player A
-                /*
-                if(bubble.btype = E_type.green)
+                if(bubble.bType == E_bType.green)
                     playerA.playerScore*=(1+greenBubbleEffect); 
                 else
-                */
                     playerA.playerScore += bubble.score;
                 
             }
             else
             {
                 // Bubble belongs to Player B
-                /*
-                if(bubble.btype = E_type.green)
-                    playerB.playerScore*=(1+greenBubbleEffect); 
+
+                if(bubble.bType == E_bType.green)
+                    playerB.playerScore2*=(1+greenBubbleEffect); 
                 else
-                */
                     playerB.playerScore2 += bubble.score;
             }
 
