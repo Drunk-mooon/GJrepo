@@ -126,7 +126,7 @@ public class PlayerA : MonoBehaviour
         timer = 0f;
         bool keyHeldDown = false;
         // While the key is held down, continue growing the bubble
-        while (Input.GetKey(KeyCode.U)) // Continue while the key is pressed
+        while (Input.GetKey(KeyCode.Q)) // Continue while the key is pressed
         {
             keyHeldDown = true;
             BBWAmount -= BBWSpeed * Time.deltaTime * 2;
@@ -161,15 +161,15 @@ public class PlayerA : MonoBehaviour
             // When the key is released, stop growing and instantiate the bubble
             if (BBWAmount > 0)  // If there's enough BBWAmount, instantiate the bubble
             {
-                BubblePoolB.Instance.blowTime = timer;
-                BubblePoolB.Instance.bType = BBWType;
-                BubblePoolB.Instance.trans = gameObject.transform;
-                BubblePoolB.Instance.GetObj();
+                BubblePoolA.Instance.blowTime = timer;
+                BubblePoolA.Instance.bType = BBWType;
+                BubblePoolA.Instance.trans = gameObject.transform;
+                BubblePoolA.Instance.GetObj();
             }
             //Ë«±¶¿ªÆô£¬Ë«±¶ÅÝÅÝ
             if (DoubleStatus == true)
             {
-                BubblePoolB.Instance.GetObj();
+                BubblePoolA.Instance.GetObj();
             }
             // Reset the timer after the bubble is instantiated
             timer = 0f;
