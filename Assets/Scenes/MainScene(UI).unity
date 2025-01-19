@@ -948,7 +948,7 @@ MonoBehaviour:
   endGamePanel: {fileID: 2020342073}
   playerA: {fileID: 1550999048}
   playerB: {fileID: 940466626}
-  miniGameInterval: 20
+  miniGameInterval: 100
   minigame: {fileID: 5289613966939871317}
 --- !u!4 &750137043
 Transform:
@@ -2597,6 +2597,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b52fbb0ae55be894ea535231e245cc22, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  B: {fileID: 21300000, guid: 4a33aa1535112f147903406c6ad60522, type: 3}
   blowTime: 0
   attackCode: 
   speedChange: 1
@@ -2723,6 +2724,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe91cf9253a6ffc40bd766d109b16415, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  A: {fileID: 21300000, guid: ce1a2624dfb107148933fb8ffc044869, type: 3}
   blowTime: 0
   attackCode: 
   speedChange: 1

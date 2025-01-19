@@ -1,8 +1,7 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.Mathematics;
-using System;
+using Unity.VisualScripting;
 public class PlayerA : MonoBehaviour
 {
     private Coroutine blowBubbleCoroutine; // Store reference to the coroutine
@@ -48,9 +47,7 @@ public class PlayerA : MonoBehaviour
                 if (keyQueue.Count >= 3)
                 {
                     string tempinput = InputKey();
-                  
                         KillBubble(tempinput);
-
                 }
                
             }
@@ -81,12 +78,6 @@ public class PlayerA : MonoBehaviour
             }
         
     }
-
-    private void Start()
-    {
-       // gameObject.transform.position = new Vector3(1,1,1);
-    }
-
     public string InputKey()
     {
         char[] tempKill = new char[3];
@@ -130,26 +121,20 @@ public class PlayerA : MonoBehaviour
         }
     }
     private IEnumerator GrowBubble()
-    {    
+    {
         float growthRate = 0.1f; // Rate of bubble growth
         timer = 0f;
-        while (timer < 1f)
-        {
-            yield return null;
-            timer += Time.deltaTime;
-        }
+        bool keyHeldDown = false;
         // While the key is held down, continue growing the bubble
-        while (Input.GetKey(KeyCode.Q)) // Continue while the key is pressed
+        while (Input.GetKey(KeyCode.U)) // Continue while the key is pressed
         {
-
+            keyHeldDown = true;
+            BBWAmount -= BBWSpeed * Time.deltaTime * 2;
             if (transform.localScale.x < maxBubbleSize.x)
             {
-                // Grow the bubble
-
                 // Deduct BBWAmount while the bubble grows
                 BBWAmount -= Mathf.FloorToInt(BBWSpeed * Time.deltaTime);
                 BBWAmount = Mathf.Max(0, BBWAmount); // Ensure BBWAmount doesn't go below 0
-
                 // If BBWAmount is 0, stop growing the bubble and exit the loop
                 if (BBWAmount <= 0)
                 {
@@ -157,49 +142,42 @@ public class PlayerA : MonoBehaviour
                 }
                 // Increment the timer as the bubble grows
                 timer += Time.deltaTime;
-
-               /*Vector3 a= gameObject.transform.localScale*(float) Math.Round(timer*0.5f,2);
-                a.y = (float)Math.Round(a.y, 2);
-                a.x = (float)Math.Round(a.x, 2);
-                a.z = (float)Math.Round(a.z, 2);
-                gameObject.transform.localScale = a;
-               */
-
-
+                yield return null;
             }
-            if (timer < 1f)
-            {
-                break;
-            }
+            timer += Time.deltaTime;
             // Wait for the next frame
-            yield return null;
         }
-
-
-        //Debug.Log(BBWAmount);
-        // When the key is released, stop growing and instantiate the bubble
-        if (BBWAmount > 0)  // If there's enough BBWAmount, instantiate the bubble
+        keyHeldDown = false;
+        if (!keyHeldDown && timer < 1f)
         {
-            BubblePoolA.Instance.blowTime = timer;
-            BubblePoolA.Instance.bType = BBWType;
-          
-            BubblePoolA.Instance.trans = gameObject.transform;
-            BubblePoolA.Instance.GetObj();
-
+            // Reset the timer
+            timer = 0f;
+            blowBubbleCoroutine = null;
+            Debug.Log("timer <= 1");
+        }
+        else if (!keyHeldDown)
+        {
+            Debug.Log("timer > 1");
+            // When the key is released, stop growing and instantiate the bubble
+            if (BBWAmount > 0)  // If there's enough BBWAmount, instantiate the bubble
+            {
+                BubblePoolB.Instance.blowTime = timer;
+                BubblePoolB.Instance.bType = BBWType;
+                BubblePoolB.Instance.trans = gameObject.transform;
+                BubblePoolB.Instance.GetObj();
+            }
             //双倍开启，双倍泡泡
             if (DoubleStatus == true)
             {
-                BubblePoolA.Instance.GetObj();
+                BubblePoolB.Instance.GetObj();
             }
+            // Reset the timer after the bubble is instantiated
+            timer = 0f;
+            // Reset the coroutine reference
+            blowBubbleCoroutine = null;
         }
 
-        // Reset the timer after the bubble is instantiated
-        timer = 0f;
-
-        // Reset the coroutine reference
-        blowBubbleCoroutine = null;
     }
-
 
     public void KillBubble(string killString)
     {
@@ -245,8 +223,6 @@ public class PlayerA : MonoBehaviour
     //选泡泡水
     public void BubbleWater()
     {
-        if (playerinput != null && playerinput.Length > 0)
-        {
             // 检查是否按下了S 键
             if (Input.GetKeyDown(KeyCode.S))
             {
@@ -254,7 +230,7 @@ public class PlayerA : MonoBehaviour
                 BBWType=SwitchBBWType();
                 BubblePoolA.Instance.bType = BBWType;
             }
-        }
+        
     }
     public void UseWater()
     {
@@ -302,8 +278,6 @@ public class PlayerA : MonoBehaviour
         E_bType[] BBWTypes = (E_bType[])System.Enum.GetValues(typeof(E_bType));
         currentBBWTypeIndex = (currentBBWTypeIndex + 1) % BBWTypes.Length;
         E_bType currentBBWType = BBWTypes[currentBBWTypeIndex];
-
-
         switch (currentBBWType)
         {
             case E_bType.blue:
