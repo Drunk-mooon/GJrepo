@@ -10,7 +10,7 @@ public class BubbleDoubleProp : Prop
     public override void ApplyEffect(bool isApplyByPlayerA)
     {
         base.ApplyEffect(isApplyByPlayerA);
-
+        InitializePlayers();
         if (isApplyByPlayerA)
         {
             // Start the coroutine to change isDoubleBlow for 5 seconds

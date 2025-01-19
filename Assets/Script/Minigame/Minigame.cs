@@ -144,16 +144,17 @@ public class Minigame : MonoBehaviour
             {
                 resultText.text = isAWin ? "A Wins!" : "B Wins!";
             }
+        }
 
-            // Assign random props after a tie
-            if (isAWin)
-            {
-                propManager.PlayerAGetProp();
-            }
-            else
-            {
-                propManager.PlayerBGetProp();
-            }
+
+        // Assign random props after a tie
+        if (isAWin)
+        {
+            propManager.PlayerAGetProp();
+        }
+        else
+        {
+            propManager.PlayerBGetProp();
         }
 
         // Wait for a few seconds before triggering the end callback and ending the mini-game

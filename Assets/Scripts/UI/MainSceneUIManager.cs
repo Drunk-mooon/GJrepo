@@ -16,7 +16,7 @@ public class MainSceneUIManager : MonoBehaviour
     public PlayerA playerA;
     public PlayerB playerB;
 
-    public PropPanel playerAPropPanel; //!need to change to player!
+    public PropPanel playerAPropPanel; 
     public PropPanel playerBPropPanel;
     public TextMeshProUGUI timerText;
 
@@ -33,8 +33,12 @@ public class MainSceneUIManager : MonoBehaviour
     {
         if (playerA.playerProp != null)
             playerAPropPanel.prop = playerA.playerProp;
+        else
+            playerAPropPanel.prop = null;
         if (playerB.playerProp != null)
             playerBPropPanel.prop = playerB.playerProp;
+        else
+            playerBPropPanel.prop = null;
     }
 
     public void UpdateTimerUI(float remainingTime)

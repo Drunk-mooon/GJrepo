@@ -10,14 +10,18 @@ public class PropManager : MonoBehaviour
     
     public void PlayerAGetProp()
     {
-        Random.InitState(System.DateTime.Now.Millisecond);
         int randomValue;
-        if (playerB.playerProp = bubbleStealProp)
+        if (playerB.playerProp == bubbleStealProp)
         {
+            Random.InitState(System.DateTime.Now.Millisecond);
             randomValue = Random.Range(0, 2);
         }
         else
+        {
+            Random.InitState(System.DateTime.Now.Millisecond);
             randomValue = Random.Range(0, 3);
+        }
+
         if (randomValue == 0)
         {
             playerA.playerProp = bubbleDoubleProp;
@@ -37,14 +41,18 @@ public class PropManager : MonoBehaviour
 
     public void PlayerBGetProp()
     {
-        Random.InitState(System.DateTime.Now.Millisecond);
         int randomValue;
-        if (playerA.playerProp = bubbleStealProp)
+        if (playerA.playerProp == bubbleStealProp)
         {
+            Random.InitState(System.DateTime.Now.Millisecond);
             randomValue = Random.Range(0, 2);
         }
         else
+        {
+            Random.InitState(System.DateTime.Now.Millisecond);
             randomValue = Random.Range(0, 3);
+        }
+
         if (randomValue == 0)
         {
             playerB.playerProp = bubbleDoubleProp;

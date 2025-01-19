@@ -8,7 +8,7 @@ public class BubbleFreezeProp : Prop
     public BubblePoolA playerABubblePool; // Reference to Player A's BubblePool
     public BubblePoolB playerBBubblePool; // Reference to Player B's BubblePool
 
-    public float freezeSpeed = 0.7f; // The reduced speed during freeze
+    public float freezeSpeed = 0.1f; // The reduced speed during freeze
     public float freezeDuration = 5f; // Duration of the freeze effect
 
     private void OnEnable()
@@ -19,7 +19,8 @@ public class BubbleFreezeProp : Prop
     public override void ApplyEffect(bool isApplyByPlayerA)
     {
         base.ApplyEffect(isApplyByPlayerA);
-
+        InitializeBulletPool();
+        InitializePlayers();
         // Start the freeze effect
         if (isApplyByPlayerA)
         {
@@ -56,6 +57,7 @@ public class BubbleFreezeProp : Prop
 
     private IEnumerator FreezeEffectB(BubblePoolB bubblePool)
     {
+        Debug.Log("FreezeB!");
         // Store the original speed
         float originalSpeed = bubblePool.speedChange;
 

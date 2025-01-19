@@ -19,5 +19,5 @@ MonoBehaviour:
   playerB: {fileID: 0}
   playerABubblePool: {fileID: 0}
   playerBBubblePool: {fileID: 0}
-  freezeSpeed: 0.7
+  freezeSpeed: 0.1
   freezeDuration: 5

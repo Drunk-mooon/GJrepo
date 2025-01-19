@@ -15,6 +15,8 @@ public class BubbleStealProp : Prop
     public override void ApplyEffect(bool isApplyByPlayerA)
     {
         base.ApplyEffect(isApplyByPlayerA);
+        InitializeBulletPool();
+        InitializePlayers();
         // Add specific logic for stronger bubbles here
         if (isApplyByPlayerA)
         {

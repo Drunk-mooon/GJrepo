@@ -26,15 +26,15 @@ public abstract class Prop : ScriptableObject
         // Check if the players were found
         if (playerA == null)
         {
-            Debug.LogError("double PlayerA not found in the scene.");
+            Debug.LogError("player PlayerA not found in the scene.");
         }
         else if (playerB == null)
         {
-            Debug.LogError("double PlayerB not found in the scene.");
+            Debug.LogError("player PlayerB not found in the scene.");
         }
         else
         {
-            Debug.Log("double success.");
+            Debug.Log("player success.");
         }
     }
 }
