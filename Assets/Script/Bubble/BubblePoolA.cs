@@ -37,6 +37,7 @@ public class BubblePoolA : ObjPool<BubblePoolA, Bubble>
         obj.dis = _random.Next(-10, 11) / 10f;
         TypeEffect(obj);
         StartCoroutine(move(obj));
+        obj.bubble.GetComponent<SpriteRenderer>().sprite= BubblePoolB.Instance.A;
         return obj;
     }
 
@@ -57,7 +58,8 @@ public class BubblePoolA : ObjPool<BubblePoolA, Bubble>
          if (obj.index == 0) //如果没命了
          {
              obj.ani.SetTrigger("EndAni"); //动画状态机操作
-             yield return new WaitForSeconds(3); //等等
+             obj.bubble.GetComponent<SpriteRenderer>().sprite = null;
+             yield return new WaitForSeconds(1); //等等
              obj.bubble.SetActive(false); //模型消失
              Pool.Enqueue(obj);
         } 
