@@ -59,7 +59,7 @@ public class Bubble : MonoBehaviour
         if (isa)
         {
             bubble = Instantiate(AssetManager.LoadRes<GameObject>("bubble1"), transform);
-            ani = bubble.GetComponentInChildren<Animator>();
+            ani = BubblePoolA.Instance.ani;
         }
         else
         {
