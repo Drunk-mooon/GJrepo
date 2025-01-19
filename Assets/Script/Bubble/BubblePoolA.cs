@@ -42,6 +42,7 @@ public class BubblePoolA : ObjPool<BubblePoolA, Bubble>
         obj.bubble.GetComponent<SpriteRenderer>().sprite = BubblePoolB.Instance.A;
         obj.ani.gameObject.GetComponent<SpriteRenderer>().color = new Color(224 / 255f, 0, 0);
 
+        SoundManager.AddSound("sound/出泡泡",0,1);
         return obj;
     }
 
@@ -62,6 +63,7 @@ public class BubblePoolA : ObjPool<BubblePoolA, Bubble>
         if (obj.index == 0) //如果没命了
         {
             obj.ani.SetTrigger("EndAni"); //动画状态机操作
+            SoundManager.AddSound("sound/泡泡破裂",0,1);
             obj.label.text = "";
             obj.bubble.GetComponent<SpriteRenderer>().sprite = null;
             yield return new WaitForSeconds(1); //等等
