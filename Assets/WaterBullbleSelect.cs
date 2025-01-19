@@ -45,7 +45,7 @@ public class WaterBullbleSelect : MonoBehaviour
     void Update()
     {
         // Press Q to start the rotation (if not currently moving)
-        if (Input.GetKeyDown(KeyCode.Q) && !isMoving)
+        if (Input.GetKeyDown(KeyCode.Y) && !isMoving)
         {
             StartRotationCycle();
         }
