@@ -18,6 +18,16 @@ public class Minigame : MonoBehaviour
     [Header("Reference")]
     public GameManager gameManager;
     public PropManager propManager;
+    
+    [Header("Button Images")]
+    public Image playerAButtonImage;    // 对应左玩家键的按钮图像
+    public Sprite playerAIdleSprite;    // 左玩家按钮的未按下
+    public Sprite playerAPressedSprite; // 左玩家按钮的按下
+
+    public Image playerBButtonImage;    // 对应右玩家键的按钮图像
+    public Sprite playerBIdleSprite;    // 右玩家按钮的未按下
+    public Sprite playerBPressedSprite; // 右玩家按钮的按下
+
 
     private bool minigameOngoing = false; // 是否正在进行游戏
 
@@ -85,10 +95,33 @@ public class Minigame : MonoBehaviour
             if (Input.GetKeyDown(playerAKey))
             {
                 playerACount++;
+                if (playerAButtonImage && playerAPressedSprite)
+                {
+                    playerAButtonImage.sprite = playerAPressedSprite;
+                }
             }
             if (Input.GetKeyDown(playerBKey))
             {
                 playerBCount++;
+                if (playerBButtonImage && playerBPressedSprite)
+                {
+                    playerBButtonImage.sprite = playerBPressedSprite;
+                }
+            }
+            
+            if (Input.GetKeyUp(playerAKey))
+            {
+                if (playerAButtonImage && playerAIdleSprite)
+                {
+                    playerAButtonImage.sprite = playerAIdleSprite;
+                }
+            }
+            if (Input.GetKeyUp(playerBKey))
+            {
+                if (playerBButtonImage && playerBIdleSprite)
+                {
+                    playerBButtonImage.sprite = playerBIdleSprite;
+                }
             }
 
             // Update the font size based on the counts

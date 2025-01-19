@@ -5,8 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="01f5344a-2482-466c-825e-61f18f7eed00" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Bubble/BubblePoolA.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Bubble/BubblePoolA.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Bubble/BubblePoolB.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Bubble/BubblePoolB.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.GJrepo/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.GJrepo/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/bubble1.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/bubble1.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/bubble2.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/bubble2.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/按钮down.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/按钮down.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/按钮up.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/按钮up.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/红色泡泡棒/红色棒（无）.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/红色泡泡棒/红色棒（无）.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/FinalScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/FinalScene.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Minigame/Minigame.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Minigame/Minigame.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -52,7 +60,7 @@
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
-  <component name="RunManager" selected="独立播放器.Start Unity">
+  <component name="RunManager" selected="Attach to Unity Editor.Attach to Unity Editor">
     <configuration name="启动 Unity" type="RunUnityExe" factoryName="Unity Executable">
       <option name="EXE_PATH" value="D:\UNITY\UNITY-ENGINE\Unity 2021.3.16f1c1\Editor\Unity.exe" />
       <option name="PROGRAM_PARAMETERS" value="-projectPath &quot;D:\UNITY\UNITY PROJECT\GJrepo&quot; -debugCodeOptimization" />
@@ -85,27 +93,21 @@
       <option name="USE_EXTERNAL_CONSOLE" value="0" />
       <method v="2" />
     </configuration>
-    <configuration name="附加到 Unity 编辑器" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost">
+    <configuration name="Attach to Unity Editor &amp; Play" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="UNITY_ATTACH_AND_PLAY" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost">
       <option name="allowRunningInParallel" value="false" />
       <option name="listenPortForConnections" value="false" />
       <option name="pid" />
       <option name="projectPathOnTarget" />
-      <option name="runtimes">
-        <list />
-      </option>
       <option name="selectedOptions">
         <list />
       </option>
       <method v="2" />
     </configuration>
-    <configuration name="附加到 Unity 编辑器并运行" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="UNITY_ATTACH_AND_PLAY" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost">
+    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost">
       <option name="allowRunningInParallel" value="false" />
       <option name="listenPortForConnections" value="false" />
       <option name="pid" />
       <option name="projectPathOnTarget" />
-      <option name="runtimes">
-        <list />
-      </option>
       <option name="selectedOptions">
         <list />
       </option>
@@ -133,6 +135,7 @@
       <workItem from="1737201741152" duration="98000" />
       <workItem from="1737201843652" duration="5945000" />
       <workItem from="1737252547686" duration="4125000" />
+      <workItem from="1737264694958" duration="178000" />
     </task>
     <servers />
   </component>
