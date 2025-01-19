@@ -5,7 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="01f5344a-2482-466c-825e-61f18f7eed00" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/bubble1.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/bubble1.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.GJrepo/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.GJrepo/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Bubble/BubblePoolA.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Bubble/BubblePoolA.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Bubble/BubblePoolB.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Bubble/BubblePoolB.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
