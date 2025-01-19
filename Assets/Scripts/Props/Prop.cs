@@ -24,6 +24,7 @@ public abstract class Prop : ScriptableObject
         playerB = GameObject.FindObjectOfType<PlayerB>();
 
         // Check if the players were found
+        /*
         if (playerA == null)
         {
             Debug.LogError("player PlayerA not found in the scene.");
@@ -35,7 +36,7 @@ public abstract class Prop : ScriptableObject
         else
         {
             Debug.Log("player success.");
-        }
+        }*/
     }
 }
 

@@ -212,7 +212,7 @@ public class PlayerB: MonoBehaviour
     {
             if (playerProp != null)
             {
-                playerProp.ApplyEffect(!isPlayerA);
+                playerProp.ApplyEffect(isPlayerA);
             }
     }
 
