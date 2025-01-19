@@ -25,7 +25,8 @@ public class Bubble : MonoBehaviour
     public string code; //当前组合键
     public int index = 2; //泡泡生命
     public E_bType bType;
-    public float dis; 
+    public float dis;
+  
     
     public void Set(bool isa)
     {
@@ -58,12 +59,12 @@ public class Bubble : MonoBehaviour
         if (isa)
         {
             bubble = Instantiate(AssetManager.LoadRes<GameObject>("bubble1"), transform);
-            ani = bubble.GetComponent<Animator>();
+            ani = BubblePoolA.Instance.ani;
         }
         else
         {
             bubble = Instantiate(AssetManager.LoadRes<GameObject>("bubble2"), transform);
-            ani = bubble.GetComponent<Animator>();
+            ani = bubble.GetComponentInChildren<Animator>();
         }
     }
 
