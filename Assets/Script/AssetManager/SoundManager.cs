@@ -6,7 +6,7 @@ public static class SoundManager
     private static GameObject _soundManagerObject;
     private static bool _isInit = false;
 
-    private static void Init()
+    public static void Init()
     {
         if (_soundManagerObject == null)
         {

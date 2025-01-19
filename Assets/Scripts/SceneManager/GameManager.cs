@@ -31,8 +31,14 @@ public class GameManager : MonoBehaviour
     public Image tuitionImage;
     private int tuitionIndex;
     private bool isNearEndMusicPlayed = false;
+
+    public TextMeshProUGUI EndPanelText;
     void Start()
     {
+        SoundManager.Init();
+        MusicManager.Init();
+        SoundManager.AddSound("sound/游戏开始", 0, 1);
+        MusicManager.AddMusic("ggjj", 0, 0.5f);
         // Find UIManager in the scene and assign it to uiManager
         uiManager = FindObjectOfType<MainSceneUIManager>();
         isInMiniGame = false;
@@ -143,6 +149,15 @@ public class GameManager : MonoBehaviour
         endGamePanel.SetActive(true);
         SoundManager.AddSound("sound/游戏结束", 0, 1);
         Time.timeScale = 0f;
+
+        if(playerA.playerScore > playerB.playerScore2)
+        {
+            EndPanelText.text = "Player RED WIN!";
+        }
+        else
+        {
+            EndPanelText.text = "Player BLUE WIN!";
+        }
     }
 
     public void RestartGame()
@@ -158,6 +173,8 @@ public class GameManager : MonoBehaviour
 
     private void ResetGame()
     {
+        SoundManager.Init();
+        MusicManager.Init();
         isNearEndMusicPlayed = false;
         elapsedTime = 0f;
         isGameActive = false;

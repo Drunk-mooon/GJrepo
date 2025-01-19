@@ -197,15 +197,12 @@ public class PlayerB: MonoBehaviour
             Destroy(bubbleSprite); // Destroy the bubble sprite if the key was released early
             isBlowingBubbles = false;
             blowBubbleCoroutine = null;
-            Debug.Log("timer <= leastPressTime");
         }
         else if (!keyHeldDown)
         {
-            Debug.Log("timer > 1");
             // When the key is released and the bubble was successfully grown
             if (BBWAmount > 0) // If there's enough BBWAmount, instantiate the bubble
             {
-                Debug.Log("generating bb");
                 BubblePoolB.Instance.blowTime = timer;
                 BubblePoolB.Instance.bType = BBWType;
                 BubblePoolB.Instance.trans = bubbleSprite.transform; // Set the transform of the bubble
@@ -236,10 +233,10 @@ public class PlayerB: MonoBehaviour
             keyQueue.Dequeue();
             keyQueue.Dequeue();
         }
-            if (BubblePoolA.Instance.Bubbles.ContainsKey(killString))
+        if (BubblePoolA.Instance.Bubbles.ContainsKey(killString))
             BubblePoolA.Instance.PutObj(BubblePoolA.Instance.Bubbles[killString]); 
-        else
-        BubblePoolB.Instance.PutObj(BubblePoolB.Instance.Bubbles[killString]);
+        else if (BubblePoolB.Instance.Bubbles.ContainsKey(killString))
+            BubblePoolB.Instance.PutObj(BubblePoolB.Instance.Bubbles[killString]);
 
         /*foreach (var item in BubblePoolB.Instance.Bubbles)
         {

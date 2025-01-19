@@ -1,6 +1,6 @@
 using UnityEngine;
 using System.Collections;
-using static UnityEditor.Experimental.GraphView.GraphView;
+
 
 [CreateAssetMenu(fileName = "BubbleFreezeProp", menuName = "Props/BubbleFreezeProp")]
 public class BubbleFreezeProp : Prop

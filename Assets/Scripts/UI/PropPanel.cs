@@ -9,6 +9,8 @@ public class PropPanel : MonoBehaviour
     public Image propImageContainer;        // Image container to hold the prop icon
     public TextMeshProUGUI propNameContainer; // Text container to display the prop name
 
+
+    public Sprite nullSprite;
     void Awake()
     {
         // Get references to the UI components
@@ -24,7 +26,7 @@ public class PropPanel : MonoBehaviour
         }
         else
         {
-            propImageContainer.sprite = null;
+            propImageContainer.sprite = nullSprite;
             propNameContainer.text = "No Prop";
         }
     }

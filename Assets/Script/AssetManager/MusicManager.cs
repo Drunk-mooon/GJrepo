@@ -10,7 +10,7 @@ public static class MusicManager
     private static bool _isInit = false;
     private static Dictionary<string, AudioSource> _msDic = new Dictionary<string, AudioSource>();
 
-    private static void Init()
+    public static void Init()
     {
         if (_musicManagerObject == null)
         {
@@ -18,6 +18,7 @@ public static class MusicManager
             _musicManagerObject.transform.position = Camera.main.transform.position;
             _musicManagerObject.transform.SetParent(Camera.main.transform); 
             _musicManagerObject.AddComponent<FakeMono>();
+            _msDic.Clear();
             Object.DontDestroyOnLoad(_musicManagerObject);
             _isInit = true;
         }
