@@ -28,6 +28,7 @@ public class BeginningSceneManager : MonoBehaviour
     // Method to load the main scene
     private void GoToMainScene()
     {
+        SoundManager.AddSound("sound/ÓÎÏ·¿ªÊ¼", 0, 1);
         SceneManager.LoadScene("FinalScene");  // Make sure "MainScene" is the name of your main scene
     }
 }

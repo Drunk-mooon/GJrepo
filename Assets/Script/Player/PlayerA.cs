@@ -124,7 +124,7 @@ public class PlayerA : MonoBehaviour
     public void BlowBubble()
     {
         isBlowingBubbles = true;
-        // Start the coroutine for growing the bubble when the key is pressed
+        SoundManager.AddSound("sound/´µÅÝÅÝ", 0,0.2f);        // Start the coroutine for growing the bubble when the key is pressed
         if (blowBubbleCoroutine == null)  // Prevent starting multiple coroutines
         {
             blowBubbleCoroutine = StartCoroutine(GrowBubble());
@@ -262,6 +262,7 @@ public class PlayerA : MonoBehaviour
     {   
             if (playerProp != null)
             {
+
                 playerProp.ApplyEffect(isPlayerA);
             }   
     }
@@ -271,6 +272,7 @@ public class PlayerA : MonoBehaviour
     public void BubbleWater()
     {
         bool isMoving = waterBubbleSelect.isMoving;
+        SoundManager.AddSound("sound/»»Ò©Ë®", 0, 1);
         // ÇÐ»» BBW ÀàÐÍ
         if (waterBubbleSelect != null && !isMoving)
             {
@@ -288,6 +290,7 @@ public class PlayerA : MonoBehaviour
     
     public void UseWater()
     {
+        SoundManager.AddSound("sound/ÕºË®", 0, 1);
         isGettingBubbleWater = true;
         // Start the coroutine only if it's not already running
         if (waterCoroutine == null)

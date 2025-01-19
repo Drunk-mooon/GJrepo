@@ -189,7 +189,7 @@ public class Minigame : MonoBehaviour
         {
             propManager.PlayerBGetProp();
         }
-
+        SoundManager.AddSound("sound/小游戏结束", 0, 1);
         // Wait for a few seconds before triggering the end callback and ending the mini-game
         yield return new WaitForSecondsRealtime(showResultTime); // Use WaitForSecondsRealtime instead of WaitForSeconds
 

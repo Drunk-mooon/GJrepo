@@ -30,6 +30,7 @@ public class GameManager : MonoBehaviour
     public Sprite[] Tuitions;
     public Image tuitionImage;
     private int tuitionIndex;
+    private bool isNearEndMusicPlayed = false;
     void Start()
     {
         // Find UIManager in the scene and assign it to uiManager
@@ -37,6 +38,7 @@ public class GameManager : MonoBehaviour
         isInMiniGame = false;
         playerA.playerScore = 0.1f;
         playerB.playerScore2 = 0.1f;
+        isNearEndMusicPlayed = false;
         ShowTutorial();
     }
 
@@ -68,6 +70,11 @@ public class GameManager : MonoBehaviour
         else
         {
             elapsedTime += Time.deltaTime;
+            if(gameDuration - elapsedTime <= 10f && !isNearEndMusicPlayed)
+            {
+                SoundManager.AddSound("sound/最后十秒", 0, 1);
+                isNearEndMusicPlayed=true;
+            }
             UpdateTimerUI();
             uiManager.UpdateScoreBar(playerA.playerScore, playerB.playerScore2);
             //Debug.Log((elapsedTime - (miniGameTime + 1) * miniGameInterval));
@@ -80,6 +87,7 @@ public class GameManager : MonoBehaviour
                 Debug.Log("minigame!");
                 BeginMiniGame();
             }
+            
         }
     }
 
@@ -133,6 +141,7 @@ public class GameManager : MonoBehaviour
         isEndActive = true;
 
         endGamePanel.SetActive(true);
+        SoundManager.AddSound("sound/游戏结束", 0, 1);
         Time.timeScale = 0f;
     }
 
@@ -149,6 +158,7 @@ public class GameManager : MonoBehaviour
 
     private void ResetGame()
     {
+        isNearEndMusicPlayed = false;
         elapsedTime = 0f;
         isGameActive = false;
         isTuitionActive = true;
@@ -171,6 +181,7 @@ public class GameManager : MonoBehaviour
         isInMiniGame = true;
         uiManager.EnableMiniGamePanel();
         minigame.StartMinigame(OnMinigameEnd);
+        SoundManager.AddSound("sound/小游戏开始", 0, 1);
     }
     public void EndMiniGame()
     {

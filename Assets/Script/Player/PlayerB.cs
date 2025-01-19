@@ -122,6 +122,7 @@ public class PlayerB: MonoBehaviour
     public void BlowBubble()
     {
         isBlowingBubbles = true;
+        SoundManager.AddSound("sound/吹泡泡", 0, 0.2f);
         // Start the coroutine for growing the bubble when the key is pressed
         if (blowBubbleCoroutine == null)  // Prevent starting multiple coroutines
         {
@@ -269,6 +270,7 @@ public class PlayerB: MonoBehaviour
         // 切换 BBW 类型
         if (waterBubbleSelect != null && !isMoving)
         {
+            SoundManager.AddSound("sound/换药水", 0, 1);
             // 切换 BBW 类型
             BBWType = SwitchBBWType();
             // 开始旋转周期
@@ -285,6 +287,7 @@ public class PlayerB: MonoBehaviour
     {
         isGettingBubbleWater = true;
         // Start the coroutine only if it's not already running
+        SoundManager.AddSound("sound/蘸水", 0, 1);
         if (waterCoroutine == null)
         {
             waterCoroutine = StartCoroutine(ManageWaterCoroutine());
