@@ -948,7 +948,7 @@ MonoBehaviour:
   endGamePanel: {fileID: 2020342073}
   playerA: {fileID: 1550999048}
   playerB: {fileID: 940466626}
-  miniGameInterval: 100
+  miniGameInterval: 20
   minigame: {fileID: 5289613966939871317}
 --- !u!4 &750137043
 Transform:
@@ -1256,7 +1256,6 @@ MonoBehaviour:
   playerProp: {fileID: 0}
   isPlayerA: 0
   maxBubbleSize: {x: 100, y: 100}
-  isDoubleBlow: 0
   DoubleStatus: 0
 --- !u!1 &958345752
 GameObject:
