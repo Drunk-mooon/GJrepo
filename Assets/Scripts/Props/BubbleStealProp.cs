@@ -15,6 +15,7 @@ public class BubbleStealProp : Prop
     public override void ApplyEffect(bool isApplyByPlayerA)
     {
         base.ApplyEffect(isApplyByPlayerA);
+        SoundManager.AddSound("sound/м╣ещещ", 0, 1);
         InitializeBulletPool();
         InitializePlayers();
         // Add specific logic for stronger bubbles here

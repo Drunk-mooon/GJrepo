@@ -21,6 +21,7 @@ public class BubbleFreezeProp : Prop
         base.ApplyEffect(isApplyByPlayerA);
         InitializeBulletPool();
         InitializePlayers();
+        SoundManager.AddSound("sound/¼õËÙÄ§·¨", 0, 1);
         // Start the freeze effect
         if (isApplyByPlayerA)
         {

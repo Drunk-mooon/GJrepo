@@ -1268,12 +1268,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd832f721446e9d4f8f54f1cf458d990, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameDuration: 100
+  gameDuration: 30
   tutorialPanel: {fileID: 725906997}
   endGamePanel: {fileID: 1581871709}
   playerA: {fileID: 1466045523}
   playerB: {fileID: 962712729}
-  miniGameInterval: 3
+  miniGameInterval: 16
   minigame: {fileID: 316238876}
   Tuitions:
   - {fileID: 21300000, guid: 4f063b2121c99d640af6b5f4dd8206fc, type: 3}
