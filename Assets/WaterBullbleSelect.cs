@@ -40,16 +40,6 @@ public class WaterBullbleSelect : MonoBehaviour
             };
         }
     }
-
-    void Update()
-    {
-        // Press Q to start the rotation (if not currently moving)
-        if (Input.GetKeyDown(KeyCode.Y) && !isMoving)
-        {
-            StartRotationCycle();
-        }
-    }
-
     // Rotate references: move each object in bullbleWater left by one,
     // then start the interpolation to the fixed slots (targetDatas).
     public void StartRotationCycle()

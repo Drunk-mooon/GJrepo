@@ -132,7 +132,7 @@ public class PlayerB: MonoBehaviour
         while (Input.GetKey(KeyCode.U)) // Continue while the key is pressed
         {
             keyHeldDown = true;
-            BBWAmount -= BBWSpeed * Time.deltaTime*2;
+            BBWAmount -= BBWSpeed * Time.deltaTime * 2;
             if (transform.localScale.x < maxBubbleSize.x)
             {
                 // Deduct BBWAmount while the bubble grows
@@ -210,14 +210,10 @@ public class PlayerB: MonoBehaviour
     //释放特殊道具
     public void SpecialItem()
     {
-        // 检查是否按下了 J 键
-        if (Input.GetKeyDown(KeyCode.J))
-        {
             if (playerProp != null)
             {
                 playerProp.ApplyEffect(!isPlayerA);
             }
-        }
     }
 
 
