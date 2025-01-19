@@ -11,6 +11,7 @@ public class BubbleDoubleProp : Prop
     {
         base.ApplyEffect(isApplyByPlayerA);
         InitializePlayers();
+        SoundManager.AddSound("sound/Ë«±¶ÅÝÅÝ", 0, 1);
         if (isApplyByPlayerA)
         {
             // Start the coroutine to change isDoubleBlow for 5 seconds
