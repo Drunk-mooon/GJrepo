@@ -108,7 +108,7 @@ public class BubblePoolB : ObjPool<BubblePoolB, Bubble>
     private IEnumerator move(Bubble obj)
     {
         float dist = 0;
-        while (dist < Math.Abs(obj.dis / 6) + 0.03f)
+        while (dist < Math.Abs(obj.dis / 4) + 0.13f)
         {
             if (Time.timeScale != 0)
             {
