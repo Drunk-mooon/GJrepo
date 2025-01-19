@@ -10,7 +10,6 @@ using UnityEngine;
  {
     blue,
     green,
-    white,
     pink
  }
 

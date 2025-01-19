@@ -42,23 +42,22 @@ public class WaterBullbleSelect : MonoBehaviour
         }
     }
 
-    void Update()
+    /*void Update()
     {
         // Press Q to start the rotation (if not currently moving)
-        if (Input.GetKeyDown(KeyCode.Q) && !isMoving)
+        if (Input.GetKeyDown(KeyCode.S) && !isMoving)
         {
             StartRotationCycle();
         }
-
         if (isMoving)
         {
             PerformSmoothMove();
         }
     }
-    
+    */
     // Rotate references: move each object in bullbleWater left by one,
     // then start the interpolation to the fixed slots (targetDatas).
-    void StartRotationCycle()
+    public void StartRotationCycle()
     {
         Transform firstObj = bullbleWater[0];
 
@@ -75,7 +74,7 @@ public class WaterBullbleSelect : MonoBehaviour
     /// <summary>
     /// Smoothly move each object to the corresponding slot (targetDatas[i]).
     /// </summary>
-    void PerformSmoothMove()
+     public void PerformSmoothMove()
     {
         moveTimer += Time.deltaTime;
         float t = Mathf.Clamp01(moveTimer / moveDuration);
