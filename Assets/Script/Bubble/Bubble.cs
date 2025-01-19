@@ -45,7 +45,7 @@ public class Bubble : MonoBehaviour
 
     private void GetSpeed(float blowTime)
     {
-        speed = blowTime / 3;
+        speed =0.3f+ blowTime*2 ;
     }
 
     private void GetScore(float blowTime)

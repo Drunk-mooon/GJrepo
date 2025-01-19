@@ -2460,7 +2460,8 @@ MonoBehaviour:
   gameObject: {fileID: 1763477956}
   playerinput: []
   BBWAmount: 0
-  BBWSpeed: 10
+  blowingBBWSpeed: 10
+  gettingBBWSpeed: 10
   playerScore2: 0.1
   playerinputin: []
   playerProp: {fileID: 0}
@@ -4153,7 +4154,8 @@ MonoBehaviour:
   gameObject: {fileID: 1242503120}
   playerinput: []
   BBWAmount: 0
-  BBWSpeed: 10
+  blowingBBWSpeed: 10
+  gettingBBWSpeed: 10
   playerScore: 0.1
   playerinputin: []
   playerProp: {fileID: 0}
