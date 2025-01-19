@@ -57,7 +57,7 @@ public class Minigame : MonoBehaviour
 
         // 随机生成玩家 A、B 的按键
         playerAKey = GetRandomKeyCode();
-        playerBKey = GetRandomKeyCode();
+        playerBKey = GetUniqueKeyCode(playerAKey);
 
         // 更新 UI 显示
         if (playerAKeyText) playerAKeyText.text = "Left Player Key: " + playerAKey.ToString();
@@ -182,5 +182,16 @@ public class Minigame : MonoBehaviour
     {
         int idx = Random.Range(0, possibleKeys.Length);
         return possibleKeys[idx];
+    }
+
+    private KeyCode GetUniqueKeyCode(KeyCode playerAKey)
+    {
+        KeyCode newKey;
+        do
+        {
+            newKey = GetRandomKeyCode();
+        }
+        while (newKey == playerAKey);  // Repeat until different key is generated
+        return newKey;
     }
 }
