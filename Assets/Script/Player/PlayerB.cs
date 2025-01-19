@@ -132,7 +132,7 @@ public class PlayerB: MonoBehaviour
         while (Input.GetKey(KeyCode.U)) // Continue while the key is pressed
         {
             keyHeldDown = true;
-            BBWAmount -= BBWSpeed * Time.deltaTime*2;
+            BBWAmount -= BBWSpeed * Time.deltaTime * 2;
             if (transform.localScale.x < maxBubbleSize.x)
             {
                 // Deduct BBWAmount while the bubble grows
