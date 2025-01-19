@@ -14,7 +14,8 @@ public class PlayerA : MonoBehaviour
     // 用于计时的变量
     private float timer = 0f;
     // 吹泡泡的速度，单位为每秒消耗的泡泡水数量
-    public float BBWSpeed = 10f;
+    public float blowingBBWSpeed = 10f;
+    public float gettingBBWSpeed = 10f;
     // 标记是否正在吹泡泡
     private bool isBlowingBubbles = false;
     private bool isGettingBubbleWater = false;
@@ -138,7 +139,7 @@ public class PlayerA : MonoBehaviour
         float growthRate = 0.1f; // Rate of bubble growth
         timer = 0f;
         bool keyHeldDown = false;
-        float maxGrowTime = 100 / (BBWSpeed * 2f);
+        float maxGrowTime = 100 / (blowingBBWSpeed * 2f);
 
         // Instantiate a bubble sprite (initially small)
         GameObject bubbleSprite = Instantiate(bubblePrefab);
@@ -154,11 +155,11 @@ public class PlayerA : MonoBehaviour
             keyHeldDown = true;
 
             // Deduct BBWAmount while the bubble grows
-            BBWAmount -= BBWSpeed * Time.deltaTime * 2;
+            BBWAmount -= blowingBBWSpeed * Time.deltaTime * 2;
             if (transform.localScale.x < maxBubbleSize.x)
             {
                 // Deduct BBWAmount while the bubble grows
-                BBWAmount -= Mathf.FloorToInt(BBWSpeed * Time.deltaTime);
+                BBWAmount -= Mathf.FloorToInt(blowingBBWSpeed * Time.deltaTime);
                 BBWAmount = Mathf.Max(0, BBWAmount); // Ensure BBWAmount doesn't go below 0
 
                 // If BBWAmount is 0 or less, stop growing the bubble and exit the loop
@@ -303,7 +304,7 @@ public class PlayerA : MonoBehaviour
                 // Increase BBWAmount while the key is held down
                 if (BBWAmount < 100)
                 {
-                    BBWAmount += BBWSpeed * Time.deltaTime;
+                    BBWAmount += gettingBBWSpeed * Time.deltaTime;
                     BBWAmount = Mathf.Min(BBWAmount, 100); // Clamp to max value
                 }
             }
