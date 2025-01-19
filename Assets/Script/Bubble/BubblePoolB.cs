@@ -90,7 +90,7 @@ public class BubblePoolB : ObjPool<BubblePoolB, Bubble>
             
             if(Time.timeScale!=0)
             {
-                if (a.isA) a.bubble.transform.position += new Vector3(_distance * a.dis, a.speed * Time.deltaTime * speedChange, 0);
+                if (!a.isA) a.bubble.transform.position += new Vector3(_distance * a.dis, a.speed * Time.deltaTime * speedChange, 0);
                 else a.bubble.transform.transform.position += new Vector3(_distance * a.dis, a.speed * Time.deltaTime * BubblePoolA.Instance.speedChange, 0); //其实是 Bu
             }
          

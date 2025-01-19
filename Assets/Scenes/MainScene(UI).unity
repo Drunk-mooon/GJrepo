@@ -1256,7 +1256,6 @@ MonoBehaviour:
   playerProp: {fileID: 0}
   isPlayerA: 0
   maxBubbleSize: {x: 100, y: 100}
-  isDoubleBlow: 0
   DoubleStatus: 0
 --- !u!1 &958345752
 GameObject:
