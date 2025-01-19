@@ -43,6 +43,7 @@ public class BubbleStealProp : Prop
         playerBBubblePool = GameObject.FindObjectOfType<BubblePoolB>();
 
         // Check if the players were found
+        /*
         if (playerABubblePool == null)
         {
             Debug.LogError("steal playerABubblePool not found in the scene.");
@@ -54,6 +55,6 @@ public class BubbleStealProp : Prop
         else
         {
             Debug.Log("Steal initial success");
-        }
+        }*/
     }
 }

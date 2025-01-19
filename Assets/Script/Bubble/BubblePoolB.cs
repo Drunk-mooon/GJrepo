@@ -153,7 +153,7 @@ public class BubblePoolB : ObjPool<BubblePoolB, Bubble>
 
             for (int i = 0; i < num; i++)
             {
-                Bubbles.ElementAt(index[i]).Value.isA = false;
+                Bubbles.ElementAt(index[i]).Value.isA = true;
                 Bubbles.ElementAt(index[i]).Value.bubble.GetComponent<SpriteRenderer>().sprite = A;
             }
         }

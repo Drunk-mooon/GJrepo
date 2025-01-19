@@ -76,7 +76,7 @@ public class BubbleFreezeProp : Prop
         // Find the unique PlayerA and PlayerB in the scene
         playerABubblePool = GameObject.FindObjectOfType<BubblePoolA>();
         playerBBubblePool = GameObject.FindObjectOfType<BubblePoolB>();
-
+        /*
         // Check if the players were found
         if (playerABubblePool == null)
         {
@@ -89,6 +89,6 @@ public class BubbleFreezeProp : Prop
         else
         {
             Debug.Log("freeze initial success");
-        }
+        }*/
     }
 }
