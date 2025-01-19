@@ -1,8 +1,7 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
-using UnityEditor.Experimental.GraphView;
+
 using TMPro;
 public class PlayerA : MonoBehaviour
 {

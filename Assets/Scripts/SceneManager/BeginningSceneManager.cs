@@ -3,6 +3,11 @@ using UnityEngine.SceneManagement;
 
 public class BeginningSceneManager : MonoBehaviour
 {
+    private void Start()
+    {
+        //SoundManager.AddSound("sound/游戏开始", 0, 1);
+        ;
+    }
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
@@ -28,7 +33,6 @@ public class BeginningSceneManager : MonoBehaviour
     // Method to load the main scene
     private void GoToMainScene()
     {
-        SoundManager.AddSound("sound/游戏开始", 0, 1);
         SceneManager.LoadScene("FinalScene");  // Make sure "MainScene" is the name of your main scene
     }
 }

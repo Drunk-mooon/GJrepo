@@ -22,6 +22,9 @@ public class MainSceneUIManager : MonoBehaviour
 
     public GameObject miniGamePanel;
 
+    public TMP_Text playerAText; // Text to display PlayerA's variable
+    public TMP_Text playerBText; // Text to display PlayerB's variable
+
     private void Start()
     {
         if (miniGamePanel != null)
@@ -39,6 +42,9 @@ public class MainSceneUIManager : MonoBehaviour
             playerBPropPanel.prop = playerB.playerProp;
         else
             playerBPropPanel.prop = null;
+
+        playerAText.text = $"{Mathf.FloorToInt(playerA.BBWAmount)}";
+        playerBText.text = $"{Mathf.FloorToInt(playerB.BBWAmount)}";
     }
 
     public void UpdateTimerUI(float remainingTime)
