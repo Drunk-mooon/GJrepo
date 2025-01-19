@@ -9,6 +9,10 @@ public class BeginningSceneManager : MonoBehaviour
         {
             ExitGame();
         }
+        else if (Input.GetKeyDown(KeyCode.Mouse0))
+        {
+            ;
+        }
         else if (Input.anyKeyDown)
         {
             GoToMainScene();
