@@ -94,7 +94,10 @@ public class Minigame : MonoBehaviour
             // Listen for key presses (use unscaledTime, since timeScale=0)
             if (Input.GetKeyDown(playerAKey))
             {
+                SoundManager.AddSound("sound/按钮点击",0,1);
+                
                 playerACount++;
+                
                 if (playerAButtonImage && playerAPressedSprite)
                 {
                     playerAButtonImage.sprite = playerAPressedSprite;
@@ -102,7 +105,10 @@ public class Minigame : MonoBehaviour
             }
             if (Input.GetKeyDown(playerBKey))
             {
+                SoundManager.AddSound("sound/按钮点击",0,1);
+                
                 playerBCount++;
+                
                 if (playerBButtonImage && playerBPressedSprite)
                 {
                     playerBButtonImage.sprite = playerBPressedSprite;
