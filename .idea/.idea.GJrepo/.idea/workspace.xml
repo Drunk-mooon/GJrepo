@@ -5,6 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="01f5344a-2482-466c-825e-61f18f7eed00" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Bubble/Bubble.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Bubble/Bubble.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Script/Bubble/BubblePoolA.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Bubble/BubblePoolA.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Script/Bubble/BubblePoolB.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Bubble/BubblePoolB.cs" afterDir="false" />
     </list>

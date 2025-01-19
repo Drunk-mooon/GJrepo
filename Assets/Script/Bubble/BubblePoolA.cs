@@ -112,7 +112,7 @@ public class BubblePoolA : ObjPool<BubblePoolA, Bubble>
             if (Time.timeScale != 0)
             {
                 dist += 0.3f * Time.deltaTime;
-                obj.transform.position += new Vector3(0.03f, 0, 0);
+                obj.transform.position += new Vector3(0.01f, 0, 0);
             }
 
             yield return null;

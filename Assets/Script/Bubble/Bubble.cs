@@ -45,12 +45,12 @@ public class Bubble : MonoBehaviour
 
     private void GetSpeed(float blowTime)
     {
-        speed =0.3f+ blowTime*2 ;
+        speed =0.2f-blowTime/2 ;
     }
 
     private void GetScore(float blowTime)
     {
-        score = math.pow(blowTime, 2);
+        score = math.pow(blowTime, 2)/2;
     }
 
     //获取两个值
