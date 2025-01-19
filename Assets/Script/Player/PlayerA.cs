@@ -38,7 +38,7 @@ public class PlayerA : MonoBehaviour
     //WaterBubbleSelect
     public WaterBullbleSelect waterBubbleSelect;
     //蘸泡泡水标记
-    private bool isMoving = false;
+    
     void Update()
     {
         //检查是否输入操作键
@@ -227,8 +227,9 @@ public class PlayerA : MonoBehaviour
     //选泡泡水
     public void BubbleWater()
     {
-            // 切换 BBW 类型
-            if (waterBubbleSelect != null)
+        bool isMoving = waterBubbleSelect.isMoving;
+        // 切换 BBW 类型
+        if (waterBubbleSelect != null && !isMoving)
             {
                 // 切换 BBW 类型
                 BBWType = SwitchBBWType();
@@ -237,11 +238,6 @@ public class PlayerA : MonoBehaviour
                 {
                     waterBubbleSelect.StartRotationCycle();
                     isMoving = true;
-                }
-                else
-                {
-                    // 进行平滑移动
-                    waterBubbleSelect.PerformSmoothMove();
                 }
                 BubblePoolA.Instance.bType = BBWType;
             }

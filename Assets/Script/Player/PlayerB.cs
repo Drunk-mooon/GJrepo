@@ -223,9 +223,10 @@ public class PlayerB: MonoBehaviour
 
     //选泡泡水
     public void BubbleWater()
-    {  
+    {
+        bool isMoving = waterBubbleSelect.isMoving;
         // 切换 BBW 类型
-        if (waterBubbleSelect != null)
+        if (waterBubbleSelect != null && !isMoving)
         {
             // 切换 BBW 类型
             BBWType = SwitchBBWType();
@@ -235,11 +236,7 @@ public class PlayerB: MonoBehaviour
                 waterBubbleSelect.StartRotationCycle();
                 isMoving = true;
             }
-            else
-            {
-                // 进行平滑移动
-                waterBubbleSelect.PerformSmoothMove();
-            }
+
             BubblePoolB.Instance.bType = BBWType;
         }
     }
