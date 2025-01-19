@@ -13,7 +13,7 @@ public class ScoreLine : MonoBehaviour
     {
         // Check if the colliding object has a Bubble component
         Bubble bubble = collision.GetComponentInParent<Bubble>();
-        Debug.Log(bubble == null);
+        //Debug.Log(bubble == null);
         if (bubble != null)
         {
             // Determine which player gets the score

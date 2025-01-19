@@ -22,6 +22,11 @@ public class PropPanel : MonoBehaviour
             propImageContainer.sprite = prop.propIcon;
             propNameContainer.text = prop.propName;
         }
+        else
+        {
+            propImageContainer.sprite = null;
+            propNameContainer.text = "No Prop";
+        }
     }
 }
 
