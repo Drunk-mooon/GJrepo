@@ -1300,7 +1300,7 @@ MonoBehaviour:
   endGamePanel: {fileID: 2020342073}
   playerA: {fileID: 1550999048}
   playerB: {fileID: 940466626}
-  miniGameInterval: 100
+  miniGameInterval: 10
   minigame: {fileID: 5289613966939871317}
 --- !u!4 &750137043
 Transform:
