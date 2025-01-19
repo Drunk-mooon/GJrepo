@@ -1607,14 +1607,19 @@ MonoBehaviour:
   gameObject: {fileID: 1216324850}
   playerinput: []
   BBWAmount: 0
-  BBWSpeed: 10
+  BBWSpeed: 3
   playerScore2: 0.1
   playerinputin: []
   playerProp: {fileID: 0}
   isPlayerA: 0
-  maxBubbleSize: {x: 100, y: 100}
+  maxBubbleSize: {x: 20, y: 20}
   DoubleStatus: 0
   waterBubbleSelect: {fileID: 742955663}
+  bubblePrefab: {fileID: 5708323977180298026, guid: 458d41f909d23704ab03e35fc534aefc, type: 3}
+  offsetX: -3
+  offsetY: 0
+  generatingTransform: {fileID: 1216324852}
+  leastPressTime: 0.5
 --- !u!1 &958345752
 GameObject:
   m_ObjectHideFlags: 0
@@ -2841,14 +2846,19 @@ MonoBehaviour:
   gameObject: {fileID: 644584278}
   playerinput: []
   BBWAmount: 0
-  BBWSpeed: 10
+  BBWSpeed: 3
   playerScore: 0.1
   playerinputin: []
   playerProp: {fileID: 0}
   isPlayerA: 1
-  maxBubbleSize: {x: 100, y: 100}
+  maxBubbleSize: {x: 20, y: 20}
   DoubleStatus: 0
   waterBubbleSelect: {fileID: 410294771}
+  bubblePrefab: {fileID: 4607083963560086839, guid: c92eea649e645e240a1949262367d7db, type: 3}
+  offsetX: 3
+  offsetY: 0
+  generatingTransform: {fileID: 644584281}
+  leastPressTime: 0.5
 --- !u!1 &1571514480
 GameObject:
   m_ObjectHideFlags: 0

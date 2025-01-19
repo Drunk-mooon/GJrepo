@@ -14,6 +14,7 @@ public class PlayerB: MonoBehaviour
     public float BBWSpeed = 10f;
     // 标记是否正在吹泡泡
     private bool isBlowingBubbles = false;
+    private bool isGettingBubbleWater = false;
     //计分
     public float playerScore2 = 0.1f;
     char[] count = new char[3];
@@ -57,7 +58,7 @@ public class PlayerB: MonoBehaviour
 
         }
         // 检查是否按下吹泡泡的键
-        if (Input.GetKeyDown(KeyCode.U))
+        if (Input.GetKeyDown(KeyCode.U) && !isGettingBubbleWater)
         {
 
             BlowBubble();
@@ -68,12 +69,12 @@ public class PlayerB: MonoBehaviour
             SpecialItem();
         }
         // 检查是否按下选泡泡水的键
-        if (Input.GetKeyDown(KeyCode.K))
+        if (Input.GetKeyDown(KeyCode.K) && !isGettingBubbleWater)
         {
             BubbleWater();
         }
         // 检查是否按下蘸泡泡水的键
-        if (Input.GetKeyDown(KeyCode.L))
+        if (Input.GetKeyDown(KeyCode.L) && !isBlowingBubbles)
         {
             Debug.Log(BBWAmount);
             UseWater();
@@ -117,69 +118,109 @@ public class PlayerB: MonoBehaviour
     //吹泡泡
     public void BlowBubble()
     {
+        isBlowingBubbles = true;
         // Start the coroutine for growing the bubble when the key is pressed
         if (blowBubbleCoroutine == null)  // Prevent starting multiple coroutines
         {
             blowBubbleCoroutine = StartCoroutine(GrowBubble());
         }
     }
+    public GameObject bubblePrefab;
+    public float offsetX = -3f; // Small offset along the X axis
+    public float offsetY = 0f; // Small offset along the Y axis
+    public Transform generatingTransform;
+    public float leastPressTime = 0.2f;
     private IEnumerator GrowBubble()
     {
         float growthRate = 0.1f; // Rate of bubble growth
         timer = 0f;
         bool keyHeldDown = false;
+        float maxGrowTime = 100 / (BBWSpeed * 2f);
+
+        // Instantiate a bubble sprite (initially small)
+        GameObject bubbleSprite = Instantiate(bubblePrefab);
+
+        // Start at the player's position with offsets in both the X and Y directions
+        bubbleSprite.transform.position = generatingTransform.position + new Vector3(offsetX, offsetY, 0f); // Add both offsetX and offsetY
+        bubbleSprite.transform.localScale = Vector3.zero; // Start with no size
+
         // While the key is held down, continue growing the bubble
         while (Input.GetKey(KeyCode.U)) // Continue while the key is pressed
         {
             keyHeldDown = true;
+
+            // Deduct BBWAmount while the bubble grows
             BBWAmount -= BBWSpeed * Time.deltaTime * 2;
             if (transform.localScale.x < maxBubbleSize.x)
             {
                 // Deduct BBWAmount while the bubble grows
                 BBWAmount -= Mathf.FloorToInt(BBWSpeed * Time.deltaTime);
                 BBWAmount = Mathf.Max(0, BBWAmount); // Ensure BBWAmount doesn't go below 0
-                // If BBWAmount is 0, stop growing the bubble and exit the loop
+
+                // If BBWAmount is 0 or less, stop growing the bubble and exit the loop
                 if (BBWAmount <= 0)
                 {
+                    isBlowingBubbles = false;
                     break; // Exit the coroutine and stop bubble growth
                 }
+
                 // Increment the timer as the bubble grows
                 timer += Time.deltaTime;
-                yield return null;
+
+                // Update the bubble sprite size based on the timer
+                float sizeFactor = Mathf.Lerp(0f, maxBubbleSize.x, timer / maxGrowTime);
+                bubbleSprite.transform.localScale = new Vector3(sizeFactor, sizeFactor, 1f);
+
+                yield return null; // Wait for the next frame
             }
-            timer += Time.deltaTime;
+            else
+            {
+                isBlowingBubbles = false;
+                break;
+            }
+
             // Wait for the next frame
+            yield return null;
         }
+
         keyHeldDown = false;
-        if (!keyHeldDown && timer < 1f)
+
+        if (!keyHeldDown && timer < leastPressTime)
         {
-            // Reset the timer
+            // Reset the timer if the key was released early
             timer = 0f;
+            Destroy(bubbleSprite); // Destroy the bubble sprite if the key was released early
+            isBlowingBubbles = false;
             blowBubbleCoroutine = null;
-            Debug.Log("timer <= 1");
+            Debug.Log("timer <= leastPressTime");
         }
-        else if(!keyHeldDown)
+        else if (!keyHeldDown)
         {
             Debug.Log("timer > 1");
-            // When the key is released, stop growing and instantiate the bubble
-            if (BBWAmount > 0)  // If there's enough BBWAmount, instantiate the bubble
+            // When the key is released and the bubble was successfully grown
+            if (BBWAmount > 0) // If there's enough BBWAmount, instantiate the bubble
             {
+                Debug.Log("generating bb");
                 BubblePoolB.Instance.blowTime = timer;
                 BubblePoolB.Instance.bType = BBWType;
-                BubblePoolB.Instance.trans = gameObject.transform;
-                BubblePoolB.Instance.GetObj();
+                BubblePoolB.Instance.trans = bubbleSprite.transform; // Set the transform of the bubble
+                BubblePoolB.Instance.GetObj(); // Generate the bubble from the pool
             }
-            //双倍开启，双倍泡泡
+
+            // Double the bubble (if DoubleStatus is true)
             if (DoubleStatus == true)
             {
                 BubblePoolB.Instance.GetObj();
             }
+
+            // Destroy the bubble sprite after using it
+            Destroy(bubbleSprite);
+
             // Reset the timer after the bubble is instantiated
             timer = 0f;
-            // Reset the coroutine reference
+            isBlowingBubbles = false;
             blowBubbleCoroutine = null;
         }
-
     }
 
 
@@ -238,6 +279,7 @@ public class PlayerB: MonoBehaviour
     }
     public void UseWater()
     {
+        isGettingBubbleWater = true;
         // Start the coroutine only if it's not already running
         if (waterCoroutine == null)
         {
@@ -263,6 +305,7 @@ public class PlayerB: MonoBehaviour
                 // Stop the coroutine when the key is released
                 StopCoroutine(waterCoroutine);
                 waterCoroutine = null;
+                isGettingBubbleWater = false;
                 yield break;
             }
             yield return null; // Wait for the next frame

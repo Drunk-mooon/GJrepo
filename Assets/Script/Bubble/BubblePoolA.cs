@@ -29,7 +29,7 @@ public class BubblePoolA : ObjPool<BubblePoolA, Bubble>
         obj.Init(blowTime); //获取本次吹得到的速度和分数 
         obj.bubble.SetActive(true); //模型激活 
         obj.bubble.transform.position = trans.position; //初始位置 
-        obj.bubble.transform.localScale = new Vector3(1+blowTime/7,1+blowTime/7 ,1+blowTime/7 );
+        obj.bubble.transform.localScale = trans.localScale;
         obj.code = GetCode(obj); //获得code 
         obj.label.text =ChangeChar( obj.code); //code可见 
         Bubbles.Add(obj.code, obj); //字典添加 code，泡泡 
