@@ -33,7 +33,7 @@ public class Bubble : MonoBehaviour
         this.isA = isa; 
         GetBubble(isA);
         this.code = "";
-        this.index = 2;
+     
         label = bubble.GetComponentInChildren<TextMeshPro>();
     } //初始化 主要是绑定和确认哪个玩家
 

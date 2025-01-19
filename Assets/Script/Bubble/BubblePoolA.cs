@@ -27,6 +27,7 @@ public class BubblePoolA : ObjPool<BubblePoolA, Bubble>
 
     protected override Bubble IniObj(Bubble obj) //每次调用前的初始化 
     {
+        obj.index = 2;
         obj.Init(blowTime); //获取本次吹得到的速度和分数 
         obj.bubble.SetActive(true); //模型激活 
         obj.bubble.transform.position = trans.position; //初始位置 
@@ -61,6 +62,7 @@ public class BubblePoolA : ObjPool<BubblePoolA, Bubble>
         if (obj.index == 0) //如果没命了
         {
             obj.ani.SetTrigger("EndAni"); //动画状态机操作
+            obj.label.text = "";
             obj.bubble.GetComponent<SpriteRenderer>().sprite = null;
             yield return new WaitForSeconds(1); //等等
             obj.bubble.SetActive(false); //模型消失
@@ -105,7 +107,7 @@ public class BubblePoolA : ObjPool<BubblePoolA, Bubble>
     private IEnumerator move(Bubble obj)
     {
         float dist = 0;
-        while (dist < Math.Abs(obj.dis / 6) + 0.17f)
+        while (dist < Math.Abs(obj.dis / 6) + 0.03f)
         {
             if (Time.timeScale != 0)
             {
