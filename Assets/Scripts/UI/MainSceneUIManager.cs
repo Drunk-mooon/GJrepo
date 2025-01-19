@@ -25,6 +25,9 @@ public class MainSceneUIManager : MonoBehaviour
     public TMP_Text playerAText; // Text to display PlayerA's variable
     public TMP_Text playerBText; // Text to display PlayerB's variable
 
+    public GameObject BBWAmountIconA;
+    public GameObject BBWAmountIconB;
+
     private void Start()
     {
         if (miniGamePanel != null)
@@ -43,8 +46,12 @@ public class MainSceneUIManager : MonoBehaviour
         else
             playerBPropPanel.prop = null;
 
-        playerAText.text = $"{Mathf.FloorToInt(playerA.BBWAmount)}";
-        playerBText.text = $"{Mathf.FloorToInt(playerB.BBWAmount)}";
+        //playerAText.text = $"{Mathf.FloorToInt(playerA.BBWAmount)}";
+        //playerBText.text = $"{Mathf.FloorToInt(playerB.BBWAmount)}";
+        float scaleA = (playerA.BBWAmount /100f)*0.9f;
+        BBWAmountIconA.transform.localScale = new Vector3 (scaleA, scaleA, scaleA);
+        float scaleB = (playerB.BBWAmount / 100f) * 0.9f;
+        BBWAmountIconB.transform.localScale = new Vector3(scaleB, scaleB, scaleB);
     }
 
     public void UpdateTimerUI(float remainingTime)

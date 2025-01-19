@@ -230,6 +230,7 @@ public class PlayerA : MonoBehaviour
 
     public void KillBubble(string killString)
     {
+        Debug.Log(killString);
         if (BubblePoolA.Instance.Bubbles.ContainsKey(killString) || BubblePoolB.Instance.Bubbles.ContainsKey(killString)) 
         {
             keyQueue.Dequeue();
@@ -237,7 +238,7 @@ public class PlayerA : MonoBehaviour
         }
         if (BubblePoolA.Instance.Bubbles.ContainsKey(killString))
             BubblePoolA.Instance.PutObj(BubblePoolA.Instance.Bubbles[killString]);
-        else
+        else if (BubblePoolB.Instance.Bubbles.ContainsKey(killString))
             BubblePoolB.Instance.PutObj(BubblePoolB.Instance.Bubbles[killString]);
         /*foreach (var item in BubblePoolA.Instance.Bubbles)
         {
