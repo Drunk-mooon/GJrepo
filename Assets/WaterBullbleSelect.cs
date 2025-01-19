@@ -20,9 +20,8 @@ public class WaterBullbleSelect : MonoBehaviour
     private TransformData[] targetDatas;
 
     [Header("Movement Control")]
-    public float moveDuration = 1f;  
-    private bool isMoving = false;    
-    private float moveTimer = 0f;
+    public float moveDuration = 1f;
+    public bool isMoving = false;
 
     void Start()
     {
@@ -37,28 +36,13 @@ public class WaterBullbleSelect : MonoBehaviour
             {
                 position = trans.position,
                 rotation = trans.rotation,
-                scale    = trans.localScale
+                scale = trans.localScale
             };
         }
     }
-
-    void Update()
-    {
-        // Press Q to start the rotation (if not currently moving)
-        if (Input.GetKeyDown(KeyCode.Q) && !isMoving)
-        {
-            StartRotationCycle();
-        }
-
-        if (isMoving)
-        {
-            PerformSmoothMove();
-        }
-    }
-    
     // Rotate references: move each object in bullbleWater left by one,
     // then start the interpolation to the fixed slots (targetDatas).
-    void StartRotationCycle()
+    public void StartRotationCycle()
     {
         Transform firstObj = bullbleWater[0];
 
@@ -68,52 +52,66 @@ public class WaterBullbleSelect : MonoBehaviour
         }
         bullbleWater[length - 1] = firstObj;
 
-        moveTimer = 0f;
-        isMoving = true;
+        StartCoroutine(SmoothMoveCoroutine());
     }
-    
-    /// <summary>
-    /// Smoothly move each object to the corresponding slot (targetDatas[i]).
-    /// </summary>
-    void PerformSmoothMove()
-    {
-        moveTimer += Time.deltaTime;
-        float t = Mathf.Clamp01(moveTimer / moveDuration);
 
+    /// <summary>
+    /// Coroutine for smoothly moving each object to the corresponding slot (targetDatas[i]).
+    /// </summary>
+    IEnumerator SmoothMoveCoroutine()
+    {
+        isMoving = true;
+        float moveTimer = 0f;
+
+        while (moveTimer < moveDuration)
+        {
+            moveTimer += Time.deltaTime;
+            float t = Mathf.Clamp01(moveTimer / moveDuration);
+
+            for (int i = 0; i < length; i++)
+            {
+                Transform trans = bullbleWater[i];
+                if (trans == null) continue;
+
+                // Lerp position
+                trans.position = Vector3.Lerp(
+                    trans.position,
+                    targetDatas[i].position,
+                    t
+                );
+
+                // Slerp rotation
+                trans.rotation = Quaternion.Slerp(
+                    trans.rotation,
+                    targetDatas[i].rotation,
+                    t
+                );
+
+                // Lerp scale
+                trans.localScale = Vector3.Lerp(
+                    trans.localScale,
+                    targetDatas[i].scale,
+                    t
+                );
+            }
+
+            yield return null; // Wait for the next frame
+        }
+
+        // Ensure all transforms are correctly set at the end
         for (int i = 0; i < length; i++)
         {
             Transform trans = bullbleWater[i];
             if (trans == null) continue;
 
-            // Lerp position
-            trans.position = Vector3.Lerp(
-                trans.position,
-                targetDatas[i].position,
-                t
-            );
-
-            // Slerp rotation
-            trans.rotation = Quaternion.Slerp(
-                trans.rotation,
-                targetDatas[i].rotation,
-                t
-            );
-
-            // Lerp scale
-            trans.localScale = Vector3.Lerp(
-                trans.localScale,
-                targetDatas[i].scale,
-                t
-            );
+            trans.position = targetDatas[i].position;
+            trans.rotation = targetDatas[i].rotation;
+            trans.localScale = targetDatas[i].scale;
         }
 
-        // End when interpolation is done
-        if (t >= 1f)
-        {
-            isMoving = false;
-        }
+        isMoving = false;
     }
-    
+
     public Transform GetSelectedElement()
     {
         if (bullbleWater != null && bullbleWater.Length > 1)

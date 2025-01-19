@@ -29,12 +29,16 @@ public class PlayerA : MonoBehaviour
     public Vector2 maxBubbleSize = new Vector2(100f,100f);
     // 存储当前的 BBW 类型索引
     private int currentBBWTypeIndex = 0;
-    E_bType BBWType = E_bType.white;
+    E_bType BBWType = E_bType.blue;
     char[] Kill = new char[3];
 
     private Coroutine waterCoroutine;
     //双倍状态
     public bool DoubleStatus = false;
+    //WaterBubbleSelect
+    public WaterBullbleSelect waterBubbleSelect;
+    //蘸泡泡水标记
+    
     void Update()
     {
         //检查是否输入操作键
@@ -60,12 +64,12 @@ public class PlayerA : MonoBehaviour
                 BlowBubble();
             }
             // 检查是否按下特殊道具键
-            if (Input.GetKey(KeyCode.A))
+            if (Input.GetKeyDown(KeyCode.A))
             {
                 SpecialItem();
             }
             // 检查是否按下选泡泡水的键
-            if (Input.GetKey(KeyCode.S))
+            if (Input.GetKeyDown(KeyCode.S))
             {
                 BubbleWater();
             }
@@ -209,29 +213,33 @@ public class PlayerA : MonoBehaviour
 
     //释放特殊道具
     public void SpecialItem()
-    {   // 检查是否按下了 A 键
-        if (Input.GetKeyDown(KeyCode.A))
-       {
+    {   
             if (playerProp != null)
             {
                 playerProp.ApplyEffect(isPlayerA);
-            }
-       }     
+            }   
     }
 
 
     //选泡泡水
     public void BubbleWater()
     {
-            // 检查是否按下了S 键
-            if (Input.GetKeyDown(KeyCode.S))
+        bool isMoving = waterBubbleSelect.isMoving;
+        // 切换 BBW 类型
+        if (waterBubbleSelect != null && !isMoving)
             {
                 // 切换 BBW 类型
-                BBWType=SwitchBBWType();
+                BBWType = SwitchBBWType();
+                // 开始旋转周期
+                if (!isMoving)
+                {
+                    waterBubbleSelect.StartRotationCycle();
+                    isMoving = true;
+                }
                 BubblePoolA.Instance.bType = BBWType;
             }
-        
     }
+    
     public void UseWater()
     {
         // Start the coroutine only if it's not already running
@@ -250,14 +258,7 @@ public class PlayerA : MonoBehaviour
                 // Increase BBWAmount while the key is held down
                 if (BBWAmount < 100)
                 {
-                    if (BubblePoolA.Instance.bType == E_bType.white)
-                    {
-                        BBWAmount += BBWSpeed * Time.deltaTime * 5;
-                    }
-                    else
-                    {
-                        BBWAmount += BBWSpeed * Time.deltaTime;
-                    }
+                    BBWAmount += BBWSpeed * Time.deltaTime;
                     BBWAmount = Mathf.Min(BBWAmount, 100); // Clamp to max value
                 }
             }
@@ -286,16 +287,13 @@ public class PlayerA : MonoBehaviour
             case E_bType.green:
                 Debug.Log("The bubble water type is green.");
                 return E_bType.green;
-            case E_bType.white:
-                Debug.Log("The bubble water type is white.");
-                return E_bType.white;
             case E_bType.pink:
                 Debug.Log("The bubble water type is pink.");
                 return E_bType.pink;
             default:
                 // 处理未预期的枚举值
-                Debug.Log("Unexpected bubble water type.");
-                return E_bType.white;
+                Debug.LogError("Unexpected bubble water type.");
+                return E_bType.blue;
 
         }
 

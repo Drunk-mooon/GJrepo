@@ -177,10 +177,7 @@ public class BubblePoolA : ObjPool<BubblePoolA, Bubble>
                 obj.label.color = new Color(1f, 0.53f, 0.79f);
                 obj.speed *= 2;
                 break;
-            case E_bType.white:
-                obj.label.color = Color.white;
-                break;
-            default:
+            default: //DeleteWhiteOperation!
                 break;
 
         }
