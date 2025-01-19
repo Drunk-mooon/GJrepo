@@ -1273,7 +1273,7 @@ MonoBehaviour:
   endGamePanel: {fileID: 1581871709}
   playerA: {fileID: 1466045523}
   playerB: {fileID: 962712729}
-  miniGameInterval: 3
+  miniGameInterval: 30
   minigame: {fileID: 316238876}
 --- !u!4 &387675973
 Transform:
@@ -2466,13 +2466,14 @@ MonoBehaviour:
   gameObject: {fileID: 1763477956}
   playerinput: []
   BBWAmount: 0
-  blowingBBWSpeed: 3
+  blowingBBWSpeed: 10
   gettingBBWSpeed: 10
   playerScore2: 0.1
   playerinputin: []
   playerProp: {fileID: 0}
   isPlayerA: 0
-  maxBubbleSize: {x: 20, y: 20}
+  maxBubbleSize: {x: 5, y: 5}
+  maxBlowTime: 2
   DoubleStatus: 0
   waterBubbleSelect: {fileID: 241018690}
   bubblePrefab: {fileID: 5708323977180298026, guid: 458d41f909d23704ab03e35fc534aefc, type: 3}
@@ -4236,13 +4237,14 @@ MonoBehaviour:
   gameObject: {fileID: 1242503120}
   playerinput: []
   BBWAmount: 0
-  blowingBBWSpeed: 3
+  blowingBBWSpeed: 10
   gettingBBWSpeed: 10
   playerScore: 0.1
   playerinputin: []
   playerProp: {fileID: 0}
   isPlayerA: 1
-  maxBubbleSize: {x: 20, y: 20}
+  maxBubbleSize: {x: 5, y: 5}
+  maxBlowTime: 2
   DoubleStatus: 0
   waterBubbleSelect: {fileID: 760197341}
   bubblePrefab: {fileID: 7266920777593200051, guid: c92eea649e645e240a1949262367d7db, type: 3}
