@@ -2312,12 +2312,12 @@ MonoBehaviour:
   gameObject: {fileID: 644584278}
   playerinput: []
   BBWAmount: 0
-  BBWSpeed: 10
+  BBWSpeed: 3
   playerScore: 0.1
   playerinputin: []
   playerProp: {fileID: 0}
   isPlayerA: 1
-  maxBubbleSize: {x: 100, y: 100}
+  maxBubbleSize: {x: 20, y: 20}
   DoubleStatus: 0
 --- !u!1 &1571514480
 GameObject:
