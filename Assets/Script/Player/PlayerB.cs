@@ -70,7 +70,7 @@ public class PlayerB: MonoBehaviour
             SpecialItem();
         }
         // 检查是否按下选泡泡水的键
-        if (Input.GetKeyDown(KeyCode.K) && !isGettingBubbleWater)
+        if (Input.GetKeyDown(KeyCode.K) && !isGettingBubbleWater && !isBlowingBubbles)
         {
             BubbleWater();
         }
