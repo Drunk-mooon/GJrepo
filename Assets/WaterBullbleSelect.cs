@@ -56,10 +56,8 @@ public class WaterBullbleSelect : MonoBehaviour
         }
     }
     
-    /// <summary>
-    /// Rotate references: move each object in bullbleWater left by one,
-    /// then start the interpolation to the fixed slots (targetDatas).
-    /// </summary>
+    // Rotate references: move each object in bullbleWater left by one,
+    // then start the interpolation to the fixed slots (targetDatas).
     void StartRotationCycle()
     {
         Transform firstObj = bullbleWater[0];
@@ -107,24 +105,6 @@ public class WaterBullbleSelect : MonoBehaviour
                 targetDatas[i].scale,
                 t
             );
-            
-            // Example: adjust sortingOrder if needed
-            Renderer rd = trans.GetComponent<Renderer>();
-            if (rd != null)
-            {
-                if (i == 1)
-                {
-                    rd.sortingOrder = 1;
-                }
-                else if (i == 3)
-                {
-                    rd.sortingOrder = 2;
-                }
-                else
-                {
-                    rd.sortingOrder = 0;
-                }
-            }
         }
 
         // End when interpolation is done
@@ -134,14 +114,11 @@ public class WaterBullbleSelect : MonoBehaviour
         }
     }
     
-    /// <summary>
-    /// Example getter: return one of the objects as "selected"
-    /// </summary>
     public Transform GetSelectedElement()
     {
         if (bullbleWater != null && bullbleWater.Length > 1)
         {
-            return bullbleWater[3];
+            return bullbleWater[1];
         }
         else
         {
