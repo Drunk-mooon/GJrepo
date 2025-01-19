@@ -28,7 +28,8 @@ public class PlayerB: MonoBehaviour
     public Prop playerProp; //道具种类
     public bool isPlayerA = false; //player是否为玩家 A
     //泡泡最大体积
-    public Vector2 maxBubbleSize = new Vector2(100f, 100f);
+    public Vector2 maxBubbleSize = new Vector2(5f, 5f);
+    public float maxBlowTime = 2f;
     // 存储当前的 BBW 类型索引
     private int currentBBWTypeIndex = 0;
     E_bType BBWType = E_bType.blue;
@@ -154,7 +155,7 @@ public class PlayerB: MonoBehaviour
 
             // Deduct BBWAmount while the bubble grows
             BBWAmount -= blowingBBWSpeed * Time.deltaTime * 2;
-            if (transform.localScale.x < maxBubbleSize.x)
+            if (timer < maxBlowTime)
             {
                 // Deduct BBWAmount while the bubble grows
                 BBWAmount -= Mathf.FloorToInt(blowingBBWSpeed * Time.deltaTime);
@@ -171,7 +172,7 @@ public class PlayerB: MonoBehaviour
                 timer += Time.deltaTime;
 
                 // Update the bubble sprite size based on the timer
-                float sizeFactor = Mathf.Lerp(0f, maxBubbleSize.x, timer / maxGrowTime);
+                float sizeFactor = Mathf.Lerp(0.2f, maxBubbleSize.x, timer / maxGrowTime);
                 bubbleSprite.transform.localScale = new Vector3(sizeFactor, sizeFactor, 1f);
 
                 yield return null; // Wait for the next frame
