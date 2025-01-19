@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 public class PlayerB: MonoBehaviour
 {
     private Coroutine blowBubbleCoroutine; // Store reference to the coroutine
@@ -140,6 +141,7 @@ public class PlayerB: MonoBehaviour
         // Instantiate a bubble sprite (initially small)
         GameObject bubbleSprite = Instantiate(bubblePrefab);
 
+        bubbleSprite.GetComponentInChildren<TextMeshPro>().text = "";
         // Start at the player's position with offsets in both the X and Y directions
         bubbleSprite.transform.position = generatingTransform.position + new Vector3(offsetX, offsetY, 0f); // Add both offsetX and offsetY
         bubbleSprite.transform.localScale = Vector3.zero; // Start with no size

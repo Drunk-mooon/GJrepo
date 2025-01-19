@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEditor.Experimental.GraphView;
+using TMPro;
 public class PlayerA : MonoBehaviour
 {
     private Coroutine blowBubbleCoroutine; // Store reference to the coroutine
@@ -128,7 +129,7 @@ public class PlayerA : MonoBehaviour
         }
     }
     public GameObject bubblePrefab;
-    public float offsetX = 3f; // Small offset along the X axis
+    public float offsetX = -3f; // Small offset along the X axis
     public float offsetY = 0f; // Small offset along the Y axis
     public Transform generatingTransform;
     public float leastPressTime = 0.2f;
@@ -143,6 +144,7 @@ public class PlayerA : MonoBehaviour
         GameObject bubbleSprite = Instantiate(bubblePrefab);
 
         // Start at the player's position with offsets in both the X and Y directions
+        bubbleSprite.GetComponentInChildren<TextMeshPro>().text = "";
         bubbleSprite.transform.position = generatingTransform.position + new Vector3(offsetX, offsetY, 0f); // Add both offsetX and offsetY
         bubbleSprite.transform.localScale = Vector3.zero; // Start with no size
 
@@ -184,12 +186,12 @@ public class PlayerA : MonoBehaviour
             // Wait for the next frame
             yield return null;
         }
+
         keyHeldDown = false;
 
         if (!keyHeldDown && timer < leastPressTime)
         {
             // Reset the timer if the key was released early
-            Debug.Log(timer);
             timer = 0f;
             Destroy(bubbleSprite); // Destroy the bubble sprite if the key was released early
             isBlowingBubbles = false;
@@ -198,7 +200,7 @@ public class PlayerA : MonoBehaviour
         }
         else if (!keyHeldDown)
         {
-            Debug.Log("timer > leastPressTime");
+            Debug.Log("timer > 1");
             // When the key is released and the bubble was successfully grown
             if (BBWAmount > 0) // If there's enough BBWAmount, instantiate the bubble
             {
