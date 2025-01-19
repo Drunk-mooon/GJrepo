@@ -28,7 +28,7 @@ public class BeginningSceneManager : MonoBehaviour
     // Method to load the main scene
     private void GoToMainScene()
     {
-        SceneManager.LoadScene("MainScene(UI)");  // Make sure "MainScene" is the name of your main scene
+        SceneManager.LoadScene("FinalScene");  // Make sure "MainScene" is the name of your main scene
     }
 }
 
