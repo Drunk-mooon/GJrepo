@@ -799,9 +799,10 @@ RectTransform:
   - {fileID: 1080881408}
   - {fileID: 1416520315}
   - {fileID: 1091767324}
-  - {fileID: 1581871710}
-  - {fileID: 1087838781}
   - {fileID: 948350744}
+  - {fileID: 1581871710}
+  - {fileID: 725906998}
+  - {fileID: 1087838781}
   - {fileID: 1484000177}
   m_Father: {fileID: 0}
   m_RootOrder: 4
@@ -1274,6 +1275,12 @@ MonoBehaviour:
   playerB: {fileID: 962712729}
   miniGameInterval: 3
   minigame: {fileID: 316238876}
+  Tuitions:
+  - {fileID: 21300000, guid: 4f063b2121c99d640af6b5f4dd8206fc, type: 3}
+  - {fileID: 21300000, guid: e72bcf7831a58f045bf84fa5bf96f3cc, type: 3}
+  - {fileID: 21300000, guid: 5edb29986c43ecc4fb69715e4ec87f37, type: 3}
+  - {fileID: 21300000, guid: 734c8f43600298342bd54c680dc30d73, type: 3}
+  tuitionImage: {fileID: 725906999}
 --- !u!4 &387675973
 Transform:
   m_ObjectHideFlags: 0
@@ -1766,17 +1773,17 @@ RectTransform:
   m_GameObject: {fileID: 725906997}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.0869565, y: 1.0869565, z: 1.0869565}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1396347029}
-  m_Father: {fileID: 1091767324}
-  m_RootOrder: 0
+  m_Father: {fileID: 110937300}
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 1043.4783, y: 586.9565}
-  m_SizeDelta: {x: 1920, y: 1080}
+  m_AnchoredPosition: {x: 0, y: -0.000061035156}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &725906999
 MonoBehaviour:
@@ -1791,7 +1798,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.392}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -2355,7 +2362,7 @@ Transform:
   - {fileID: 960870728}
   - {fileID: 34673632}
   m_Father: {fileID: 110937300}
-  m_RootOrder: 5
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &960870727
 GameObject:
@@ -2780,7 +2787,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 110937300}
-  m_RootOrder: 4
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -2913,8 +2920,7 @@ Transform:
   m_LocalPosition: {x: -960, y: -540, z: 0}
   m_LocalScale: {x: 0.92, y: 0.92, z: 0.92}
   m_ConstrainProportionsScale: 1
-  m_Children:
-  - {fileID: 725906998}
+  m_Children: []
   m_Father: {fileID: 110937300}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3865,7 +3871,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: This is the tuition panel
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -4304,7 +4310,7 @@ RectTransform:
   - {fileID: 1215573627}
   - {fileID: 1497032854}
   m_Father: {fileID: 110937300}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -4676,7 +4682,7 @@ RectTransform:
   m_Children:
   - {fileID: 1414270177}
   m_Father: {fileID: 110937300}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}

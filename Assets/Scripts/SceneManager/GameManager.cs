@@ -1,6 +1,8 @@
 using UnityEngine;
 using TMPro;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
+using System;
 
 public class GameManager : MonoBehaviour
 {
@@ -24,6 +26,10 @@ public class GameManager : MonoBehaviour
     public float miniGameInterval = 10f;
     private bool isInMiniGame = false;
     public Minigame minigame;
+
+    public Sprite[] Tuitions;
+    public Image tuitionImage;
+    private int tuitionIndex;
     void Start()
     {
         // Find UIManager in the scene and assign it to uiManager
@@ -55,18 +61,25 @@ public class GameManager : MonoBehaviour
     #region Update
     private void GameUpdate()
     {
-        elapsedTime += Time.deltaTime;
-        UpdateTimerUI();
-        uiManager.UpdateScoreBar(playerA.playerScore, playerB.playerScore2);
-        //Debug.Log((elapsedTime - (miniGameTime + 1) * miniGameInterval));
-        if (elapsedTime >= gameDuration)
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
-            EndGame();
+            ShowTutorial();
         }
-        else if ((elapsedTime - (miniGameTime+1) * miniGameInterval >= 0f) && !isInMiniGame)
+        else
         {
-            Debug.Log("minigame!");
-            BeginMiniGame();
+            elapsedTime += Time.deltaTime;
+            UpdateTimerUI();
+            uiManager.UpdateScoreBar(playerA.playerScore, playerB.playerScore2);
+            //Debug.Log((elapsedTime - (miniGameTime + 1) * miniGameInterval));
+            if (elapsedTime >= gameDuration)
+            {
+                EndGame();
+            }
+            else if ((elapsedTime - (miniGameTime + 1) * miniGameInterval >= 0f) && !isInMiniGame)
+            {
+                Debug.Log("minigame!");
+                BeginMiniGame();
+            }
         }
     }
 
@@ -75,6 +88,11 @@ public class GameManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Return))
         {
             StartGame();
+        }
+        else if (Input.anyKeyDown)
+        {
+            tuitionIndex = (tuitionIndex + 1) % (Tuitions.Length);
+            tuitionImage.sprite = Tuitions[tuitionIndex];
         }
     }
 
@@ -95,7 +113,6 @@ public class GameManager : MonoBehaviour
     public void StartGame()
     {
         tutorialPanel.SetActive(false);
-        elapsedTime = 0f;
         isGameActive = true;
         isTuitionActive = false;
         isEndActive = false;
@@ -176,13 +193,15 @@ public class GameManager : MonoBehaviour
 
     private void ShowTutorial()
     {
+        tuitionIndex = (tuitionIndex + 1) % (Tuitions.Length);
+        tuitionImage.sprite = Tuitions[tuitionIndex];
         isGameActive = false;
         isTuitionActive = true;
         isEndActive = false;
 
         tutorialPanel.SetActive(true);
         endGamePanel.SetActive(false);
-
+        tuitionIndex = 0;
         if (uiManager != null)
         {
             uiManager.timerText.gameObject.SetActive(false); // Hide timer text
