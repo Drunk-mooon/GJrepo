@@ -173,9 +173,7 @@ public class BubblePoolB : ObjPool<BubblePoolB, Bubble>
             case E_bType.pink:
                 obj.speed *= 2;
                 break;
-            case E_bType.white:
-                break;
-            default:
+            default://DeleteWhiteOperation!
                 break;
 
         }
