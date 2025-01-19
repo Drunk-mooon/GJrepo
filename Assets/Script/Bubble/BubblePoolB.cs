@@ -173,7 +173,7 @@ public class BubblePoolB : ObjPool<BubblePoolB, Bubble>
         switch (obj.bType)
         {
             case E_bType.blue:
-                obj.index = 3;
+                obj.index = 2;
                 obj.label.color = Color.blue;
                 break;
             case E_bType.green:
