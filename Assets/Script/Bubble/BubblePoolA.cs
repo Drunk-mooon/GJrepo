@@ -18,7 +18,7 @@ public class BubblePoolA : ObjPool<BubblePoolA, Bubble>
     public E_bType bType;
     private float _distance;
     public Transform trans=null;
-    public Animator ani;
+   
     public override void Init()
     {
         _random = new Random();

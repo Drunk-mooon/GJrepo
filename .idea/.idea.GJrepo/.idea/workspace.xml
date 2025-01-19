@@ -5,10 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="01f5344a-2482-466c-825e-61f18f7eed00" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.GJrepo/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.GJrepo/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/FinalScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/FinalScene.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Bubble/Bubble.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Bubble/Bubble.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Bubble/BubblePoolA.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Bubble/BubblePoolA.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/bubble1.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/bubble1.prefab" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -54,7 +51,7 @@
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
-  <component name="RunManager" selected="Attach to Unity Editor.附加到 Unity 编辑器">
+  <component name="RunManager" selected="独立播放器.Start Unity">
     <configuration name="启动 Unity" type="RunUnityExe" factoryName="Unity Executable">
       <option name="EXE_PATH" value="D:\UNITY\UNITY-ENGINE\Unity 2021.3.16f1c1\Editor\Unity.exe" />
       <option name="PROGRAM_PARAMETERS" value="-projectPath &quot;D:\UNITY\UNITY PROJECT\GJrepo&quot; -debugCodeOptimization" />
@@ -92,6 +89,9 @@
       <option name="listenPortForConnections" value="false" />
       <option name="pid" />
       <option name="projectPathOnTarget" />
+      <option name="runtimes">
+        <list />
+      </option>
       <option name="selectedOptions">
         <list />
       </option>
@@ -102,6 +102,9 @@
       <option name="listenPortForConnections" value="false" />
       <option name="pid" />
       <option name="projectPathOnTarget" />
+      <option name="runtimes">
+        <list />
+      </option>
       <option name="selectedOptions">
         <list />
       </option>
