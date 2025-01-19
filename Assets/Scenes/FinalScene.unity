@@ -1178,12 +1178,12 @@ MonoBehaviour:
   showResultTime: 1
   gameManager: {fileID: 387675972}
   propManager: {fileID: 1387310903}
-  playerAButtonImage: {fileID: 0}
-  playerAIdleSprite: {fileID: 0}
-  playerAPressedSprite: {fileID: 0}
-  playerBButtonImage: {fileID: 0}
-  playerBIdleSprite: {fileID: 0}
-  playerBPressedSprite: {fileID: 0}
+  playerAButtonImage: {fileID: 1215573629}
+  playerAIdleSprite: {fileID: 21300000, guid: 67cfcb24e3f324447a92bfb7d90c2563, type: 3}
+  playerAPressedSprite: {fileID: 21300000, guid: ceb632c3a345a5640974d57d9c31c63f, type: 3}
+  playerBButtonImage: {fileID: 1497032852}
+  playerBIdleSprite: {fileID: 21300000, guid: 788ab46db32c31141bcf0ca7729de147, type: 3}
+  playerBPressedSprite: {fileID: 21300000, guid: 8b09fd45f9ac04440ab18ac43247f309, type: 3}
 --- !u!1001 &350316639
 PrefabInstance:
   m_ObjectHideFlags: 0
