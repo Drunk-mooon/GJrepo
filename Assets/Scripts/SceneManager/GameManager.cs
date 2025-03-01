@@ -37,7 +37,7 @@ public class GameManager : MonoBehaviour
     {
         SoundManager.Init();
         MusicManager.Init();
-        SoundManager.AddSound("sound/ÓÎÏ·¿ªÊ¼", 0, 1);
+        SoundManager.AddSound("sound/æ¸¸æˆå¼€å§‹", 0, 1);
         MusicManager.AddMusic("ggjj", 0, 0.5f);
         // Find UIManager in the scene and assign it to uiManager
         uiManager = FindObjectOfType<MainSceneUIManager>();
@@ -78,7 +78,7 @@ public class GameManager : MonoBehaviour
             elapsedTime += Time.deltaTime;
             if(gameDuration - elapsedTime <= 10f && !isNearEndMusicPlayed)
             {
-                SoundManager.AddSound("sound/×îºóÊ®Ãë", 0, 1);
+                SoundManager.AddSound("sound/æœ€ååç§’", 0, 1);
                 isNearEndMusicPlayed=true;
             }
             UpdateTimerUI();
@@ -147,7 +147,7 @@ public class GameManager : MonoBehaviour
         isEndActive = true;
 
         endGamePanel.SetActive(true);
-        SoundManager.AddSound("sound/ÓÎÏ·½áÊø", 0, 1);
+        SoundManager.AddSound("sound/æ¸¸æˆç»“æŸ", 0, 1);
         Time.timeScale = 0f;
 
         if(playerA.playerScore > playerB.playerScore2)
@@ -198,7 +198,7 @@ public class GameManager : MonoBehaviour
         isInMiniGame = true;
         uiManager.EnableMiniGamePanel();
         minigame.StartMinigame(OnMinigameEnd);
-        SoundManager.AddSound("sound/Ğ¡ÓÎÏ·¿ªÊ¼", 0, 1);
+        SoundManager.AddSound("sound/å°æ¸¸æˆå¼€å§‹", 0, 1);
     }
     public void EndMiniGame()
     {
@@ -245,11 +245,11 @@ public class GameManager : MonoBehaviour
     {
         if (isAWin)
         {
-            Debug.Log("Íæ¼ÒA »ñÊ¤£¡");
+            Debug.Log("ç©å®¶A è·èƒœï¼");
         }
         else
         {
-            Debug.Log("Íæ¼ÒB »ñÊ¤£¡");
+            Debug.Log("ç©å®¶B è·èƒœï¼");
         }
     }
     #endregion
